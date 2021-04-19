@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import ResultCard from './ResultCard'
 import ReactDOM from 'react-dom';
+import './citybox.css'
 
 
 export default class InitialCityBox extends Component {
@@ -57,7 +58,7 @@ export default class InitialCityBox extends Component {
         })
         .then(res => {return res.json()}) //returns a promise
         .then((data) => {
-          this.setState({finalDistance: data.distance[1], finalTime: data.time[1]})
+          this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
         })
         .catch(error => console.log('ERROR'))
       })
@@ -69,7 +70,7 @@ export default class InitialCityBox extends Component {
     let remainingSec = this.state.finalTime - (hours * 3600) 
     let minutes = Math.trunc(remainingSec / 60)
     var finalTime = ""
-    finalTime += hours + "hrs"
+    finalTime += hours + "hrs " 
     finalTime += minutes + "min"
     return finalTime
   }
@@ -78,8 +79,8 @@ export default class InitialCityBox extends Component {
     e.preventDefault()
     if (e.keyCode === 13) {
       console.log(e.keyCode)
-      this.componentDidMount()
     }
+    this.componentDidMount()
   }
 
 
@@ -89,7 +90,7 @@ export default class InitialCityBox extends Component {
         <h1>Current City</h1>
         <div>
           <form action="submit">
-            <input type="text"placeholder="Enter City" ref={this.secondRef} onKeyPress={this.handleKeyPress}/>
+            <input type="text"placeholder="Enter City" ref={this.secondRef}/>
               <label htmlFor="states">State Abbrev.</label>
               <select name="states" id="states" ref={this.firstRef}>
                 <option value="AL">Alabama</option>
@@ -145,13 +146,10 @@ export default class InitialCityBox extends Component {
                 <option value="WY">Wyoming</option>
               </select>
           </form>
-        </div>
-        <button type='submit' onClick={this.componentDidMount}>Submit</button>
-        <div>
           <h1>Destination City</h1>
           <div>
         <form action="submit">
-          <input type="text"placeholder="Enter City" ref={this.thirdRef} />
+          <input type="text"placeholder="Enter City" ref={this.thirdRef} onSubmit={this.handleKeyPress}/>
             <label htmlFor="states">State Abbrev.</label>
             <select name="states" id="states" ref={this.fourthRef}>
               <option value="AL">Alabama</option>
@@ -207,11 +205,11 @@ export default class InitialCityBox extends Component {
               <option value="WY">Wyoming</option>
             </select>
           </form>
+        <button type='submit' onClick={this.componentDidMount}>Submit</button>
         </div>
-      </div>
-
-      <div className="results" ref="demo">
-        <ResultCard didChangeDistance={this.state.finalDistance} didChangeTime={this.convertTimeMin}/>
+        <div className="resultWrapper">
+          <ResultCard didChangeDistance={this.state.finalDistance} didChangeTime={this.convertTimeMin}/>
+        </div>
       </div>
       </div>
 

@@ -33,7 +33,7 @@ export default class App extends Component {
         <div>
           <p className="descrip">Enter one city in the US and choose where you want to go. The resulting distance will be calculated.
           <br></br>If the city you are looking for is not correct, an error will be thrown! Distance will be given in miles and <br></br> time
-          will be given in hours and minutes. Any feedback is appreciated! This application uses the MapQuest API </p>
+          will be given in hours and minutes. Any feedback is appreciated! This application uses the MapQuest API. </p>
         </div>
         <div className="box-container">
           <div className="from-box">
@@ -46,33 +46,4 @@ export default class App extends Component {
       
   }
 }
-
-
-// export function App() {
-//   return (
-//     <div className="header">
-//       <h2>Route Time Calculator</h2>
-//       <div>
-//         <p className="descrip">Enter one city in the US and choose where you want to go. The resulting distance will be calculated.
-//         <br></br>If the city you are looking for is not correct, an error will be thrown! Distance will be given in miles and time
-//         will be given in hours and minutes. Any feedback is appreciated! This application uses the MapQuest API </p>
-//       </div>
-//       <div className="box-container">
-//         <div className="from-box">
-//           <Citybox />
-//         </div>
-//         <div className="to-box">
-//           <Citybox />
-//         </div>
-//         <div className="results">
-//           <h2 className="miles">Place</h2>
-//           <h2 className="travel-time"></h2>
-//         </div>
-//       </div>
-//     </div>
-
-//   ); 
-// }
-
-//export default App;
 

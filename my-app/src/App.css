@@ -22,15 +22,13 @@ body {
 
 .box-container {
   margin-top: 25px;
-  border: 2px solid lightgreen;
   position: relative;
-  right: 290px;
+  right: 280px;
   display: flex;
   justify-content: space-between;
 }
 
 .from-box {
-  border: 2px solid red;
   margin-right: 50px;
 }
 
