@@ -54,7 +54,7 @@ export default class InitialCityBox extends Component {
   }
 
   showLoad = () => {
-    this.setState({showLoading: true})
+    return this.setState({showLoading: true})
   }
 
   returnData() {
@@ -75,11 +75,11 @@ export default class InitialCityBox extends Component {
           },
           body: JSON.stringify(data),
         })
-        .then(res => {return res.json()}) //returns a promise
+        .then(res => {this.setState({showLoading: false}); return res.json()}) //returns a promise
         .then((data) => {
           this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
         })
-        .catch(error => console.log('ERROR'))
+        .catch(error => console.log('ERROR')) 
       })
   }
 
@@ -102,8 +102,15 @@ export default class InitialCityBox extends Component {
     this.componentDidMount()
   }
 
+  onClick = () => {
+    this.showLoad()
+    this.componentDidMount()
+  }
+
 
   render() {
+    const show = this.state.showLoading
+    console.log(show)
     return (
       <div>
         <h1>Current City</h1>
@@ -225,10 +232,10 @@ export default class InitialCityBox extends Component {
             </select>
           </form>
           <StylesProvider injectFirst>
-            <Button type='submit' variant="contained" color="primary" onClick={this.componentDidMount}>Submit</Button>
+            <Button type='submit' variant="contained" color="primary" onClick={this.onClick}>Submit</Button>
           </StylesProvider>
           <ThemeProvider theme={this.theme}>
-            <CircularProgress color="secondary" />
+            {show && <CircularProgress color="secondary" />}
           </ThemeProvider>
         </div>
         <div className="resultWrapper">
