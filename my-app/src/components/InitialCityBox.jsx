@@ -3,6 +3,11 @@ import { Component } from 'react';
 import ResultCard from './ResultCard'
 import ReactDOM from 'react-dom';
 import './citybox.css'
+import Button from '@material-ui/core/Button';
+import { StylesProvider } from "@material-ui/core/styles";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
 
 
 export default class InitialCityBox extends Component {
@@ -14,7 +19,7 @@ export default class InitialCityBox extends Component {
     this.thirdRef = React.createRef()
     this.fourthRef = React.createRef()
     this.buttonRef = React.createRef()
-    this.componentDidMount = this.componentDidMount.bind(this)
+    // this.componentDidMount = this.componentDidMount.bind(this)
     this.state = {
       data: [
         {
@@ -29,13 +34,27 @@ export default class InitialCityBox extends Component {
           finalDistance: null,
           finalTime: null
         }
-      ]
+      ],
+      showLoading: false
     }
   }
+
+  theme = createMuiTheme({
+    props: {
+      MuiCircularProgress: {
+        size: 20,
+        thickness: 3.5
+      },
+    },
+  });
 
   componentDidMount = () => {
     console.log('works')
     this.returnData()
+  }
+
+  showLoad = () => {
+    this.setState({showLoading: true})
   }
 
   returnData() {
@@ -149,7 +168,7 @@ export default class InitialCityBox extends Component {
           <h1>Destination City</h1>
           <div>
         <form action="submit">
-          <input type="text"placeholder="Enter City" ref={this.thirdRef} onSubmit={this.handleKeyPress}/>
+          <input type="text"placeholder="Enter City" ref={this.thirdRef} onSubmit={this.handleKeyPress} className="input-2"/>
             <label htmlFor="states">State Abbrev.</label>
             <select name="states" id="states" ref={this.fourthRef}>
               <option value="AL">Alabama</option>
@@ -205,7 +224,12 @@ export default class InitialCityBox extends Component {
               <option value="WY">Wyoming</option>
             </select>
           </form>
-        <button type='submit' onClick={this.componentDidMount}>Submit</button>
+          <StylesProvider injectFirst>
+            <Button type='submit' variant="contained" color="primary" onClick={this.componentDidMount}>Submit</Button>
+          </StylesProvider>
+          <ThemeProvider theme={this.theme}>
+            <CircularProgress color="secondary" />
+          </ThemeProvider>
         </div>
         <div className="resultWrapper">
           <ResultCard didChangeDistance={this.state.finalDistance} didChangeTime={this.convertTimeMin}/>

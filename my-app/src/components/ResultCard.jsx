@@ -7,10 +7,6 @@ export default class ResultCard extends Component {
     super(props)
   }
 
-  myStyle = {
-   
-  }
-
   render() {
     return (
       <div className="result">

@@ -2,8 +2,7 @@ import './App.css';
 import InitialCityBox from './components/InitialCityBox';
 import'./components/ResultCard'
 import React, { Component } from 'react';
-import ResultCard from './components/ResultCard';
-import ReactDOM from 'react-dom';
+import ProgressBar from 'react-bootstrap/ProgressBar'
 
 
 export default class App extends Component {
@@ -39,6 +38,9 @@ export default class App extends Component {
           <div className="from-box">
             <InitialCityBox ref={this.refer} callBack={this.receivedCallBack}/>
           </div>
+        </div>
+        <div>
+          <ProgressBar now={10} />
         </div>
       </div>
   
