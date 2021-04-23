@@ -15,6 +15,27 @@ label {
   color: white;
 }
 
+.top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-descrip {
+  display: flex;
+}
+
+.logo-descrip > span {
+  padding-top: 27px;
+  padding-right: 20px;
+  color: wheat;
+}
+
+.MuiSvgIcon-root {
+  margin-top: 30px;
+  color: rgb(202, 243, 107);
+  cursor: pointer;
+}
+
 select {
   margin-left: 20px;
 }

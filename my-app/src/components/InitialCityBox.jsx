@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import { StylesProvider } from "@material-ui/core/styles";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
+import ReplayRoundedIcon from '@material-ui/icons/ReplayRounded';
 
 
 export default class InitialCityBox extends Component {
@@ -19,7 +19,6 @@ export default class InitialCityBox extends Component {
     this.thirdRef = React.createRef()
     this.fourthRef = React.createRef()
     this.buttonRef = React.createRef()
-    // this.componentDidMount = this.componentDidMount.bind(this)
     this.state = {
       data: [
         {
@@ -107,13 +106,25 @@ export default class InitialCityBox extends Component {
     this.componentDidMount()
   }
 
+  stateReset = () => {
+    this.setState(this.state)
+  }
+
 
   render() {
     const show = this.state.showLoading
     console.log(show)
     return (
       <div>
-        <h1>Current City</h1>
+        <div className="top-header">
+          <h1>Current City</h1>
+          <div className="logo-descrip">
+            <span>Reset</span>
+            <StylesProvider injectFirst>
+              <ReplayRoundedIcon onClick={this.stateReset}></ReplayRoundedIcon>
+            </StylesProvider>
+          </div>
+        </div>
         <div>
           <form action="submit">
             <input type="text"placeholder="Enter City" ref={this.secondRef}/>
