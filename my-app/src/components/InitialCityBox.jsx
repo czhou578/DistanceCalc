@@ -38,6 +38,14 @@ export default class InitialCityBox extends Component {
     }
   }
 
+  reset = () => {
+    console.log('hello')
+    document.getElementById('first-form').value = ''
+    document.getElementById('second-form').value = ''
+    document.getElementsByClassName('states')[0].value = 'AL'
+    document.getElementsByClassName('states')[1].value = 'AL'
+  }
+
   theme = createMuiTheme({
     props: {
       MuiCircularProgress: {
@@ -106,11 +114,6 @@ export default class InitialCityBox extends Component {
     this.componentDidMount()
   }
 
-  stateReset = () => {
-    this.setState(this.state)
-  }
-
-
   render() {
     const show = this.state.showLoading
     console.log(show)
@@ -121,15 +124,15 @@ export default class InitialCityBox extends Component {
           <div className="logo-descrip">
             <span>Reset</span>
             <StylesProvider injectFirst>
-              <ReplayRoundedIcon onClick={this.stateReset}></ReplayRoundedIcon>
+              <ReplayRoundedIcon onClick={this.reset}></ReplayRoundedIcon>
             </StylesProvider>
           </div>
         </div>
         <div>
           <form action="submit">
-            <input type="text"placeholder="Enter City" ref={this.secondRef}/>
+            <input type="text"placeholder="Enter City" ref={this.secondRef} id="first-form" />
               <label htmlFor="states">State Abbrev.</label>
-              <select name="states" id="states" ref={this.firstRef}>
+              <select name="states" className="states" ref={this.firstRef}>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -186,9 +189,9 @@ export default class InitialCityBox extends Component {
           <h1>Destination City</h1>
           <div>
         <form action="submit">
-          <input type="text"placeholder="Enter City" ref={this.thirdRef} onSubmit={this.handleKeyPress} className="input-2"/>
+          <input type="text"placeholder="Enter City" ref={this.thirdRef} onSubmit={this.handleKeyPress} className="input-2" id='second-form'/>
             <label htmlFor="states">State Abbrev.</label>
-            <select name="states" id="states" ref={this.fourthRef}>
+            <select name="states" className="states" ref={this.fourthRef}>
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
               <option value="AZ">Arizona</option>
