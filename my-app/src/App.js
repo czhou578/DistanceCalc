@@ -37,6 +37,7 @@ export default class App extends Component {
           </div>
         </div>
         <div className="log-container">
+          <span>Search History</span>
           <Log />
         </div>
 

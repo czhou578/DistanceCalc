@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -11,52 +11,169 @@ import TableRow from '@material-ui/core/TableRow';
 import './Log.css'
 
 const columns = [
-  { id: 'Current City', label: 'Current City', minWidth: 170 },
-  { id: 'Destination City', label: 'Destination City', minWidth: 100 },
-  { id: 'Distance', label: 'Distance(miles)', minWidth: 100 },
-  { id: 'Travel Time', label: 'Travel Time(mins)', minWidth: 100 },
-]
+  { id: 'currentCity', label: 'Current City', minWidth: 170 },
+  { id: 'destinationCity', label: 'Destination City', minWidth: 140 },
+  {
+    id: 'distance',
+    label: 'Distance(mi)',
+    minWidth: 170,
+    align: 'right',
+  },
+  {
+    id: 'travelTime',
+    label: 'Travel Time(min)',
+    minWidth: 170,
+    align: 'right',
+  }
+];
 
-function createData(city1, city2, distance, time) {
-  return {city1, city2, distance, time}
+function createData(currentCity, destinationCity, distance, travelTime) {
+  return { currentCity, destinationCity, distance, travelTime };
 }
 
-const dummyData = [
-  createData('Mobile, AL', 'Montgomery, AL', 600, 2.5)
-]
+const rows = [
+  createData('India', 'IN', 1324171354, 3287263),
+  createData('China', 'CN', 1403500365, 9596961),
+  createData('Italy', 'IT', 60483973, 301340),
+  createData('United States', 'US', 327167434, 9833520),
+  createData('Canada', 'CA', 37602103, 9984670),
+  createData('Australia', 'AU', 25475400, 7692024),
+  createData('Germany', 'DE', 83019200, 357578),
+  createData('Ireland', 'IE', 4857000, 70273),
+  createData('Mexico', 'MX', 126577691, 1972550),
+  createData('Japan', 'JP', 126317000, 377973),
+  createData('France', 'FR', 67022000, 640679),
+  createData('United Kingdom', 'GB', 67545757, 242495),
+  createData('Russia', 'RU', 146793744, 17098246),
+  createData('Nigeria', 'NG', 200962417, 923768),
+  createData('Brazil', 'BR', 210147125, 8515767),
+];
 
-export default class Log extends Component {
-  constructor(props) {
-    super(props)
-  }
+const useStyles = makeStyles({
+  root: {
+    width: '100%',
+  },
+  container: {
+    maxHeight: 440,
+  },
+});
 
-  render() {
-    return (
-      <div className="log-table-wrapper">
-        <Paper className='paper'>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  {columns.map((columns) => (
-                    <TableCell>
-                      {columns.label}
-                    </TableCell>
-                  ))}
+export default function StickyHeadTable() {
+  const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  return (
+    <Paper className={classes.root}>
+      <TableContainer className={classes.container}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    console.log(value)
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
-              </TableHead>
-              <TableBody>
-
-                <TableRow>
-                  <TableCell>
-
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </div>
-    )
-  }
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+    </Paper>
+  );
 }
+
+// const columns = [
+//   { id: 'Current City', label: 'Current City', minWidth: 170 },
+//   { id: 'Destination City', label: 'Destination City', minWidth: 100 },
+//   { id: 'Distance', label: 'Distance(miles)', minWidth: 100 },
+//   { id: 'Travel Time', label: 'Travel Time(mins)', minWidth: 100 },
+// ]
+
+// function createData(city1, city2, distance, time) {
+//   return {city1, city2, distance, time}
+// }
+
+// const dummyData = [
+//   createData('Mobile, AL', 'Montgomery, AL', 600, 2.5)
+// ]
+
+// export default function Log(props) {
+//   // constructor(props) {
+//   //   super(props)
+//   // }
+//   const [page, setPage] = React.useState(0)
+//   const [rowsPerPage, setRowsPerPage] = React.useState(8)
+//   return (
+//     <div className="log-table-wrapper">
+//       <Paper className='paper'>
+//         <TableContainer>
+//           <Table>
+//             <TableHead>
+//               <TableRow>
+//                 {columns.map((columns) => (
+//                   <TableCell>
+//                     {columns.label}
+//                   </TableCell>
+//                 ))}
+//               </TableRow>
+//             </TableHead>
+//             <TableBody>
+  
+//               <TableRow>
+//                 <TableCell>
+  
+//                 </TableCell>
+//               </TableRow>
+//             </TableBody>
+//           </Table>
+//         </TableContainer>
+//       </Paper>
+//     </div>
+//   )
+
+// }
+
+// export default class Log extends Component {
+
+//   render() {
+//   }
+// }

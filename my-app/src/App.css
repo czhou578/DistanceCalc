@@ -49,7 +49,17 @@ body {
 }
 
 .log-container {
-  margin-top: 40px;
+  margin-top: 60px;
   margin-left: 16%;
   width: 65%;
+}
+
+.log-container > span {
+  position: relative;
+  bottom: 20px;
+  color: white;
+  margin-left: 40%;
+  margin-bottom: 30px;
+  font-size: 20px;
+
 }
