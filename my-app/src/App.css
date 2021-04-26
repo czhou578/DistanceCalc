@@ -48,12 +48,8 @@ body {
   right: 450px;
 }
 
-/* .progress {
-  min-height: 10px;
-  max-width: 300px;
-  background-color: white;
+.log-container {
+  margin-top: 40px;
+  margin-left: 16%;
+  width: 65%;
 }
-
-.progress-bar {
-  width: 200px;
-} */

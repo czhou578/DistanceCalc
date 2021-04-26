@@ -2,6 +2,7 @@ import './App.css';
 import InitialCityBox from './components/InitialCityBox';
 import'./components/ResultCard'
 import React, { Component } from 'react';
+import Log from './components/Log'
 
 
 export default class App extends Component {
@@ -21,18 +22,24 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="header">
-        <h2>Route Time Calculator</h2>
-        <div>
-          <p className="descrip">Enter one city in the US and choose where you want to go. The resulting distance will be calculated.
-          <br></br>If the city you are looking for is not correct, an error will be thrown! Distance will be given in miles and <br></br> time
-          will be given in hours and minutes. Any feedback is appreciated! This application uses the MapQuest API. </p>
-        </div>
-        <div className="box-container">
-          <div className="from-box">
-            <InitialCityBox ref={this.refer}/>
+      <div>
+        <div className="header">
+          <h2>Route Time Calculator</h2>
+          <div>
+            <p className="descrip">Enter one city in the US and choose where you want to go. The resulting distance will be calculated.
+            <br></br>If the city you are looking for is not correct, an error will be thrown! Distance will be given in miles and <br></br> time
+            will be given in hours and minutes. Any feedback is appreciated! This application uses the MapQuest API. </p>
+          </div>
+          <div className="box-container">
+            <div className="from-box">
+              <InitialCityBox ref={this.refer}/>
+            </div>
           </div>
         </div>
+        <div className="log-container">
+          <Log />
+        </div>
+
       </div>
   
     ); 
