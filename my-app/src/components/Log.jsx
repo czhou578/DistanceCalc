@@ -11,17 +11,24 @@ import TableRow from '@material-ui/core/TableRow';
 import './Log.css'
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'population', label: 'Population', minWidth: 100 }
-
+  { id: 'Current City', label: 'Current City', minWidth: 170 },
+  { id: 'Destination City', label: 'Destination City', minWidth: 100 },
+  { id: 'Distance', label: 'Distance(miles)', minWidth: 100 },
+  { id: 'Travel Time', label: 'Travel Time(mins)', minWidth: 100 },
 ]
 
+function createData(city1, city2, distance, time) {
+  return {city1, city2, distance, time}
+}
+
+const dummyData = [
+  createData('Mobile, AL', 'Montgomery, AL', 600, 2.5)
+]
 
 export default class Log extends Component {
   constructor(props) {
     super(props)
   }
-
 
   render() {
     return (
@@ -31,10 +38,15 @@ export default class Log extends Component {
             <Table>
               <TableHead>
                 <TableRow>
-
+                  {columns.map((columns) => (
+                    <TableCell>
+                      {columns.label}
+                    </TableCell>
+                  ))}
                 </TableRow>
               </TableHead>
               <TableBody>
+
                 <TableRow>
                   <TableCell>
 
