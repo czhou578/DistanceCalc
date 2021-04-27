@@ -9,7 +9,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import ReplayRoundedIcon from '@material-ui/icons/ReplayRounded';
 
-
 export default class InitialCityBox extends Component {
   constructor(props) {
     super(props)
@@ -34,16 +33,17 @@ export default class InitialCityBox extends Component {
           finalTime: null
         }
       ],
-      showLoading: false
+      showLoading: false,
+      deleteResultData: false
     }
   }
 
   reset = () => {
-    console.log('hello')
     document.getElementById('first-form').value = ''
     document.getElementById('second-form').value = ''
     document.getElementsByClassName('states')[0].value = 'AL'
     document.getElementsByClassName('states')[1].value = 'AL'
+    this.setState({deleteResultData: true})
   }
 
   theme = createMuiTheme({
@@ -56,7 +56,7 @@ export default class InitialCityBox extends Component {
   });
 
   componentDidMount = () => {
-    console.log('works')
+    // console.log('works')
     this.returnData()
   }
 
@@ -101,14 +101,6 @@ export default class InitialCityBox extends Component {
     return finalTime
   }
 
-  handleKeyPress = e => {
-    e.preventDefault()
-    if (e.keyCode === 13) {
-      console.log(e.keyCode)
-    }
-    this.componentDidMount()
-  }
-
   onClick = () => {
     this.showLoad()
     this.componentDidMount()
@@ -116,7 +108,6 @@ export default class InitialCityBox extends Component {
 
   render() {
     const show = this.state.showLoading
-    console.log(show)
     return (
       <div>
         <div className="top-header">
@@ -189,7 +180,7 @@ export default class InitialCityBox extends Component {
           <h1>Destination City</h1>
           <div>
         <form action="submit">
-          <input type="text"placeholder="Enter City" ref={this.thirdRef} onSubmit={this.handleKeyPress} className="input-2" id='second-form'/>
+          <input type="text"placeholder="Enter City" ref={this.thirdRef} className="input-2" id='second-form'/>
             <label htmlFor="states">State Abbrev.</label>
             <select name="states" className="states" ref={this.fourthRef}>
               <option value="AL">Alabama</option>
@@ -253,7 +244,7 @@ export default class InitialCityBox extends Component {
           </ThemeProvider>
         </div>
         <div className="resultWrapper">
-          <ResultCard didChangeDistance={this.state.finalDistance} didChangeTime={this.convertTimeMin}/>
+          <ResultCard didChangeDistance={this.state.finalDistance} didChangeTime={this.convertTimeMin} deleteData={() => {console.log(this.state.deleteResultData)}}/>
         </div>
       </div>
       </div>
