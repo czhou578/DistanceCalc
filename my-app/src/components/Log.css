@@ -1,3 +1,7 @@
 .log-table-wrapper {
   background-color: beige;
 }
+
+.MuiTableCell-root {
+  padding: 10px;
+}
