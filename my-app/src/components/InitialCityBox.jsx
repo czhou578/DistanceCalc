@@ -39,11 +39,12 @@ export default class InitialCityBox extends Component {
   }
 
   reset = () => {
+    console.log('executed')
     document.getElementById('first-form').value = ''
     document.getElementById('second-form').value = ''
     document.getElementsByClassName('states')[0].value = 'AL'
     document.getElementsByClassName('states')[1].value = 'AL'
-    this.setState({deleteResultData: true})
+    return this.setState({deleteResultData: true})
   }
 
   theme = createMuiTheme({
@@ -244,7 +245,7 @@ export default class InitialCityBox extends Component {
           </ThemeProvider>
         </div>
         <div className="resultWrapper">
-          <ResultCard didChangeDistance={this.state.finalDistance} didChangeTime={this.convertTimeMin} deleteData={() => {console.log(this.state.deleteResultData)}}/>
+          <ResultCard didChangeDistance={this.state.finalDistance} didChangeTime={this.convertTimeMin} deleteData={this.state.deleteResultData}/>
         </div>
       </div>
       </div>
