@@ -8,6 +8,7 @@ import { StylesProvider } from "@material-ui/core/styles";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import ReplayRoundedIcon from '@material-ui/icons/ReplayRounded';
+import Log from './Log'
 
 export default class InitialCityBox extends Component {
   constructor(props) {
@@ -248,11 +249,34 @@ export default class InitialCityBox extends Component {
           <ResultCard didChangeDistance={this.state.finalDistance} didChangeTime={this.convertTimeMin} deleteData={this.state.deleteResultData}/>
         </div>
       </div>
+        <div className="log-wrapper">
+        <span>Search History</span>
+          <Log logInfo={[this.state.cityName, this.state.stateAbbrev, this.state.finalCity, this.state.finalStateAbbrev, this.state.finalDistance, this.state.finalTime]}/>
+        </div>
       </div>
 
     )
   }
 }
+
+// this.state = {
+//   data: [
+//     {
+//       cityName: '',
+//       stateAbbrev: '',
+//       finalCity: '',
+//       finalStateAbbrev: '',
+//       newSubmission: false
+//     },
+
+//     {
+//       finalDistance: null,
+//       finalTime: null
+//     }
+//   ],
+//   showLoading: false,
+//   deleteResultData: false
+// }
 
 
 

@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import './Log.css'
+import './InitialCityBox'
 
 const columns = [
   { id: 'currentCity', label: 'Current City', minWidth: 150 },
@@ -64,10 +65,30 @@ const useStyles = makeStyles({
   }
 });
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  let startCityString = ''
+  let endCityString = ''
+  let startCity = props.logInfo[0]
+  let startCityAbrev = props.logInfo[1]
+  let endCity = props.logInfo[2]
+  let endCityAbrev = props.logInfo[3]
+  let finalDistance = props.logInfo[4]
+  let travelTime = props.logInfo[5]
+  // console.log(finalDistance)
+
+  startCityString += startCity + ' '
+  startCityString += startCityAbrev
+  startCityString = startCityString.charAt(0).toUpperCase() + startCityString.slice(1)
+
+  endCityString += endCity + ' '
+  endCityString += endCityAbrev
+  endCityString = endCityString.charAt(0).toUpperCase() + endCityString.slice(1)
+
+  createData(startCityString, endCityString, finalDistance, travelTime)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -77,6 +98,8 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+
 
   return (
     <Paper className={classes.root}>
