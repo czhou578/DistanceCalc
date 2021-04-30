@@ -91,11 +91,10 @@ export default function StickyHeadTable(props) {
   endCityString = endCityString.charAt(0).toUpperCase() + endCityString.slice(1)
 
   if (finalDistance === undefined || travelTime === undefined || didDataDelete) {
-    console.log('true')
     
   } else if (!didDataDelete) {
+    console.log('true')
     rows.push(createData(startCityString, endCityString, finalDistance, travelTime))
-    // console.log('accurate')
   }
 
   const handleChangePage = (event, newPage) => {

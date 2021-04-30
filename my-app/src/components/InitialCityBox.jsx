@@ -59,7 +59,6 @@ export default class InitialCityBox extends Component {
 
 
   componentDidMount = () => {
-    // console.log('works')
     this.returnData()
   }
 
