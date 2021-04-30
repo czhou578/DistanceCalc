@@ -11,7 +11,7 @@ export default class ResultCard extends Component {
     let distanceDisplay
     let timeDisplay
     let deleted = this.props.deleteData
-    
+
     if (deleted == false) {
       distanceDisplay = <h2 id="distance">Distance: {this.props.didChangeDistance}</h2>
       timeDisplay = <h2 id="travelTime">Travel time: {this.props.didChangeTime()} </h2>

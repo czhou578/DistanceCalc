@@ -39,6 +39,15 @@ export default class InitialCityBox extends Component {
     }
   }
 
+  theme = createMuiTheme({
+    props: {
+      MuiCircularProgress: {
+        size: 20,
+        thickness: 3.5
+      },
+    },
+  });
+
   reset = () => {
     console.log('executed')
     document.getElementById('first-form').value = ''
@@ -48,14 +57,6 @@ export default class InitialCityBox extends Component {
     return this.setState({deleteResultData: true})
   }
 
-  theme = createMuiTheme({
-    props: {
-      MuiCircularProgress: {
-        size: 20,
-        thickness: 3.5
-      },
-    },
-  });
 
   componentDidMount = () => {
     // console.log('works')
@@ -251,7 +252,8 @@ export default class InitialCityBox extends Component {
       </div>
         <div className="log-wrapper">
         <span>Search History</span>
-          <Log logInfo={[this.state.cityName, this.state.stateAbbrev, this.state.finalCity, this.state.finalStateAbbrev, this.state.finalDistance, this.state.finalTime]}/>
+          <Log logInfo={[this.state.cityName, this.state.stateAbbrev, this.state.finalCity, this.state.finalStateAbbrev, this.state.finalDistance, this.convertTimeMin, 
+          this.state.deleteResultData]}/>
         </div>
       </div>
 

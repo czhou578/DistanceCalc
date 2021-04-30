@@ -77,7 +77,10 @@ export default function StickyHeadTable(props) {
   let endCity = props.logInfo[2]
   let endCityAbrev = props.logInfo[3]
   let finalDistance = props.logInfo[4]
-  let travelTime = props.logInfo[5]
+  // console.log(finalDistance)
+  let travelTime = props.logInfo[5]()
+  let didDataDelete = props.logInfo[6] //if diddelete is true, don't render, but if its false, render
+  // console.log(travelTime)
 
   startCityString += startCity + ',' + ' '
   startCityString += startCityAbrev
@@ -87,12 +90,13 @@ export default function StickyHeadTable(props) {
   endCityString += endCityAbrev
   endCityString = endCityString.charAt(0).toUpperCase() + endCityString.slice(1)
 
-  if (startCity != '' || endCity != '') {
+  if (finalDistance === undefined || travelTime === undefined || didDataDelete) {
+    console.log('true')
+    
+  } else if (!didDataDelete) {
     rows.push(createData(startCityString, endCityString, finalDistance, travelTime))
-
-  } else {
+    // console.log('accurate')
   }
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -103,8 +107,6 @@ export default function StickyHeadTable(props) {
     setPage(0);
   };
 
-
-
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -113,7 +115,7 @@ export default function StickyHeadTable(props) {
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  key={column.id}
+                  key={column.id} 
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                   className={classes.cell}
