@@ -78,17 +78,21 @@ export default function StickyHeadTable(props) {
   let endCityAbrev = props.logInfo[3]
   let finalDistance = props.logInfo[4]
   let travelTime = props.logInfo[5]
-  // console.log(finalDistance)
 
-  startCityString += startCity + ' '
+  startCityString += startCity + ',' + ' '
   startCityString += startCityAbrev
   startCityString = startCityString.charAt(0).toUpperCase() + startCityString.slice(1)
 
-  endCityString += endCity + ' '
+  endCityString += endCity + ',' + ' '
   endCityString += endCityAbrev
   endCityString = endCityString.charAt(0).toUpperCase() + endCityString.slice(1)
 
-  createData(startCityString, endCityString, finalDistance, travelTime)
+  if (startCity != '' || endCity != '') {
+    rows.push(createData(startCityString, endCityString, finalDistance, travelTime))
+
+  } else {
+  }
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
