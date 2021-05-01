@@ -37,6 +37,8 @@ export default class InitialCityBox extends Component {
       showLoading: false,
       deleteResultData: false
     }
+
+    this.counter = 0;
   }
 
   theme = createMuiTheme({
@@ -71,7 +73,7 @@ export default class InitialCityBox extends Component {
     const selectAbbrev = ReactDOM.findDOMNode(this.firstRef.current);
     const inputFinalCity = ReactDOM.findDOMNode(this.thirdRef.current)
     const inputFinalAbbrev = ReactDOM.findDOMNode(this.fourthRef.current)
-    var finished
+
 
     this.setState({cityName: startingCity.value, stateAbbrev: selectAbbrev.value, finalCity: inputFinalCity.value, finalStateAbbrev: inputFinalAbbrev.value
     , newSubmission: true},
@@ -107,8 +109,14 @@ export default class InitialCityBox extends Component {
     this.showLoad()
     this.componentDidMount()
   }
-
+  
   render() {
+    this.counter++;
+    if (this.counters % 3 == 1) {
+      this.setState({deleteResultData: false})
+    }
+
+    console.log(this.counter)
     const show = this.state.showLoading
     return (
       <div>
