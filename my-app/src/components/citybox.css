@@ -77,6 +77,13 @@ select {
 
 .log-wrapper {
   position: relative;
-  left: 100px;
+  top: 40px;
+  left: 110px;
+}
+
+.log-wrapper > span {
+  margin-left: 40%;
+  color: white;
+  padding-bottom: 10px;
 }
 

@@ -106,18 +106,44 @@ export default class InitialCityBox extends Component {
   }
 
   onClick = () => {
+    this.setState({deleteResultData: false})
     this.showLoad()
     this.componentDidMount()
   }
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+
+    // if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === false && nextState.showLoading === false) {
+    //   return false;
+    // }
+
+    if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === false && nextState.showLoading === true) {
+      console.log('this is it2')
+      return true;
+    }
+
+    if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === true && nextState.showLoading === false) {
+      console.log('this is it')
+      return false;
+    }
+
+    // if (this.state.finalDistance == null && nextState.finalDistance != null) {
+    //   return true;
+    // }
+
+    // if (this.state.showLoading === true && nextState.showLoading === false) {
+    //   return true;
+    // } 
+
+
+    return true;
+  }
   
   render() {
-    this.counter++;
-    if (this.counters % 3 == 1) {
-      this.setState({deleteResultData: false})
-    }
 
     console.log(this.counter)
     const show = this.state.showLoading
+
     return (
       <div>
         <div className="top-header">
@@ -260,7 +286,7 @@ export default class InitialCityBox extends Component {
         <div className="log-wrapper">
         <span>Search History</span>
           <Log logInfo={[this.state.cityName, this.state.stateAbbrev, this.state.finalCity, this.state.finalStateAbbrev, this.state.finalDistance, this.convertTimeMin, 
-          this.state.deleteResultData]}/>
+          this.state.deleteResultData]} loadingShow={this.state.showLoading}/>
         </div>
       </div>
 
