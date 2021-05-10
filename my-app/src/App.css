@@ -63,3 +63,27 @@ body {
   font-size: 20px;
 
 }
+
+.longlat-explain {
+  display: flex;
+  width: 100vw;
+  border: 1px solid salmon;
+  margin-top: 200px;
+  margin-left: -250px;
+}
+
+.longitude-explain > h2, .longitude-explain > p, .latitude-explain > h2, .latitude-explain > p{
+  color: antiquewhite;
+}
+
+.longitude-explain, .latitude-explain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid sandybrown;
+  /* padding-right: 155px; */
+}
+
+.longitude-explain > p, .latitude-explain > p {
+  font-size: 12px;
+}
