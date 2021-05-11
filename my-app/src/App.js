@@ -2,6 +2,7 @@ import './App.css';
 import InitialCityBox from './components/InitialCityBox';
 import'./components/ResultCard'
 import React, { Component } from 'react';
+import GeoInputBox from './components/GeoInputBox';
 
 
 export default class App extends Component {
@@ -48,6 +49,10 @@ export default class App extends Component {
               an angle that ranges from 0 to 90, where 0 starts at the Equator<br></br>
               and 90 is at both the North and South Poles.</p>
             </div>
+          </div>
+          <div>
+            <h1>Use this calculator to find the latitude and longitude of two cities</h1>
+            <GeoInputBox />
           </div>
         </div>
       </div>
