@@ -141,7 +141,7 @@ export default class InitialCityBox extends Component {
   
   render() {
 
-    console.log(this.counter)
+    // console.log(this.counter)
     const show = this.state.showLoading
 
     return (
@@ -272,7 +272,6 @@ export default class InitialCityBox extends Component {
               <option value="WY">Wyoming</option>
             </select>
           </form>
-
 
           <StylesProvider injectFirst>
             <Button type='submit' variant="contained" color="primary" onClick={this.onClick}>Submit</Button>
