@@ -70,6 +70,7 @@ export default class InitialCityBox extends Component {
 
   returnData() {
     const startingCity = ReactDOM.findDOMNode(this.secondRef.current) 
+    console.log('initbox' + startingCity.value)
     const selectAbbrev = ReactDOM.findDOMNode(this.firstRef.current);
     const inputFinalCity = ReactDOM.findDOMNode(this.thirdRef.current)
     const inputFinalAbbrev = ReactDOM.findDOMNode(this.fourthRef.current)

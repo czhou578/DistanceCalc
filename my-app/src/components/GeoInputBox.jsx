@@ -8,8 +8,6 @@ export default class GeoInputBox extends Component {
   constructor(props) {
     super(props)
     this.props = props
-    this.firstRef = React.createRef()
-    this.secondRef = React.createRef()
 
     this.state = {
       data: [
@@ -30,55 +28,63 @@ export default class GeoInputBox extends Component {
   } 
 
   returnGeoData = () => {
-    const enteredFirstCity = ReactDOM.findDOMNode(this.firstRef.current)
-    console.log(enteredFirstCity.value)
-    const enteredSecondCity = ReactDOM.findDOMNode(this.secondRef.current)
+    // const enteredFirstCity = ReactDOM.findDOMNode(this.firstRefR.current)
+    const enteredFirstCity = document.getElementById('first-city')
+    const enteredSecondCity = document.getElementById('second-city')
 
-    if (enteredFirstCity != null || enteredSecondCity != null) {
-      this.setState({firstCity: enteredFirstCity, secondCity: enteredSecondCity}, 
-        function() {
-          const data = {"location": this.state.firstCity, "options": {"thumbMaps": false}}
-          //const data2 = {"location": enteredSecondCity, "options": {"thumbMaps": false}}
-  
+    this.setState({firstCity: enteredFirstCity.value, secondCity: enteredSecondCity.value}, 
+      function() {
+        const data = {"location": this.state.firstCity, "options": {"thumbMaps": false}}
+        const data2 = {"location": this.state.secondCity, "options": {"thumbMaps": false}}
+
+        Promise.all([
           fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
-          })
-          .then(res => {return res.json()})
-          .then(data => {
-            this.setState({firstCityLatitude: data.results[1][1].lat})
-          })
-  
-          // fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB'), {
-          //   method: 'POST',
-          //   headers: {
-          //     'Content-type': 'application/json',
-          //   },
-          //   body: JSON.stringify(data2)
-          // }
-          // .then(res => {return res.json()})
-          .catch(error => console.log('ERROR'))
+          }),
+
+          fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB'), {
+            method: 'POST',
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: JSON.stringify(data2)
+          }
+
+        ]).then(allResponses => {
+          const response = allResponses[0].json();
+          const response2 = allResponses[1].json()
+          return [response, response2]
+        }).then(dataArray => {
+          console.log(dataArray[0])
+          //this.setState({firstCityLatitude: dataArray.results[1][1].lat})
+          // this.setState({firstCityLongitude: data.results[1][1].lng})
+
         })
-    }
 
+        // .then(res => {return res.json()})
+
+      }
+    )
+    
   }
-
+ 
 
   render() {
     return (
       <div>
         <div>
           <form action="submit">
-            <input type="text" placeholder="Enter first city" ref={this.firstRef}/>
+            <input type="text" placeholder="Enter first city" ref={this.firstRefR} id="first-city"/>
           </form>
           <form action="submit">
-            <input type="text" placeholder="Enter second city" ref={this.secondRef}/>
+            <input type="text" placeholder="Enter second city" ref={this.secondRef} id="second-city"/>
           </form>
           <div>
-            <Button type="submit" variant="contained" color="primary" onClick={this.componentDidMount()} >
+            <Button type="submit" variant="contained" color="primary" onClick={this.componentDidMount} >
               Calculate
             </Button>
             <Button variant="contained" color="secondary">
