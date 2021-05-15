@@ -49,21 +49,35 @@ export default class GeoInputBox extends Component {
           fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB'), {
             method: 'POST',
             headers: {
-              'Content-type': 'application/json',
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify(data2)
           }
 
-        ]).then(allResponses => {
-          const response = allResponses[0].json();
-          const response2 = allResponses[1].json()
-          return [response, response2]
-        }).then(dataArray => {
-          console.log(dataArray[0])
-          //this.setState({firstCityLatitude: dataArray.results[1][1].lat})
-          // this.setState({firstCityLongitude: data.results[1][1].lng})
+        ])
+        .then(data => {
+          return data[0].json()
 
+        }).then(data => {
+          setTimeout(function() {
+            const object1 = data.results[0].locations
+            console.log(JSON.parse(JSON.stringify(object1)))
+
+          }, 1000)
+          // const test = JSON.parse(JSON.stringify(object1))
+          // const test = JSON.parse(object1)
+          //console.log(object1.toString())
         })
+        // .then(allResponses => {
+        //   const response = allResponses[0].json();
+        //   const response2 = allResponses[1].json()
+        //   return [response, response2]
+        // }).then(dataArray => {
+        //   console.log(dataArray[0])
+        //   //this.setState({firstCityLatitude: dataArray.results[1][1].lat})
+        //   // this.setState({firstCityLongitude: data.results[1][1].lng})
+
+        // })
 
         // .then(res => {return res.json()})
 

@@ -89,6 +89,7 @@ export default class InitialCityBox extends Component {
         })
         .then(res => {this.setState({showLoading: false}); return res.json()}) //returns a promise
         .then((data) => {
+          console.log(data)
           this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
         })
         .catch(error => console.log('ERROR')) 
