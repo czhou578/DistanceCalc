@@ -28,7 +28,6 @@ export default class GeoInputBox extends Component {
   } 
 
   returnGeoData = () => {
-    // const enteredFirstCity = ReactDOM.findDOMNode(this.firstRefR.current)
     const enteredFirstCity = document.getElementById('first-city')
     const enteredSecondCity = document.getElementById('second-city')
 
@@ -57,35 +56,33 @@ export default class GeoInputBox extends Component {
         ])
         .then(data => {
           return data[0].json()
-
+  
         }).then(data => {
-          setTimeout(function() {
-            const object1 = data.results[0].locations
-            console.log(JSON.parse(JSON.stringify(object1)))
 
-          }, 1000)
-          // const test = JSON.parse(JSON.stringify(object1))
-          // const test = JSON.parse(object1)
-          //console.log(object1.toString())
+          var test = JSON.parse(JSON.stringify(data.results[0].locations[0]))
+          console.log(test)
+          return Promise.resolve(test)
+        
+        }).then(data => {
+          console.log(data.displayLatLng.lat)
+          console.log(data.displayLatLng.lng)
         })
-        // .then(allResponses => {
-        //   const response = allResponses[0].json();
-        //   const response2 = allResponses[1].json()
-        //   return [response, response2]
-        // }).then(dataArray => {
-        //   console.log(dataArray[0])
-        //   //this.setState({firstCityLatitude: dataArray.results[1][1].lat})
-        //   // this.setState({firstCityLongitude: data.results[1][1].lng})
-
-        // })
-
-        // .then(res => {return res.json()})
-
-      }
-    )
-    
+         
+      })
   }
- 
+    
+    // .then(allResponses => {
+    //   const response = allResponses[0].json();
+    //   const response2 = allResponses[1].json()
+    //   return [response, response2]
+    // }).then(dataArray => {
+    //   console.log(dataArray[0])
+    //   //this.setState({firstCityLatitude: dataArray.results[1][1].lat})
+    //   // this.setState({firstCityLongitude: data.results[1][1].lng})
+
+    // })
+
+    // .then(res => {return res.json()})
 
   render() {
     return (
