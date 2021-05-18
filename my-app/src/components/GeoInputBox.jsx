@@ -64,8 +64,20 @@ export default class GeoInputBox extends Component {
           return Promise.resolve(test)
         
         }).then(data => {
+          this.setState({firstCityLatitude: data.displayLatLng.lat, firstCityLongitude: data.displayLatLng.lng})
           console.log(data.displayLatLng.lat)
           console.log(data.displayLatLng.lng)
+
+        }).then(data => {
+          return data[1].json()
+
+        }).then(data => {
+          const data2 = JSON.parse(JSON.stringify(data.results[0].locations[0]))
+          return Promise.resolve(data2)
+          
+        }).then(data => {
+          this.setState({secondCityLatitude: data.displayLatLng.lat, secondCityLongitude: data.displayLatLng.lng})
+
         })
          
       })
