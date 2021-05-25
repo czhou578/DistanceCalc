@@ -23,80 +23,94 @@ export default class GeoInputBox extends Component {
     }
   }
 
-  componentDidMount = () => {
-    this.returnGeoData()
-  } 
-
   returnGeoData = () => {
     const enteredFirstCity = document.getElementById('first-city')
     const enteredSecondCity = document.getElementById('second-city')
-
+    
     this.setState({firstCity: enteredFirstCity.value, secondCity: enteredSecondCity.value}, 
       function() {
         const data = {"location": this.state.firstCity, "options": {"thumbMaps": false}}
         const data2 = {"location": this.state.secondCity, "options": {"thumbMaps": false}}
 
         Promise.all([
+
           fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
-          }),
+          }).then(res => res.json()),
 
-          fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB'), {
+          fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data2)
-          }
 
-        ])
+          }).then(res => res.json())
+
+         // results[0].locations[0].displayLatLng.lat
+        ]).then(([urlOne, urlTwo]) => { //retrieving data properly
+          // let first = urlOne.json()
+          console.log(urlOne)
+          console.log(urlTwo)
+
+          var test = JSON.parse(JSON.stringify(urlOne.results[0].locations[0]))
+          return Promise.all([test, urlTwo])
+
+        })
         .then(data => {
-          return data[0].json()
-  
-        }).then(data => {
+          this.setState({firstCityLatitude: data[0].displayLatLng.lat, firstCityLongitude: data[0].displayLatLng.lng})
+          console.log(data[0].displayLatLng.lat)
+          console.log(data[0].displayLatLng.lng)
 
-          var test = JSON.parse(JSON.stringify(data.results[0].locations[0]))
-          console.log(test)
-          return Promise.resolve(test)
-        
-        }).then(data => {
-          this.setState({firstCityLatitude: data.displayLatLng.lat, firstCityLongitude: data.displayLatLng.lng})
+          var test2 = JSON.parse(JSON.stringify(data[1].results[0].locations[0]))
+          return Promise.resolve(test2)
+
+        }) .then(data => {
+          this.setState({secondCityLatitude: data.displayLatLng.lat, secondCityLongitude: data.displayLatLng.lng})
+
           console.log(data.displayLatLng.lat)
           console.log(data.displayLatLng.lng)
 
-        }).then(data => {
-          return data[1].json()
-
-        }).then(data => {
-          const data2 = JSON.parse(JSON.stringify(data.results[0].locations[0]))
-          return Promise.resolve(data2)
-          
-        }).then(data => {
-          this.setState({secondCityLatitude: data.displayLatLng.lat, secondCityLongitude: data.displayLatLng.lng})
-
         })
+        // .then(data => {
+        //   this.setState({firstCityLatitude: data[0].displayLatLng.lat, firstCityLongitude: data[0].displayLatLng.lng})
+        //   console.log(data[0].displayLatLng.lat)
+        //   console.log(data[0].displayLatLng.lng)
+
+        //   // console.log('hello' + JSON.stringify(data[1].results[0].locations[0]))
+        //   console.log(data[1].displayLatLng.lat)
+        //   console.log(data[1].displayLatLng.lng)
+          
+        //   return data[1]
+        //   // return Promise.all(test)
+        // })
+        // .then(data => {
+        //   console.log(data)
+          
+        //   // return Promise.resolve(test2)
+        // })
+        
+        // .then(data => {
+        //   return data[1].json()
+
+        // }).then(data => {
+        //   const data2 = JSON.parse(JSON.stringify(data.results[0].locations[0]))
+        //   return Promise.resolve(data2)
+
+        // }).then(data => {
+        //   this.setState({secondCityLatitude: data.displayLatLng.lat, secondCityLongitude: data.displayLatLng.lng})
+
+        // })
          
       })
   }
-    
-    // .then(allResponses => {
-    //   const response = allResponses[0].json();
-    //   const response2 = allResponses[1].json()
-    //   return [response, response2]
-    // }).then(dataArray => {
-    //   console.log(dataArray[0])
-    //   //this.setState({firstCityLatitude: dataArray.results[1][1].lat})
-    //   // this.setState({firstCityLongitude: data.results[1][1].lng})
-
-    // })
-
-    // .then(res => {return res.json()})
 
   render() {
+
     return (
       <div>
         <div>
@@ -107,7 +121,7 @@ export default class GeoInputBox extends Component {
             <input type="text" placeholder="Enter second city" ref={this.secondRef} id="second-city"/>
           </form>
           <div>
-            <Button type="submit" variant="contained" color="primary" onClick={this.componentDidMount} >
+            <Button type="submit" variant="contained" color="primary" onClick={this.returnGeoData} >
               Calculate
             </Button>
             <Button variant="contained" color="secondary">
