@@ -143,7 +143,6 @@ export default class InitialCityBox extends Component {
   
   render() {
 
-    // console.log(this.counter)
     const show = this.state.showLoading
 
     return (

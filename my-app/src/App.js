@@ -3,6 +3,7 @@ import InitialCityBox from './components/InitialCityBox';
 import'./components/ResultCard'
 import React, { Component } from 'react';
 import GeoInputBox from './components/GeoInputBox';
+import LatlongDisplay from './components/LatlongDisplay'
 
 
 export default class App extends Component {
@@ -50,7 +51,7 @@ export default class App extends Component {
               and 90 is at both the North and South Poles.</p>
             </div>
           </div>
-          <div>
+          <div className="geobox-container">
             <h1>Use this calculator to find the latitude and longitude of two cities</h1>
             <GeoInputBox />
           </div>

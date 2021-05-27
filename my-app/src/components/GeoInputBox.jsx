@@ -2,6 +2,10 @@ import React from 'react';
 import { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import ReactDOM from 'react-dom';
+import './geobox.css'
+import ReplayRoundedIcon from '@material-ui/icons/ReplayRounded';
+import { StylesProvider } from "@material-ui/core/styles";
+import LatLongDisplay from './LatlongDisplay';
 
 
 export default class GeoInputBox extends Component {
@@ -51,9 +55,7 @@ export default class GeoInputBox extends Component {
 
           }).then(res => res.json())
 
-         // results[0].locations[0].displayLatLng.lat
         ]).then(([urlOne, urlTwo]) => { //retrieving data properly
-          // let first = urlOne.json()
           console.log(urlOne)
           console.log(urlTwo)
 
@@ -71,63 +73,39 @@ export default class GeoInputBox extends Component {
 
         }) .then(data => {
           this.setState({secondCityLatitude: data.displayLatLng.lat, secondCityLongitude: data.displayLatLng.lng})
-
           console.log(data.displayLatLng.lat)
           console.log(data.displayLatLng.lng)
 
         })
-        // .then(data => {
-        //   this.setState({firstCityLatitude: data[0].displayLatLng.lat, firstCityLongitude: data[0].displayLatLng.lng})
-        //   console.log(data[0].displayLatLng.lat)
-        //   console.log(data[0].displayLatLng.lng)
-
-        //   // console.log('hello' + JSON.stringify(data[1].results[0].locations[0]))
-        //   console.log(data[1].displayLatLng.lat)
-        //   console.log(data[1].displayLatLng.lng)
-          
-        //   return data[1]
-        //   // return Promise.all(test)
-        // })
-        // .then(data => {
-        //   console.log(data)
-          
-        //   // return Promise.resolve(test2)
-        // })
-        
-        // .then(data => {
-        //   return data[1].json()
-
-        // }).then(data => {
-        //   const data2 = JSON.parse(JSON.stringify(data.results[0].locations[0]))
-        //   return Promise.resolve(data2)
-
-        // }).then(data => {
-        //   this.setState({secondCityLatitude: data.displayLatLng.lat, secondCityLongitude: data.displayLatLng.lng})
-
-        // })
-         
       })
   }
 
   render() {
+    const states = [this.state.firstCityLatitude, this.state.firstCityLongitude, this.state.secondCityLatitude, this.state.secondCityLongitude]
 
     return (
       <div>
+        <div className="logo-descrip">
+          <span>Reset</span>
+          <StylesProvider injectFirst>
+            <ReplayRoundedIcon onClick={this.reset}></ReplayRoundedIcon>
+          </StylesProvider>
+        </div>        
         <div>
-          <form action="submit">
+          <form action="submit" id="form-1">
             <input type="text" placeholder="Enter first city" ref={this.firstRefR} id="first-city"/>
           </form>
-          <form action="submit">
+          <form action="submit" id="form-2">
             <input type="text" placeholder="Enter second city" ref={this.secondRef} id="second-city"/>
           </form>
           <div>
             <Button type="submit" variant="contained" color="primary" onClick={this.returnGeoData} >
               Calculate
             </Button>
-            <Button variant="contained" color="secondary">
-              Reset
-            </Button>
           </div>
+        </div>
+        <div>
+          <LatLongDisplay citiesInfo={states}/>
         </div>
       </div>
     )
