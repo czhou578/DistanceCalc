@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   root: {
     minWidth: 175,
     minHeight: 155,
-    padding: 0
+    backgroundColor: 'tan'
   },
   bullet: {
     display: 'inline-block',
@@ -38,7 +38,7 @@ export default function LatLongDisplay(props) {
          <br></br> 
 
         <Typography variant="h7">
-          First City Longitude: {passedStates[1]}
+        First City Longitude: {passedStates[1]}
         </Typography>
          <br></br> 
 

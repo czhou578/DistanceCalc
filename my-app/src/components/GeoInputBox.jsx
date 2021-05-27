@@ -99,9 +99,11 @@ export default class GeoInputBox extends Component {
           </StylesProvider>
         </div>        
         <div>
+          <h1>First City </h1>
           <form action="submit" id="form-1">
             <input type="text" placeholder="Enter first city" ref={this.firstRefR} id="first-city"/>
           </form>
+          <h1>Second City </h1>
           <form action="submit" id="form-2">
             <input type="text" placeholder="Enter second city" ref={this.secondRef} id="second-city"/>
           </form>
