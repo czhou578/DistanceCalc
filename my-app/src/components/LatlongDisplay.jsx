@@ -3,10 +3,14 @@ import '../components/GeoInputBox'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    minWidth: 175,
+    minHeight: 155,
+    padding: 0
   },
   bullet: {
     display: 'inline-block',
@@ -24,18 +28,32 @@ const useStyles = makeStyles({
 export default function LatLongDisplay(props) {
   const classes = useStyles();
   let passedStates = props.citiesInfo
-  console.log(passedStates)
 
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        First City Longitude:
-        First City Latitude:
-        Second City Longitude:
-        Second City Latitude:
+        <Typography variant="h7">
+        First City Latitude: {passedStates[0]}
+        </Typography>
+         <br></br> 
+
+        <Typography variant="h7">
+          First City Longitude: {passedStates[1]}
+        </Typography>
+         <br></br> 
+
+        <Typography variant="h7">
+          Second City Latitude: {passedStates[2]}         
+        </Typography>
+         <br></br> 
+
+        <Typography variant="h7">
+          Second City Longitude: {passedStates[3]}
+        </Typography>
+         <br></br> 
 
       </CardContent>
-  </Card>
+    </Card>
   )
 
 }

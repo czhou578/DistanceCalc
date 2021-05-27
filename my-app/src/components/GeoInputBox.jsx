@@ -23,8 +23,15 @@ export default class GeoInputBox extends Component {
           firstCityLongitude: "",
           secondCityLongitude: "",
         }
-      ]
+      ],
+      didReset: false
     }
+  }
+
+  reset = () => {
+    document.getElementById('first-city').value = '';
+    document.getElementById('second-city').value = '';
+    return this.setState({didReset: true})
   }
 
   returnGeoData = () => {
@@ -104,7 +111,7 @@ export default class GeoInputBox extends Component {
             </Button>
           </div>
         </div>
-        <div>
+        <div id="display-container">
           <LatLongDisplay citiesInfo={states}/>
         </div>
       </div>
