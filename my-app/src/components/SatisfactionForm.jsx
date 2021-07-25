@@ -12,8 +12,6 @@ export default function(props) {
     console.log('hello')
   })
 
-
-
   return (
     <div>
       <h1>Want to Subscribe?</h1>
@@ -25,13 +23,12 @@ export default function(props) {
         <div>
           <TextField id="standard-basic3" label="Email Address" color="red"/>
         </div>
-        <div>
+        <div className={styles.rating}>
           Rating (1-10)
           <button onClick={() => setCount(count + 1)} className={styles.btn}>
             +
           </button>
           <div>{count}</div>
-
         </div>
         <Button variant="contained" color="primary">
           Submit
