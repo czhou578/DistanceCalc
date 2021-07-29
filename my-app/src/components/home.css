@@ -1,0 +1,92 @@
+.header {
+  margin-left: 37%;
+  font-family: 'Poppins', sans-serif;
+}
+
+.header > h2, .descrip {
+  color: white;
+}
+
+.descrip {
+  position: relative;
+  right: 100px;
+  font-size: 10px;
+}
+
+.box-container {
+  margin-top: 25px;
+  position: relative;
+  right: 280px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.from-box {
+  margin-right: 50px;
+}
+
+.to-box {
+  border: 2px solid lightcoral;
+}
+
+.miles {
+  color: white;
+  font-size: 50px;
+}
+
+.results {
+  border: 2px solid lightgoldenrodyellow;
+  position: relative;
+  top: 200px;
+  right: 450px;
+}
+
+.log-container {
+  margin-top: 60px;
+  margin-left: 16%;
+  width: 65%;
+}
+
+.log-container > span {
+  position: relative;
+  bottom: 20px;
+  color: white;
+  margin-left: 40%;
+  margin-bottom: 30px;
+  font-size: 20px;
+
+}
+
+/**
+  Styling for the latitude/longitude section
+**/
+
+.longlat-explain {
+  display: flex;
+  width: 80vw;
+  margin-top: 200px;
+  margin-left: -300px;
+}
+
+.longitude-explain > h2, .longitude-explain > p, .latitude-explain > h2, .latitude-explain > p{
+  color: antiquewhite;
+}
+
+.longitude-explain, .latitude-explain {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.longitude-explain > p, .latitude-explain > p {
+  font-size: 12px;
+}
+
+.geobox-container {
+  margin-top: 35px;
+  position: relative;
+  right: 100px;
+  margin-right: 200px;
+}
