@@ -3,11 +3,12 @@ import { TextField, Button } from '@material-ui/core';
 import styles from './satisForm.module.css'
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { createStore } from 'redux';
 
 export default function(props) {
   const [userFirstName, setUserFirstName] = useState('')
   const [userLastName, setUserLastName] = useState('')
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
   const ref1 = useRef();
   const initialValues = {
     firstName: '',
@@ -20,9 +21,9 @@ export default function(props) {
   })
 
   const validationSchema = yup.object({
-    firstName: yup.string().required('Required').max(5),
-    lastName: yup.string().required('Required'),
-    email: yup.string().required('Required')
+    firstName: yup.string().required('Required').min(1, 'Must enter an FirstName'),
+    lastName: yup.string().required('Required').min(1, 'Must enter an lastName'),
+    email: yup.string().required('Required').min(1, 'Must enter an email')
   })
 
   function incrementCount(count) {
@@ -46,22 +47,56 @@ export default function(props) {
           isValid,
           isSubmitting,
           dirty,
+          values,
+          handleBlur,
+          handleReset,
+          errors,
+          touched,
+          helperText
         } = formProps;
         return (
           <div>
             <h1>Want to Subscribe?</h1>
             <div className={styles['text-wrapper']}>
-              <form action="submit">
-                <TextField id="standard-basic" label="First Name" color="red"
+              <form action="submit" onSubmit={handleSubmit} onReset={handleReset}>
+                <TextField 
+                id="standard-basic" 
+                label="First Name" 
+                color="red"
                   onChange={handleChange}
                   name="firstName"
-
+                  value={values.firstName}  
+                  onBlur={handleBlur}
+                  error={touched.firstName && Boolean(errors.firstName)}
+                  helperText={touched.firstName && errors.firstName}
                 />
                 <div>
-                  <TextField id="standard-basic2" label="Last Name" color="red"/>
+                  <TextField 
+                    id="standard-basic2" 
+                    label="Last Name" 
+                    color="red" 
+                    value={values.lastName} 
+                    onChange={handleChange} 
+                    name="lastName" 
+                    onBlur={handleBlur}
+                    error={touched.lastName && Boolean(errors.lastName)}
+                    helperText={touched.lastName && errors.lastName}
+
+                    />
                 </div>
                 <div>
-                  <TextField id="standard-basic3" label="Email Address" color="red"/>
+                  <TextField 
+                  id="standard-basic3" 
+                  label="Email Address" 
+                  color="red" 
+                  value={values.email} 
+                  onChange={handleChange} 
+                  name="email" 
+                  onBlur={handleBlur}
+                  error={touched.email && Boolean(errors.email)}
+                  helperText={touched.email && errors.email}
+
+                  />
                 </div>
                 <div className={styles.rating}>
                   Rating (1-10)
@@ -70,7 +105,7 @@ export default function(props) {
                   </button>
                   <div ref={ref1}>{count}</div>
                 </div>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting} dirty={dirty}>
                   Submit
                 </Button>
 
