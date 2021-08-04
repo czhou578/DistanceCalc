@@ -51,7 +51,7 @@ export default class InitialCityBox extends Component {
   });
 
   reset = () => {
-    console.log('executed')
+    // console.log('executed')
     document.getElementById('first-form').value = ''
     document.getElementById('second-form').value = ''
     document.getElementsByClassName('states')[0].value = 'AL'
@@ -70,7 +70,7 @@ export default class InitialCityBox extends Component {
 
   returnData() {
     const startingCity = ReactDOM.findDOMNode(this.secondRef.current) 
-    console.log('initbox' + startingCity.value)
+    // console.log('initbox' + startingCity.value)
     const selectAbbrev = ReactDOM.findDOMNode(this.firstRef.current);
     const inputFinalCity = ReactDOM.findDOMNode(this.thirdRef.current)
     const inputFinalAbbrev = ReactDOM.findDOMNode(this.fourthRef.current)
@@ -89,7 +89,7 @@ export default class InitialCityBox extends Component {
         })
         .then(res => {this.setState({showLoading: false}); return res.json()}) //returns a promise
         .then((data) => {
-          console.log(data)
+          // console.log(data)
           this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
         })
         .catch(error => console.log('ERROR')) 
@@ -120,12 +120,12 @@ export default class InitialCityBox extends Component {
     // }
 
     if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === false && nextState.showLoading === true) {
-      console.log('this is it2')
+      // console.log('this is it2')
       return true;
     }
 
     if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === true && nextState.showLoading === false) {
-      console.log('this is it')
+      // console.log('this is it')
       return false;
     }
 
