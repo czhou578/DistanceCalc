@@ -4,8 +4,9 @@ import styles from './satisForm.module.css'
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { createStore } from 'redux';
+import { createStore } from 'redux';
 
-export default function(props) {
+export default function SatisfactionForm(props) {
   const [userFirstName, setUserFirstName] = useState('')
   const [userLastName, setUserLastName] = useState('')
   const [count, setCount] = useState(1)
@@ -32,6 +33,27 @@ export default function(props) {
     }
     setCount(count => count + 1)
   }
+
+  const updateFirstNameReducer = (state = '', action) => {
+    switch (action.type) {
+      case 'addedName':
+        return state + "text"
+      default:
+        return state;
+    } 
+  }
+
+  const updateLastNameReducer = (state = '', action) => {
+    switch (action.type) {
+      case 'addLastName':
+        return state + "text2"
+      default:
+        return state  
+    }
+  }
+
+  let store = createStore(updateFirstNameReducer)
+  store.subscribe(() => console.log(store.state))
 
   return (
     <Formik
@@ -111,10 +133,7 @@ export default function(props) {
 
               </form>
             </div>
-
           </div>
-
-
         )
       }}
 
