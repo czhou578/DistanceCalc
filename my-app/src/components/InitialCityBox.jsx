@@ -13,6 +13,7 @@ import Log from './Log'
 export default class InitialCityBox extends Component {
   constructor(props) {
     super(props)
+    console.log(this.props)
     this.props = props
     this.firstRef = React.createRef()
     this.secondRef = React.createRef()
@@ -70,7 +71,6 @@ export default class InitialCityBox extends Component {
 
   returnData() {
     const startingCity = ReactDOM.findDOMNode(this.secondRef.current) 
-    // console.log('initbox' + startingCity.value)
     const selectAbbrev = ReactDOM.findDOMNode(this.firstRef.current);
     const inputFinalCity = ReactDOM.findDOMNode(this.thirdRef.current)
     const inputFinalAbbrev = ReactDOM.findDOMNode(this.fourthRef.current)
@@ -314,6 +314,10 @@ export default class InitialCityBox extends Component {
 //   showLoading: false,
 //   deleteResultData: false
 // }
+
+{/* <React.Fragment>
+  <Colin></Colin>
+</React.Fragment> */}
 
 
 
