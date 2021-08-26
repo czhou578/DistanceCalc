@@ -13,7 +13,6 @@ import Log from './Log'
 export default class InitialCityBox extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props)
     this.props = props
     this.firstRef = React.createRef()
     this.secondRef = React.createRef()
@@ -295,29 +294,6 @@ export default class InitialCityBox extends Component {
     )
   }
 }
-
-// this.state = {
-//   data: [
-//     {
-//       cityName: '',
-//       stateAbbrev: '',
-//       finalCity: '',
-//       finalStateAbbrev: '',
-//       newSubmission: false
-//     },
-
-//     {
-//       finalDistance: null,
-//       finalTime: null
-//     }
-//   ],
-//   showLoading: false,
-//   deleteResultData: false
-// }
-
-{/* <React.Fragment>
-  <Colin></Colin>
-</React.Fragment> */}
 
 
 

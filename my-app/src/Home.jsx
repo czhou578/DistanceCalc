@@ -2,11 +2,7 @@ import InitialCityBox from './components/InitialCityBox';
 import'./components/ResultCard'
 import React, { Component } from 'react';
 import GeoInputBox from './components/GeoInputBox';
-import LatlongDisplay from './components/LatlongDisplay'
 import SatisfactionForm from './components/SatisfactionForm';
-import About from './components/About';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import { Link } from 'react-router-dom';
 import './components/home.css'
 
 export default class Home extends Component {

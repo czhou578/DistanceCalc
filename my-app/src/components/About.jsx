@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ColinPic from './colin.jpg'
 
 export default function About(props) {
+
+  const {...rest} = props
   const styles = {
     color: 'white',
     fontSize: '15px'
