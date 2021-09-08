@@ -4,7 +4,7 @@ Deploy link: https://distance-calculator-a905f.web.app/
 
 ## Installation & Setup For Development
 
-Install [Node](https://nodejs.org/en/) Follow instructions in installation to install NPM after Node.
+Install [Node](https://nodejs.org/en/). Follow instructions in installation to install NPM after Node.
 
 ## Run App: 
    ```
