@@ -27,7 +27,7 @@ export default function SatisfactionForm(props) {
     email: yup.string().required('Required').min(1, 'Must enter an email')
   })
 
-  const store = createStore()
+  const store = createStore(allReducers)
 
   return (
     <Formik
@@ -95,13 +95,12 @@ export default function SatisfactionForm(props) {
 
                   />
                 </div>
-                {/* <div className={styles.rating}>
-                  Rating (1-10)
-                  <button id="addBtn" onClick={incrementCount} className={styles.btn} type="button">
-                    +
-                  </button>
-                  <div ref={ref1}>{count}</div>
-                </div> */}
+                <div>
+                  <h4>Give Rating</h4>
+                  <p></p>
+                <button className={styles.ratingBtn}>+</button>
+
+                </div>
                 <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting} dirty={dirty} type="submit">
                   Submit
                 </Button>
