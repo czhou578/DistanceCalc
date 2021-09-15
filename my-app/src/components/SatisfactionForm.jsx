@@ -4,6 +4,7 @@ import styles from './satisForm.module.css'
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { createStore, combineReducers} from 'redux';
+import allReducers from '../reducers/index'
 
 export default function SatisfactionForm(props) {
   const [userFirstName, setUserFirstName] = useState('')
@@ -18,7 +19,7 @@ export default function SatisfactionForm(props) {
 
   useEffect(() => {
     console.log('hello')
-  })
+  }, [])
 
   const validationSchema = yup.object({
     firstName: yup.string().required('Required').min(1, 'Must enter an FirstName'),
@@ -26,60 +27,7 @@ export default function SatisfactionForm(props) {
     email: yup.string().required('Required').min(1, 'Must enter an email')
   })
 
-  const incrementCount = (count) => {
-    console.log('incremented')
-    if (count == 10) {
-      console.log('this cannot happen')
-    }
-    return setCount(count => count + 1)
-  }
-
-  const fName = () => {
-    return {
-      type: 'addedFirstName'
-    }
-  }
-
-  const lName = () => {
-    return {
-      type: 'addedLastName'
-    }
-  }
-
-  const updateNameReducer = (state = '', action) => {
-    switch (action.type) {
-      case 'addedFirstName':
-        return state + "text  "
-      case 'addedLastName':
-        return state + "text2"
-      default:
-        return state;
-    } 
-  }
-
-  const allReducers = combineReducers({
-    updateName: updateNameReducer
-  })
-
-  let store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-  store.subscribe(() => console.log(store.state))
-
-  const onSubmit = () => {
-    submitDispatch()
-  }
-  
-  const submitDispatch = () => {
-    // e.stopPropagation();
-    console.log('submit')
-    store.dispatch(lName())
-    store.dispatch(fName())    
-  }
-
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      update: () => dispatch(lName())
-    }
-  }
+  const store = createStore()
 
   return (
     <Formik
@@ -87,7 +35,7 @@ export default function SatisfactionForm(props) {
       validationSchema={validationSchema}
       enableReinitialize
       validateOnChange={true}
-      onSubmit={submitDispatch}
+      // onSubmit={reducer}
     >
       {(formProps) => {
         const {
@@ -107,7 +55,7 @@ export default function SatisfactionForm(props) {
           <div>
             <h1>Want to Subscribe?</h1>
             <div className={styles['text-wrapper']}>
-              <form action="submit" onSubmit={handleSubmit} onReset={handleReset}>
+              <form action="submit" onReset={handleReset}>
                 <TextField 
                 id="standard-basic" 
                 label="First Name" 
@@ -154,7 +102,7 @@ export default function SatisfactionForm(props) {
                   </button>
                   <div ref={ref1}>{count}</div>
                 </div> */}
-                <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting} dirty={dirty} onClick={onSubmit} type="submit">
+                <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting} dirty={dirty} type="submit">
                   Submit
                 </Button>
               </form>
