@@ -16,7 +16,6 @@ export default function IncrementBtn(props) {
     marginLeft: '20px'
   }
 
-
   return (
     <div style={styles}>
       <div>

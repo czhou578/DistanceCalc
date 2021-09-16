@@ -20,8 +20,6 @@ export default class Home extends Component {
     document.body.appendChild(script);
   }
 
-
-
   render() {
     return (
       <div>

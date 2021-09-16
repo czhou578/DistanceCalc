@@ -34,86 +34,92 @@ export default function SatisfactionForm(props) {
 
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      enableReinitialize
-      validateOnChange={true}
-      onSubmit={ () => console.log('colin is here')}
-    >
-      {(formProps) => {
-        const {
-          handleChange,
-          isValid,
-          isSubmitting,
-          dirty,
-          values,
-          handleBlur,
-          handleReset,
-          errors,
-          touched,
-          setSubmitting
-        } = formProps;
-        return (
-            <div>
-              <h1>Want to Subscribe?</h1>
-              <div className={styles['text-wrapper']}>
-                <form action="submit" onReset={handleReset}>
-                  <TextField 
-                  id="standard-basic" 
-                  label="First Name" 
-                  color="red"
-                    onChange={handleChange}
-                    name="firstName"
-                    value={values.firstName}  
-                    onBlur={handleBlur}
-                    error={touched.firstName && Boolean(errors.firstName)}
-                    helperText={touched.firstName && errors.firstName}
-                  />
-                  <div>
+    <div>
+      {/* <div>
+        <span className={styles.text}>THANK YOU FOR WORKING</span>
+      </div> */}
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        enableReinitialize
+        validateOnChange={true}
+        onSubmit={ (data, {resetForm}, e) => {
+          // e.preventDefault()
+          resetForm()
+        } }
+      >
+        {(formProps) => {
+          const {
+            handleChange,
+            isSubmitting,
+            dirty,
+            values,
+            handleBlur,
+            handleReset,
+            errors,
+            touched,
+            handleSubmit
+          } = formProps;
+          return (
+              <div>
+                <h1>Want to Subscribe?</h1>
+                <div className={styles['text-wrapper']}>
+                  <form action="submit" onReset={handleReset} onSubmit={handleSubmit}>
                     <TextField 
-                      id="standard-basic2" 
-                      label="Last Name" 
-                      color="red" 
-                      value={values.lastName} 
-                      onChange={handleChange} 
-                      name="lastName" 
+                    id="standard-basic" 
+                    label="First Name" 
+                    color="red"
+                      onChange={handleChange}
+                      name="firstName"
+                      value={values.firstName}  
                       onBlur={handleBlur}
-                      error={touched.lastName && Boolean(errors.lastName)}
-                      helperText={touched.lastName && errors.lastName}
-
-                      />
-                  </div>
-                  <div>
-                    <TextField 
-                    id="standard-basic3" 
-                    label="Email Address" 
-                    color="red" 
-                    value={values.email} 
-                    onChange={handleChange} 
-                    name="email" 
-                    onBlur={handleBlur}
-                    error={touched.email && Boolean(errors.email)}
-                    helperText={touched.email && errors.email}
-
+                      error={touched.firstName && Boolean(errors.firstName)}
+                      helperText={touched.firstName && errors.firstName}
                     />
-                  </div>
-                  <div>
-                    <h4>Give Rating (0-10)</h4>
-                    <div className={styles.increDiv}>
-                    <Provider store={store}> 
-                      <IncrementBtn setSubmitting={false} disabled={!isValid} addition={true}/>
-                    </Provider>
+                    <div>
+                      <TextField 
+                        id="standard-basic2" 
+                        label="Last Name" 
+                        color="red" 
+                        value={values.lastName} 
+                        onChange={handleChange} 
+                        name="lastName" 
+                        onBlur={handleBlur}
+                        error={touched.lastName && Boolean(errors.lastName)}
+                        helperText={touched.lastName && errors.lastName}
+
+                        />
                     </div>
-                  </div>
-                  <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting, () => console.log('colin was here')} dirty={!dirty} type="submit">
-                    Submit
-                  </Button>
-                </form>
+                    <div>
+                      <TextField 
+                      id="standard-basic3" 
+                      label="Email Address" 
+                      color="red" 
+                      value={values.email} 
+                      onChange={handleChange} 
+                      name="email" 
+                      onBlur={handleBlur}
+                      error={touched.email && Boolean(errors.email)}
+                      helperText={touched.email && errors.email}
+                      />
+                    </div>
+                    <div>
+                      <h4>Give Rating (0-10)</h4>
+                      <div className={styles.increDiv}>
+                      <Provider store={store}> 
+                        <IncrementBtn />
+                      </Provider>
+                      </div>
+                    </div>
+                    <Button variant="contained" disabled={!dirty}color="primary" type="submit">
+                      Submit
+                    </Button>
+                  </form>
+                </div>
               </div>
-            </div>
-        )
-      }}
-    </Formik>
+          )
+        }}
+      </Formik>
+    </div>
   )
 }
