@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import increment from '../actions/index'
+import IncrementBtn from './IncrementBtn';
 
 export default function SatisfactionForm(props) {
   const [userFirstName, setUserFirstName] = useState('')
@@ -22,7 +23,6 @@ export default function SatisfactionForm(props) {
   }, [])
 
   const counterShow = useSelector(state => state.counter)
-  const dispatch = useDispatch()
 
   const validationSchema = yup.object({
     firstName: yup.string().required('Required').min(1, 'Must enter an FirstName'),
@@ -37,7 +37,7 @@ export default function SatisfactionForm(props) {
       validationSchema={validationSchema}
       enableReinitialize
       validateOnChange={true}
-      // onSubmit={reducer}
+      onSubmit={ () => console.log('colin is here')}
     >
       {(formProps) => {
         const {
@@ -51,7 +51,7 @@ export default function SatisfactionForm(props) {
           handleReset,
           errors,
           touched,
-          helperText
+          setSubmitting
         } = formProps;
         return (
             <div>
@@ -101,10 +101,10 @@ export default function SatisfactionForm(props) {
                     <h4>Give Rating</h4>
                     <div>
                       <p>{counterShow}</p>
-                      <button className={styles.ratingBtn} onClick={() => dispatch(increment())}>+</button>
+                      <IncrementBtn setSubmitting={false} disabled={!isValid} />
                     </div>
                   </div>
-                  <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting} dirty={!dirty} type="submit">
+                  <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting, () => console.log('colin was here')} dirty={!dirty} type="submit">
                     Submit
                   </Button>
                 </form>
