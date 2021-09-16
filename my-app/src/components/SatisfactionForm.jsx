@@ -3,9 +3,11 @@ import { TextField, Button } from '@material-ui/core';
 import styles from './satisForm.module.css'
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import increment from '../actions/index'
+import { Provider} from 'react-redux';
 import IncrementBtn from './IncrementBtn';
+import allReducers from '../reducers/index'
+import { createStore } from 'redux';
+
 
 export default function SatisfactionForm(props) {
   const [userFirstName, setUserFirstName] = useState('')
@@ -22,13 +24,13 @@ export default function SatisfactionForm(props) {
     console.log('hello')
   }, [])
 
-  const counterShow = useSelector(state => state.counter)
-
   const validationSchema = yup.object({
     firstName: yup.string().required('Required').min(1, 'Must enter an FirstName'),
     lastName: yup.string().required('Required').min(1, 'Must enter an lastName'),
     email: yup.string().required('Required').min(1, 'Must enter an email')
   })
+
+  const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
   return (
@@ -42,7 +44,6 @@ export default function SatisfactionForm(props) {
       {(formProps) => {
         const {
           handleChange,
-          handleSubmit,
           isValid,
           isSubmitting,
           dirty,
@@ -100,15 +101,9 @@ export default function SatisfactionForm(props) {
                   <div>
                     <h4>Give Rating</h4>
                     <div className={styles.increDiv}>
-                      <div>
-                        <p className={styles.pa}>{counterShow}</p>
-                      </div>
-                      <div className={styles.increbtn}>
-                        <IncrementBtn setSubmitting={false} disabled={!isValid} addition={true}/>
-                      </div>
-                      <div className={styles.decrbtn}>
-                        <IncrementBtn setSubmitting={false} disabled={!isValid} addition={false}/>
-                      </div>
+                    <Provider store={store}> 
+                      <IncrementBtn setSubmitting={false} disabled={!isValid} addition={true}/>
+                    </Provider>
                     </div>
                   </div>
                   <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting, () => console.log('colin was here')} dirty={!dirty} type="submit">

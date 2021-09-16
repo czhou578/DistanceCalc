@@ -1,19 +1,34 @@
 import React from "react";
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import increment from '../actions/index'
-import decrement from '../actions/index'
-import counterReducer from "../reducers/counter";
+import { useDispatch, useSelector } from 'react-redux';
+import * as actionType from '../actions/index'
 import styles from './satisForm.module.css'
 
 export default function IncrementBtn(props) {
   const {addition} = props
 
-  const dispatch = useDispatch()
+  const counterShow = useSelector(state => state.counter.value)
+  const dispatch = useDispatch();
+
+  const styles = {
+    display: 'flex'
+  }
+
+  const styles2 = {
+    marginLeft: '20px'
+  }
+
 
   return (
-    <div>
-      {addition ? <button className={styles.ratingBtn} onClick={() => dispatch(increment())} type="button"> + </button> : 
-      <button className={styles.ratingBtn} onClick={() => dispatch(decrement())} type="button"> - </button> }
+    <div style={styles}>
+      <div>
+        <button className={styles.ratingBtn} onClick={() => dispatch(actionType.incrementType())} type="button"> + </button>
+      </div>
+      <div style={styles2}>
+        <span>{counterShow}</span>
+      </div>
+      <div style={styles2}>
+        <button className={styles.ratingBtn} onClick={() => dispatch(actionType.decrementType())} type="button"> - </button>
+      </div>
     </div>
   )
 }

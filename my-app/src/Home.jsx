@@ -4,12 +4,7 @@ import React, { Component } from 'react';
 import GeoInputBox from './components/GeoInputBox';
 import SatisfactionForm from './components/SatisfactionForm';
 import './components/home.css'
-import { Provider } from 'react-redux';
-import allReducers from './reducers/index'
-import { createStore, combineReducers, } from 'redux';
 
-
-const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 export default class Home extends Component {
   constructor(props) {
     super(props)
@@ -62,9 +57,7 @@ export default class Home extends Component {
           <GeoInputBox />
         </div>
         <div>
-          <Provider store={store}> 
-            <SatisfactionForm />
-          </Provider>
+          <SatisfactionForm />
         </div>
       </div>
     </div>

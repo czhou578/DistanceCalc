@@ -1,10 +1,10 @@
- const incrementType = () => {
+ export const incrementType = () => {
   return {
     type: 'increment'
   }
 }
 
-export default incrementType
+// export default incrementType
 
 export const decrementType = () => {
   return {
