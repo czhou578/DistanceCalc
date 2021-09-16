@@ -8,6 +8,8 @@ const counterReducer = (state = {value: 0}, action) => {
       if (state.value > 0) {
         return {value: state.value - 1}
       }
+    case 'reset':
+      return {value: state.value = 0}
     default:
       return state
   }

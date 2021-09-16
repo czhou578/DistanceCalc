@@ -9,3 +9,9 @@ export const decrementType = () => {
     type: 'decrement'
   }
 }
+
+export const resetStore = () => {
+  return {
+    type: 'reset'
+  }
+}

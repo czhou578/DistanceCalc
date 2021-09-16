@@ -3,10 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actionType from '../actions/index'
 
 export default function IncrementBtn(props) {
-  const {addition} = props
+  const {state, handler} = props
 
   const counterShow = useSelector(state => state.counter.value)
   const dispatch = useDispatch();
+
+  if (state) {
+    dispatch(actionType.resetStore())
+    handler(false)
+  }
 
   const styles = {
     display: 'flex'

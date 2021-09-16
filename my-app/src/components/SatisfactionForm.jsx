@@ -7,12 +7,15 @@ import { Provider} from 'react-redux';
 import IncrementBtn from './IncrementBtn';
 import allReducers from '../reducers/index'
 import { createStore } from 'redux';
+import * as actionType from '../actions/index'
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function SatisfactionForm(props) {
   const [userFirstName, setUserFirstName] = useState('')
   const [userLastName, setUserLastName] = useState('')
   const [count, setCount] = useState(1)
+  const [reset, didReset] = useState(false)
   const ref1 = useRef();
   const initialValues = {
     firstName: '',
@@ -32,19 +35,14 @@ export default function SatisfactionForm(props) {
 
   const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-
   return (
     <div>
-      {/* <div>
-        <span className={styles.text}>THANK YOU FOR WORKING</span>
-      </div> */}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         enableReinitialize
         validateOnChange={true}
         onSubmit={ (data, {resetForm}, e) => {
-          // e.preventDefault()
           resetForm()
         } }
       >
@@ -53,6 +51,7 @@ export default function SatisfactionForm(props) {
             handleChange,
             isSubmitting,
             dirty,
+            isValid,
             values,
             handleBlur,
             handleReset,
@@ -107,11 +106,11 @@ export default function SatisfactionForm(props) {
                       <h4>Give Rating (0-10)</h4>
                       <div className={styles.increDiv}>
                       <Provider store={store}> 
-                        <IncrementBtn />
+                        <IncrementBtn state={reset} handler={didReset}/>
                       </Provider>
                       </div>
                     </div>
-                    <Button variant="contained" disabled={!dirty}color="primary" type="submit">
+                    <Button variant="contained" disabled={!dirty || !isValid} color="primary" type="submit" onClick={() => didReset(!reset)}>
                       Submit
                     </Button>
                   </form>
