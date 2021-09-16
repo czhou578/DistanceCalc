@@ -7,8 +7,6 @@ import { Provider} from 'react-redux';
 import IncrementBtn from './IncrementBtn';
 import allReducers from '../reducers/index'
 import { createStore } from 'redux';
-import * as actionType from '../actions/index'
-import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function SatisfactionForm(props) {
