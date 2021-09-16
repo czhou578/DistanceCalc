@@ -3,8 +3,8 @@ import { TextField, Button } from '@material-ui/core';
 import styles from './satisForm.module.css'
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { createStore, combineReducers} from 'redux';
-import allReducers from '../reducers/index'
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import increment from '../actions/index'
 
 export default function SatisfactionForm(props) {
   const [userFirstName, setUserFirstName] = useState('')
@@ -21,13 +21,15 @@ export default function SatisfactionForm(props) {
     console.log('hello')
   }, [])
 
+  const counterShow = useSelector(state => state.counter)
+  const dispatch = useDispatch()
+
   const validationSchema = yup.object({
     firstName: yup.string().required('Required').min(1, 'Must enter an FirstName'),
     lastName: yup.string().required('Required').min(1, 'Must enter an lastName'),
     email: yup.string().required('Required').min(1, 'Must enter an email')
   })
 
-  const store = createStore(allReducers)
 
   return (
     <Formik
@@ -52,61 +54,62 @@ export default function SatisfactionForm(props) {
           helperText
         } = formProps;
         return (
-          <div>
-            <h1>Want to Subscribe?</h1>
-            <div className={styles['text-wrapper']}>
-              <form action="submit" onReset={handleReset}>
-                <TextField 
-                id="standard-basic" 
-                label="First Name" 
-                color="red"
-                  onChange={handleChange}
-                  name="firstName"
-                  value={values.firstName}  
-                  onBlur={handleBlur}
-                  error={touched.firstName && Boolean(errors.firstName)}
-                  helperText={touched.firstName && errors.firstName}
-                />
-                <div>
+            <div>
+              <h1>Want to Subscribe?</h1>
+              <div className={styles['text-wrapper']}>
+                <form action="submit" onReset={handleReset}>
                   <TextField 
-                    id="standard-basic2" 
-                    label="Last Name" 
-                    color="red" 
-                    value={values.lastName} 
-                    onChange={handleChange} 
-                    name="lastName" 
+                  id="standard-basic" 
+                  label="First Name" 
+                  color="red"
+                    onChange={handleChange}
+                    name="firstName"
+                    value={values.firstName}  
                     onBlur={handleBlur}
-                    error={touched.lastName && Boolean(errors.lastName)}
-                    helperText={touched.lastName && errors.lastName}
+                    error={touched.firstName && Boolean(errors.firstName)}
+                    helperText={touched.firstName && errors.firstName}
+                  />
+                  <div>
+                    <TextField 
+                      id="standard-basic2" 
+                      label="Last Name" 
+                      color="red" 
+                      value={values.lastName} 
+                      onChange={handleChange} 
+                      name="lastName" 
+                      onBlur={handleBlur}
+                      error={touched.lastName && Boolean(errors.lastName)}
+                      helperText={touched.lastName && errors.lastName}
+
+                      />
+                  </div>
+                  <div>
+                    <TextField 
+                    id="standard-basic3" 
+                    label="Email Address" 
+                    color="red" 
+                    value={values.email} 
+                    onChange={handleChange} 
+                    name="email" 
+                    onBlur={handleBlur}
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
 
                     />
-                </div>
-                <div>
-                  <TextField 
-                  id="standard-basic3" 
-                  label="Email Address" 
-                  color="red" 
-                  value={values.email} 
-                  onChange={handleChange} 
-                  name="email" 
-                  onBlur={handleBlur}
-                  error={touched.email && Boolean(errors.email)}
-                  helperText={touched.email && errors.email}
-
-                  />
-                </div>
-                <div>
-                  <h4>Give Rating</h4>
-                  <p></p>
-                <button className={styles.ratingBtn}>+</button>
-
-                </div>
-                <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting} dirty={dirty} type="submit">
-                  Submit
-                </Button>
-              </form>
+                  </div>
+                  <div>
+                    <h4>Give Rating</h4>
+                    <div>
+                      <p>{counterShow}</p>
+                      <button className={styles.ratingBtn} onClick={() => dispatch(increment())}>+</button>
+                    </div>
+                  </div>
+                  <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting} dirty={!dirty} type="submit">
+                    Submit
+                  </Button>
+                </form>
+              </div>
             </div>
-          </div>
         )
       }}
     </Formik>
