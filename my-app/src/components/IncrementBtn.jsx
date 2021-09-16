@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import * as actionType from '../actions/index'
-import styles from './satisForm.module.css'
 
 export default function IncrementBtn(props) {
   const {addition} = props
