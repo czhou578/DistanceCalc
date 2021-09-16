@@ -16,6 +16,23 @@
   margin-top: 120px;
 }
 
-.ratingBtn {
-  margin-left: 120px;
+.pa {
+  position: relative;
+  bottom: 15px;
 }
+
+.increDiv {
+  display: flex;
+  justify-content: start;
+}
+
+.increbtn {
+  position: relative;
+  left: 30px;
+}
+
+.decrbtn {
+  position: relative;
+  left: 50px;
+}
+

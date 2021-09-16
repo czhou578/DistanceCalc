@@ -99,9 +99,16 @@ export default function SatisfactionForm(props) {
                   </div>
                   <div>
                     <h4>Give Rating</h4>
-                    <div>
-                      <p>{counterShow}</p>
-                      <IncrementBtn setSubmitting={false} disabled={!isValid} />
+                    <div className={styles.increDiv}>
+                      <div>
+                        <p className={styles.pa}>{counterShow}</p>
+                      </div>
+                      <div className={styles.increbtn}>
+                        <IncrementBtn setSubmitting={false} disabled={!isValid} addition={true}/>
+                      </div>
+                      <div className={styles.decrbtn}>
+                        <IncrementBtn setSubmitting={false} disabled={!isValid} addition={false}/>
+                      </div>
                     </div>
                   </div>
                   <Button variant="contained" color="primary" isValid={isValid} isSubmitting={isSubmitting, () => console.log('colin was here')} dirty={!dirty} type="submit">
