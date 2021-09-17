@@ -15,3 +15,19 @@ export const resetStore = () => {
     type: 'reset'
   }
 }
+
+export const saveFirstCity = (error) => {
+  return {
+    type: 'enteredFirstCity',
+    error: error
+  }
+}
+
+export const saveDestinationCity = (error) => {
+  return {
+    type: 'enteredDestinationCity',
+    error: error
+  }
+}
+
+

@@ -9,6 +9,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import ReplayRoundedIcon from '@material-ui/icons/ReplayRounded';
 import Log from './Log'
+import { useDispatch } from 'react-redux';
+
 
 export default class InitialCityBox extends Component {
   constructor(props) {
@@ -119,12 +121,10 @@ export default class InitialCityBox extends Component {
     // }
 
     if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === false && nextState.showLoading === true) {
-      // console.log('this is it2')
       return true;
     }
 
     if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === true && nextState.showLoading === false) {
-      // console.log('this is it')
       return false;
     }
 
