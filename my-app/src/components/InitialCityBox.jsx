@@ -10,9 +10,10 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import ReplayRoundedIcon from '@material-ui/icons/ReplayRounded';
 import Log from './Log'
 import { useDispatch } from 'react-redux';
+import * as actionTypes from '../actions/index'
+import { connect } from 'react-redux';
 
-
-export default class InitialCityBox extends Component {
+class InitialCityBox extends Component {
   constructor(props) {
     super(props)
     this.props = props
@@ -76,6 +77,8 @@ export default class InitialCityBox extends Component {
     const inputFinalCity = ReactDOM.findDOMNode(this.thirdRef.current)
     const inputFinalAbbrev = ReactDOM.findDOMNode(this.fourthRef.current)
 
+    // useDispatch(actionTypes.saveFirstCity)
+
 
     this.setState({cityName: startingCity.value, stateAbbrev: selectAbbrev.value, finalCity: inputFinalCity.value, finalStateAbbrev: inputFinalAbbrev.value
     , newSubmission: true},
@@ -90,7 +93,6 @@ export default class InitialCityBox extends Component {
         })
         .then(res => {this.setState({showLoading: false}); return res.json()}) //returns a promise
         .then((data) => {
-          // console.log(data)
           this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
         })
         .catch(error => console.log('ERROR')) 
@@ -294,6 +296,14 @@ export default class InitialCityBox extends Component {
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    enteredCities: (startCity, endCity) => {dispatch({type: 'saveUserEnteredCities', startCity: startCity, endCity: endCity})}
+  }
+}
+
+export default (mapDispatchToProps)(InitialCityBox)
 
 
 

@@ -7,6 +7,8 @@ const initialState = {
 
 export const cityReducer = (state = {value: initialState}, action) => {
   switch (action.type) {
+    case saveUserEnteredCities:
+      return {value: state.value}
     case saveFirstCity:
         return {value: state.value.cityName + "Colin"}
     case saveDestinationCity:

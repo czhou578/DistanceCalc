@@ -5,8 +5,6 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Provider} from 'react-redux';
 import IncrementBtn from './IncrementBtn';
-import allReducers from '../reducers/index'
-import { createStore } from 'redux';
 
 
 export default function SatisfactionForm(props) {
@@ -30,8 +28,6 @@ export default function SatisfactionForm(props) {
     lastName: yup.string().required('Required').min(1, 'Must enter an lastName'),
     email: yup.string().required('Required').min(1, 'Must enter an email')
   })
-
-  const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
   return (
     <div>
@@ -103,9 +99,7 @@ export default function SatisfactionForm(props) {
                     <div>
                       <h4>Give Rating (0-10)</h4>
                       <div className={styles.increDiv}>
-                      <Provider store={store}> 
                         <IncrementBtn state={reset} handler={didReset}/>
-                      </Provider>
                       </div>
                     </div>
                     <Button variant="contained" disabled={!dirty || !isValid} color="primary" type="submit" onClick={() => didReset(!reset)}>
