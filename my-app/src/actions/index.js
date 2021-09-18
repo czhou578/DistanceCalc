@@ -16,6 +16,14 @@ export const resetStore = () => {
   }
 }
 
+export const saveUserEnteredCities = (startCity, endCity) => {
+  return {
+    type: 'saveUserEnteredCities',
+    startCity: startCity,
+    endCity: endCity
+  }
+}
+
 export const saveFirstCity = (error) => {
   return {
     type: 'enteredFirstCity',

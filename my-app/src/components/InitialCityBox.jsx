@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import * as actionTypes from '../actions/index'
 import { connect } from 'react-redux';
 
-class InitialCityBox extends Component {
+export class InitialCityBox extends Component {
   constructor(props) {
     super(props)
     this.props = props
@@ -54,7 +54,6 @@ class InitialCityBox extends Component {
   });
 
   reset = () => {
-    // console.log('executed')
     document.getElementById('first-form').value = ''
     document.getElementById('second-form').value = ''
     document.getElementsByClassName('states')[0].value = 'AL'
@@ -73,12 +72,12 @@ class InitialCityBox extends Component {
 
   returnData() {
     const startingCity = ReactDOM.findDOMNode(this.secondRef.current) 
-    const selectAbbrev = ReactDOM.findDOMNode(this.firstRef.current);
+    const selectAbbrev = ReactDOM.findDOMNode(this.firstRef.current); 
     const inputFinalCity = ReactDOM.findDOMNode(this.thirdRef.current)
     const inputFinalAbbrev = ReactDOM.findDOMNode(this.fourthRef.current)
 
     // useDispatch(actionTypes.saveFirstCity)
-
+    this.props.enteredCities(startingCity.value, inputFinalCity.value);
 
     this.setState({cityName: startingCity.value, stateAbbrev: selectAbbrev.value, finalCity: inputFinalCity.value, finalStateAbbrev: inputFinalAbbrev.value
     , newSubmission: true},
@@ -143,6 +142,7 @@ class InitialCityBox extends Component {
   }
   
   render() {
+    console.log(this.props);
 
     const show = this.state.showLoading
 
@@ -299,11 +299,11 @@ class InitialCityBox extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    enteredCities: (startCity, endCity) => {dispatch({type: 'saveUserEnteredCities', startCity: startCity, endCity: endCity})}
+    enteredCities: (startCity, endCity) => {dispatch(actionTypes.saveUserEnteredCities(startCity, endCity))}
   }
 }
 
-export default (mapDispatchToProps)(InitialCityBox)
+export default connect(null, mapDispatchToProps)(InitialCityBox)
 
 
 
