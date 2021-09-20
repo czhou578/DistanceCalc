@@ -17,7 +17,6 @@ export const cityReducer = (state = initialState, action) => {
         userEnteredFromCity: action.startCity,
         userEnteredToCity: action.endCity
       }
-      
     default:
       console.log('this is default')
       return state;
