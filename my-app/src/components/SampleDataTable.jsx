@@ -76,7 +76,7 @@ export default function SampleDataTable(props) {
     const newFlattenedColumn = {
       data: [...locationData]
     }
-    const currentSortingDirection = sortingDirection(sortColumnKey)
+    const currentSortingDirection = sortingDirection[sortColumnKey]
 
     newFlattenedColumn.data.sort((a, b) => {
       const key1 = a[sortColumnKey]
@@ -92,15 +92,12 @@ export default function SampleDataTable(props) {
         if (key1 < key2) return 1
         return 0
       }
-
-      
     })
     const nextSortDirection = assignSortingDirection(currentSortingDirection)
     const newSortDirection = {...nextSortDirection}
 
     newSortDirection[sortColumnKey] = nextSortDirection
     setSortingDirection(newSortDirection)
-
 
     setLocationData(newFlattenedColumn.data)
   }
