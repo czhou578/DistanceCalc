@@ -22,6 +22,11 @@ export default class Home extends Component {
   }
 
   render() {
+    const style = {
+      position: 'relative',
+      right: '300px'
+    }
+
     return (
       <div>
         <div className="header">
@@ -58,7 +63,7 @@ export default class Home extends Component {
         <div>
           <SatisfactionForm />
         </div>
-        <div>
+        <div style={style}>
           <SampleDataTable />
         </div>
       </div>
