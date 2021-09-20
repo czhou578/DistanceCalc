@@ -38,9 +38,16 @@ const style = {
   color: 'white'
 }
 
+const sortEnum = {
+  DEFAULT: 'DEFAULT',
+  ASCENDING: 'ASCENDING',
+  DESCENDING: 'DESCENDING'
+}
+
 export default function SampleDataTable(props) {
   const [locationHeaders, setLocationHeaders] = useState([])
   const [locationData, setLocationData] = useState([])
+  const [sortinDirection, setSortingDirection] = useState({})
 
   useEffect(() => {
     getData().then((data) => {
@@ -66,7 +73,7 @@ export default function SampleDataTable(props) {
 
     setLocationData(newFlattenedColumn.data)
   }
-  
+
   return (
     <div className={styles.container}>
       <table>
