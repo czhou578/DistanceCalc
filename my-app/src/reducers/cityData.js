@@ -7,21 +7,19 @@ const initialState = {
   finalCity: ''
 }
 
-export const cityReducer = (state = {value: initialState}, action) => {
+export const cityReducer = (state = initialState, action) => {
   switch (action.type) {
-    case saveUserEnteredCities:
+    case 'saveUserEnteredCities':
+      console.log('appeared here')
+      console.log('action startcity: ' + action.startCity)
       return {
-        value: {
-          userEnteredFromCity: action.startCity,
-          userEnteredToCity: action.endCity,
-          ...state.value
-        }
+        ...state,
+        userEnteredFromCity: action.startCity,
+        userEnteredToCity: action.endCity
       }
-    case saveFirstCity:
-        return {value: state.value.cityName + "Colin"}
-    case saveDestinationCity:
-        return {value: state.value.finalCity + "Cosun"}
+      
     default:
+      console.log('this is default')
       return state;
   }
 }

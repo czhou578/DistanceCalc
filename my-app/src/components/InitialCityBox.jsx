@@ -94,7 +94,7 @@ export class InitialCityBox extends Component {
         .then((data) => {
           this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
         })
-        .catch(error => console.log('ERROR')) 
+        .catch(error => console.log(error)) 
       })
   }
 
@@ -142,8 +142,6 @@ export class InitialCityBox extends Component {
   }
   
   render() {
-    console.log(this.props);
-
     const show = this.state.showLoading
 
     return (
@@ -299,7 +297,7 @@ export class InitialCityBox extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    enteredCities: (startCity, endCity) => {dispatch(actionTypes.saveUserEnteredCities(startCity, endCity))}
+    enteredCities: (startCity, endCity) => { dispatch({type: 'saveUserEnteredCities', startCity: startCity, endCity: endCity}) }
   }
 }
 
