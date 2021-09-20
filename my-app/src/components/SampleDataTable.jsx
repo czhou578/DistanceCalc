@@ -50,13 +50,30 @@ export default function SampleDataTable(props) {
     })
   }, [])
 
+  const sortColumn = (sortColumnKey) => {
+    const newFlattenedColumn = {
+      data: [...locationData]
+    }
+
+    newFlattenedColumn.data.sort((a, b) => {
+      const key1 = a[sortColumnKey]
+      const key2 = b[sortColumnKey]
+
+      if (key1 < key2) return -1
+      if (key1 > key2) return 1
+      return 0
+    })
+
+    setLocationData(newFlattenedColumn.data)
+  }
+  
   return (
     <div className={styles.container}>
       <table>
         <thead>
           <tr>
             {locationHeaders.length > 0 ? locationHeaders.map((header, idx) => {
-              return <th key={idx} style={style}>{header}</th>
+              return <th key={idx} style={style} onClick={() => sortColumn(header)}>{header}</th>
             }) : null}
           </tr>
         </thead>
