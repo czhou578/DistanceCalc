@@ -44,16 +44,31 @@ const sortEnum = {
   DESCENDING: 'DESCENDING'
 }
 
+const assignSortingDirection = (sortingDirection) => {
+  if (sortingDirection === sortEnum.DEFAULT || sortingDirection === sortEnum.ASCENDING) {
+    return sortEnum.DESCENDING
+  }
+
+  return sortEnum.ASCENDING
+}
+
 export default function SampleDataTable(props) {
   const [locationHeaders, setLocationHeaders] = useState([])
   const [locationData, setLocationData] = useState([])
-  const [sortinDirection, setSortingDirection] = useState({})
+  const [sortingDirection, setSortingDirection] = useState({})
 
   useEffect(() => {
     getData().then((data) => {
       console.log(data);
       setLocationData(flattenObject(data.map((element) => element.location)))
       setLocationHeaders(setHeaders([data[0].location]))
+
+      const startSortDirection = {} //assign initial header sorting state
+      for (const header in locationHeaders) {
+        startSortDirection[header] = sortEnum.DEFAULT
+      }
+
+      setSortingDirection(startSortDirection)
     })
   }, [])
 
@@ -61,15 +76,31 @@ export default function SampleDataTable(props) {
     const newFlattenedColumn = {
       data: [...locationData]
     }
+    const currentSortingDirection = sortingDirection(sortColumnKey)
 
     newFlattenedColumn.data.sort((a, b) => {
       const key1 = a[sortColumnKey]
       const key2 = b[sortColumnKey]
 
-      if (key1 < key2) return -1
-      if (key1 > key2) return 1
-      return 0
+      if (currentSortingDirection === sortEnum.DEFAULT || currentSortingDirection === sortEnum.ASCENDING) {
+        if (key1 < key2) return -1
+        if (key1 > key2) return 1
+        return 0
+
+      } else {
+        if (key1 > key2) return -1
+        if (key1 < key2) return 1
+        return 0
+      }
+
+      
     })
+    const nextSortDirection = assignSortingDirection(currentSortingDirection)
+    const newSortDirection = {...nextSortDirection}
+
+    newSortDirection[sortColumnKey] = nextSortDirection
+    setSortingDirection(newSortDirection)
+
 
     setLocationData(newFlattenedColumn.data)
   }
