@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import GeoInputBox from './components/GeoInputBox';
 import SatisfactionForm from './components/SatisfactionForm';
 import './components/home.css'
+import SampleDataTable from './components/SampleDataTable';
 
 export default class Home extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ export default class Home extends Component {
           <SatisfactionForm />
         </div>
         <div>
-          
+          <SampleDataTable />
         </div>
       </div>
     </div>

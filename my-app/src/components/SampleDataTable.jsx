@@ -12,7 +12,7 @@ export default function SampleDataTable(props) {
 
   useEffect(() => {
     getData().then((data) => {
-      
+      console.log(data);
     })
   })
 
