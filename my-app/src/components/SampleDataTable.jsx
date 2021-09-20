@@ -25,6 +25,7 @@ const flattenObject = (obj) => {
 }
 
 const setHeaders = (obj) => {
+  console.log('previous: ' + obj);
   let temp = flattenObject(obj)
   console.log(temp);
   // console.log(flattenObject(obj))
@@ -32,15 +33,17 @@ const setHeaders = (obj) => {
 }
 
 export default function SampleDataTable(props) {
-  const [locationHeaders, setLocationHeaders] = useState('')
+  const [locationHeaders, setLocationHeaders] = useState([])
   const [locationData, setLocationData] = useState('')
 
   useEffect(() => {
     getData().then((data) => {
-      // console.log(data);
-      setHeaders(data)
+      console.log(data);
+      setLocationData(data.map((element) => element.location))
+      // setLocationHeaders(data.location[0])
+      // setHeaders(data)
     })
-  })
+  }, [])
 
   return (
     <div>
