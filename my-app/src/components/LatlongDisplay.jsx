@@ -32,22 +32,22 @@ export default function LatLongDisplay(props) {
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Typography variant="h7">
+        <Typography variant="h6">
         First City Latitude: {passedStates[0]}
         </Typography>
          <br></br> 
 
-        <Typography variant="h7">
+        <Typography variant="h6">
         First City Longitude: {passedStates[1]}
         </Typography>
          <br></br> 
 
-        <Typography variant="h7">
+        <Typography variant="h6">
           Second City Latitude: {passedStates[2]}         
         </Typography>
          <br></br> 
 
-        <Typography variant="h7">
+        <Typography variant="h6">
           Second City Longitude: {passedStates[3]}
         </Typography>
          <br></br> 

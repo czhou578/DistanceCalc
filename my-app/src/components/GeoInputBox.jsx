@@ -80,8 +80,6 @@ export default class GeoInputBox extends Component {
 
         }) .then(data => {
           this.setState({secondCityLatitude: data.displayLatLng.lat, secondCityLongitude: data.displayLatLng.lng})
-          console.log(data.displayLatLng.lat)
-          console.log(data.displayLatLng.lng)
 
         })
       })

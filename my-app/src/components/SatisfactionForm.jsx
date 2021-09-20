@@ -20,7 +20,7 @@ export default function SatisfactionForm(props) {
   }
 
   useEffect(() => {
-    console.log('hello')
+    
   }, [])
 
   const validationSchema = yup.object({
@@ -61,7 +61,7 @@ export default function SatisfactionForm(props) {
                     <TextField 
                     id="standard-basic" 
                     label="First Name" 
-                    color="red"
+                    color="primary"
                       onChange={handleChange}
                       name="firstName"
                       value={values.firstName}  
@@ -73,7 +73,7 @@ export default function SatisfactionForm(props) {
                       <TextField 
                         id="standard-basic2" 
                         label="Last Name" 
-                        color="red" 
+                        color="primary" 
                         value={values.lastName} 
                         onChange={handleChange} 
                         name="lastName" 
@@ -87,7 +87,7 @@ export default function SatisfactionForm(props) {
                       <TextField 
                       id="standard-basic3" 
                       label="Email Address" 
-                      color="red" 
+                      color="primary" 
                       value={values.email} 
                       onChange={handleChange} 
                       name="email" 

@@ -54,7 +54,6 @@ export default function SampleDataTable(props) {
 
   useEffect(() => {
     getData().then((data) => {
-      console.log(data);
       setLocationData(flattenObject(data.map((element) => element.location)))
       setLocationHeaders(setHeaders([data[0].location]))
 
@@ -88,15 +87,8 @@ export default function SampleDataTable(props) {
       }
     })
 
-    // for (const header in locationHeaders) {
-    //   startSortDirection[header] = sortEnum.DEFAULT
-    // }
-
     const nextSortDirection = assignSortingDirection(currentSortingDirection) //ascending example
-
     const newSortDirection = {...nextSortDirection}
-    console.log("newDirection: " + JSON.stringify(newSortDirection));
-
     newSortDirection[sortColumnKey] = nextSortDirection
     setSortingDirection(newSortDirection)
     setLocationData(newFlattenedColumn.data)

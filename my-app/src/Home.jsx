@@ -9,7 +9,6 @@ import SampleDataTable from './components/SampleDataTable';
 export default class Home extends Component {
   constructor(props) {
     super(props)
-    this.refer = React.createRef()
   }
 
   componentDidMount() {
@@ -28,7 +27,6 @@ export default class Home extends Component {
       top: '50px'
     }
 
-
     return (
       <div>
         <div className="header">
@@ -40,7 +38,7 @@ export default class Home extends Component {
         </div>
         <div className="box-container">
           <div className="from-box">
-            <InitialCityBox ref={this.refer}/>
+            <InitialCityBox />
           </div>
         </div>
         <div className="longlat-explain">
