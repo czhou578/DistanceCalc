@@ -34,10 +34,6 @@ const setHeaders = (obj) => {
   return headerArray
 }
 
-const style = {
-  color: 'white'
-}
-
 const sortEnum = {
   DEFAULT: 'DEFAULT',
   ASCENDING: 'ASCENDING',
@@ -48,7 +44,6 @@ const assignSortingDirection = (sortingDirection) => {
   if (sortingDirection === sortEnum.DEFAULT || sortingDirection === sortEnum.ASCENDING) {
     return sortEnum.DESCENDING
   }
-
   return sortEnum.ASCENDING
 }
 
@@ -67,7 +62,6 @@ export default function SampleDataTable(props) {
       for (const header in locationHeaders) {
         startSortDirection[header] = sortEnum.DEFAULT
       }
-
       setSortingDirection(startSortDirection)
     })
   }, [])
@@ -93,35 +87,44 @@ export default function SampleDataTable(props) {
         return 0
       }
     })
-    const nextSortDirection = assignSortingDirection(currentSortingDirection)
+
+    // for (const header in locationHeaders) {
+    //   startSortDirection[header] = sortEnum.DEFAULT
+    // }
+
+    const nextSortDirection = assignSortingDirection(currentSortingDirection) //ascending example
+
     const newSortDirection = {...nextSortDirection}
+    console.log("newDirection: " + JSON.stringify(newSortDirection));
 
     newSortDirection[sortColumnKey] = nextSortDirection
     setSortingDirection(newSortDirection)
-
     setLocationData(newFlattenedColumn.data)
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="container">
+      <div>
+      {/* {Object.values(sortingDirection)[0] === 'DEFAULT' ? <h5>Sorting Direction: DEFAULT</h5> : <h5>Sorting Direction: {[].concat(...Object.values(sortingDirection))}</h5>} */}
+      <h5 className={styles.sortDir}>Click Headers to Sort Ascend/Descend</h5>
+      </div>
       <table>
         <thead>
           <tr>
             {locationHeaders.length > 0 ? locationHeaders.map((header, idx) => {
-              return <th key={idx} style={style} onClick={() => sortColumn(header)}>{header}</th>
+              return <th key={idx} className={styles.thStyle} onClick={() => sortColumn(header)}>{header}</th>
             }) : null}
           </tr>
         </thead>
-        <tbody>
+        <tbody id="body">
           {locationData.length > 0 ? locationData.map((row, idex) => {
-            return <tr>
+            return <tr key={idex} className={styles.tr}>
               {Object.values(row).map((value, idex) => {
-                return <td key={idex} style={style}>{value}</td>
+                return <td key={idex} className={styles.tdStyle}>{value}</td>
               })}
             </tr>
           }) : null}
         </tbody>
-
       </table>
     </div>
   )
