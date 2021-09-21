@@ -1,4 +1,3 @@
-import { saveDestinationCity, saveFirstCity, saveUserEnteredCities } from "../actions";
 
 const initialState = {
   userEnteredFromCity: '',

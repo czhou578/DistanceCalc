@@ -1,10 +1,16 @@
-const isLoggedReducer = (state = false, action) => {
+const initialValue = {
+  didSubmitForm: false
+}
+
+const isSubmittedReducer = (state = initialValue, action) => {
   switch(action.type) {
-    case 'SIGN_IN':
-      return !state
+    case 'SUBMITTED':
+      return {
+        didSubmitForm: true
+      }
     default: 
       return state;
   }
 }
 
-export default isLoggedReducer
+export default isSubmittedReducer

@@ -1,10 +1,10 @@
-import React, { Component, useEffect, useRef, useState } from 'react';
+import React, { Component, useCallback, useEffect, useRef, useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import styles from './satisForm.module.css'
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { Provider} from 'react-redux';
 import IncrementBtn from './IncrementBtn';
+import { useDispatch } from 'react-redux';
 
 
 export default function SatisfactionForm(props) {
@@ -20,14 +20,21 @@ export default function SatisfactionForm(props) {
   }
 
   useEffect(() => {
-    
+
   }, [])
+  
+  const dispatch = useDispatch()
+
+  const submitCallback = useCallback(() => {
+    dispatch({type: 'SUBMITTED'})
+  })
 
   const validationSchema = yup.object({
     firstName: yup.string().required('Required').min(1, 'Must enter an FirstName'),
     lastName: yup.string().required('Required').min(1, 'Must enter an lastName'),
     email: yup.string().required('Required').min(1, 'Must enter an email')
   })
+
 
   return (
     <div>
@@ -102,7 +109,7 @@ export default function SatisfactionForm(props) {
                         <IncrementBtn state={reset} handler={didReset}/>
                       </div>
                     </div>
-                    <Button variant="contained" disabled={!dirty || !isValid} color="primary" type="submit" onClick={() => didReset(!reset)}>
+                    <Button variant="contained" disabled={!dirty || !isValid} color="primary" type="submit" onClick={() => {didReset(!reset); submitCallback()}}>
                       Submit
                     </Button>
                   </form>
