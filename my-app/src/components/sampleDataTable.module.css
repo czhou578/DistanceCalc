@@ -9,6 +9,10 @@
   cursor: pointer;
 }
 
+.thStyle:focus {
+  background-color: darkorange;
+}
+
 .tr:nth-child(even) {
   background-color: darkgoldenrod;
 }

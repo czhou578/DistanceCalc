@@ -104,7 +104,7 @@ export default function SampleDataTable(props) {
         <thead>
           <tr>
             {locationHeaders.length > 0 ? locationHeaders.map((header, idx) => {
-              return <th key={idx} className={styles.thStyle} onClick={() => sortColumn(header)}>{header}</th>
+              return <th key={idx} className={styles.thStyle} tabindex={idx} onClick={() => sortColumn(header)}>{header}</th>
             }) : null}
           </tr>
         </thead>
