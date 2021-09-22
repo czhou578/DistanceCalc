@@ -15,8 +15,6 @@ export class GeoInputBox extends Component {
     this.state = {
       data: [
         {
-          firstCity: "",
-          secondCity: "",
           firstCityLatitude: "",
           secondCityLatitude: "",
           firstCityLongitude: "",
@@ -43,56 +41,48 @@ export class GeoInputBox extends Component {
 
     this.props.enteredGeoCities(enteredFirstCity.value, enteredSecondCity.value)
     
-    this.setState({firstCity: enteredFirstCity.value, secondCity: enteredSecondCity.value}, 
-      function() {
-        const data = {"location": this.state.firstCity, "options": {"thumbMaps": false}}
-        const data2 = {"location": this.state.secondCity, "options": {"thumbMaps": false}}
+    const data = {"location": this.props.geoFirstCity, "options": {"thumbMaps": false}}
+    const data2 = {"location": this.props.geoSecondCity, "options": {"thumbMaps": false}}
 
-        Promise.all([
+    Promise.all([
 
-          fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-          }).then(res => res.json()),
+      fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.json()),
 
-          fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data2)
+      fetch('http://www.mapquestapi.com/geocoding/v1/address?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data2)
 
-          }).then(res => res.json())
+      }).then(res => res.json())
 
-        ]).then(([urlOne, urlTwo]) => { //retrieving data properly
-          console.log(urlOne)
-          console.log(urlTwo)
+    ]).then(([urlOne, urlTwo]) => { //retrieving data properly
+      var test = JSON.parse(JSON.stringify(urlOne.results[0].locations[0]))
+      return Promise.all([test, urlTwo])
 
-          var test = JSON.parse(JSON.stringify(urlOne.results[0].locations[0]))
-          return Promise.all([test, urlTwo])
+    })
+    .then(data => {
 
-        })
-        .then(data => {
-          this.setState({firstCityLatitude: data[0].displayLatLng.lat, firstCityLongitude: data[0].displayLatLng.lng})
-          console.log(data[0].displayLatLng.lat)
-          console.log(data[0].displayLatLng.lng)
+      // this.setState({firstCityLatitude: data[0].displayLatLng.lat, firstCityLongitude: data[0].displayLatLng.lng})
+      this.props.retrievedFirstCityResults(data[0].displayLatLng.lat, data[0].displayLatLng.lng)
+      var test2 = JSON.parse(JSON.stringify(data[1].results[0].locations[0]))
+      return Promise.resolve(test2)
 
-          var test2 = JSON.parse(JSON.stringify(data[1].results[0].locations[0]))
-          return Promise.resolve(test2)
-
-        }) .then(data => {
-          this.setState({secondCityLatitude: data.displayLatLng.lat, secondCityLongitude: data.displayLatLng.lng})
-
-        })
-      })
+    }) .then(data => {
+      this.props.retrievedSecondCityResults(data.displayLatLng.lat, data.displayLatLng.lng)
+      // this.setState({secondCityLatitude: data.displayLatLng.lat, secondCityLongitude: data.displayLatLng.lng})
+    })
   }
 
   render() {
     const states = [this.state.firstCityLatitude, this.state.firstCityLongitude, this.state.secondCityLatitude, this.state.secondCityLongitude]
-
     return (
       <div>
         <div className="logo-descrip">
@@ -124,10 +114,21 @@ export class GeoInputBox extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    enteredGeoCities: (cityOne, cityTwo) => { dispatch({type: 'saveGeoCities', cityOne: cityOne, cityTwo: cityTwo})}
+    geoFirstCity: state.geoCityReducer.cityOne,
+    geoSecondCity: state.geoCityReducer.cityTwo
   }
 }
 
-export default connect(null, mapDispatchToProps)(GeoInputBox)
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    enteredGeoCities: (cityOne, cityTwo) => { dispatch({type: 'saveGeoCities', cityOne: cityOne, cityTwo: cityTwo})},
+    retrievedFirstCityResults: (latitude, longitude) => { dispatch({type: 'firstCityResults', c1Latitude: latitude, c1Longitude: longitude})},
+    retrievedSecondCityResults: (latitude, longitude) => { dispatch({type: 'secondCityResults', c2Latitude: latitude, c2Longitude: longitude})}
+  
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GeoInputBox)

@@ -11,6 +11,15 @@ const initalStateGeoCities = {
   cityTwo: ''
 }
 
+const geoCityResultsInit = {
+  firstCityLatitude: "",
+  secondCityLatitude: "",
+  firstCityLongitude: "",
+  secondCityLongitude: "",
+
+}
+
+
 export const cityReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'saveUserEnteredCities':
@@ -31,6 +40,26 @@ export const geoCityReducer = (state = initalStateGeoCities, action) => {
         ...state,
         cityOne: action.cityOne,
         cityTwo: action.cityTwo
+      }
+  
+    default:
+      return state;
+  }
+}
+
+export const firstGeoCityReducerResults = (state = geoCityResultsInit, action) => {
+  switch (action.type) {
+    case 'firstCityResults':
+      return {
+        ...state,
+        firstCityLatitude: action.c1Latitude,
+        firstCityLongitude: action.c1Longitude,
+      }
+    case 'secondCityResults':
+      return {
+        ...state,
+        secondCityLatitude: action.c2Latitude,
+        secondCityLongitude: action.c2Longitude
       }
   
     default:

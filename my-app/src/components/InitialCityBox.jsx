@@ -59,7 +59,6 @@ export class InitialCityBox extends Component {
     return this.setState({deleteResultData: true})
   }
 
-
   componentDidMount = () => {
     this.returnData()
   }
@@ -80,24 +79,21 @@ export class InitialCityBox extends Component {
     }
 
     this.props.enteredCities(startingCity.value, inputFinalCity.value);
-
-    this.setState({cityName: startingCity.value, stateAbbrev: selectAbbrev.value, finalCity: inputFinalCity.value, finalStateAbbrev: inputFinalAbbrev.value
-    , newSubmission: true},
-      function() {
-        const data = {"locations": [this.state.cityName, this.state.finalCity], "options": {"allToAll": false}}
-        fetch('http://www.mapquestapi.com/directions/v2/routematrix?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        })
-        .then(res => {this.setState({showLoading: false}); return res.json()}) //returns a promise
-        .then((data) => {
-          this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
-        })
-        .catch(error => console.log(error)) 
-      })
+    this.setState({newSubmission: true})
+    
+    const data = {"locations": [this.props.userEnteredStartCity, this.props.userEnteredDestCity], "options": {"allToAll": false}}
+    fetch('http://www.mapquestapi.com/directions/v2/routematrix?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(res => {this.setState({showLoading: false}); return res.json()}) //returns a promise
+    .then((data) => {
+      this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
+    })
+    .catch(error => console.log(error)) 
   }
 
   convertTimeMin = () => {
@@ -297,13 +293,20 @@ export class InitialCityBox extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userEnteredStartCity: state.cityReducer.userEnteredFromCity,
+    userEnteredDestCity: state.cityReducer.userEnteredToCity
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     enteredCities: (startCity, endCity) => { dispatch({type: 'saveUserEnteredCities', startCity: startCity, endCity: endCity}) }
   }
 }
 
-export default connect(null, mapDispatchToProps)(InitialCityBox)
+export default connect(mapStateToProps, mapDispatchToProps)(InitialCityBox)
 
 
 
