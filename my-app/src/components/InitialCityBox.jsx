@@ -64,7 +64,32 @@ export class InitialCityBox extends Component {
   }
 
   showLoad = () => {
-    return this.setState({showLoading: true})
+    this.setState({showLoading: true}, () => this.componentDidUpdate())
+  }
+
+  componentDidUpdate = async (previousProps, previousState) => {
+    console.log('isloading: ' + previousState.showLoading)
+    const data = {"locations": [this.props.userEnteredStartCity, this.props.userEnteredDestCity], "options": {"allToAll": false}}
+    
+    fetch('http://www.mapquestapi.com/directions/v2/routematrix?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then((res) => {
+      if (previousState.showLoading === true) {
+        this.setState({showLoading: false}); 
+      } 
+      
+      return res.json()
+    }) //returns a promise
+    .then((data) => {
+      this.props.retrievedInitCityResults(data.distance[1], data.time[1])
+      // this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
+    })
+    .catch(error => console.log(error)) 
   }
 
   returnData() {
@@ -80,20 +105,7 @@ export class InitialCityBox extends Component {
 
     this.props.enteredCities(startingCity.value, inputFinalCity.value);
     this.setState({newSubmission: true})
-    
-    const data = {"locations": [this.props.userEnteredStartCity, this.props.userEnteredDestCity], "options": {"allToAll": false}}
-    fetch('http://www.mapquestapi.com/directions/v2/routematrix?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    .then(res => {this.setState({showLoading: false}); return res.json()}) //returns a promise
-    .then((data) => {
-      this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
-    })
-    .catch(error => console.log(error)) 
+
   }
 
   convertTimeMin = () => {
@@ -302,7 +314,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    enteredCities: (startCity, endCity) => { dispatch({type: 'saveUserEnteredCities', startCity: startCity, endCity: endCity}) }
+    enteredCities: (startCity, endCity) => { dispatch({type: 'saveUserEnteredCities', startCity: startCity, endCity: endCity}) },
+    retrievedInitCityResults: (finalDistance, finalTime) => { dispatch({type: 'saveCityResults', distance: finalDistance, time: finalTime})}
   }
 }
 

@@ -4,6 +4,7 @@ import { geoCityReducer } from "./cityData";
 import { cityReducer } from "./cityData";
 import { combineReducers } from "redux";
 import { firstGeoCityReducerResults } from "./cityData";
+import { retrievedInitCityResults } from "./cityData";
 
 const allReducers = combineReducers({
   cityReducer: cityReducer,
@@ -11,6 +12,7 @@ const allReducers = combineReducers({
   counter: counterReducer,
   isSubmittedReducer: isSubmittedReducer,
   firstGeoCityReducerResults: firstGeoCityReducerResults,
+  retrievedInitCityResults: retrievedInitCityResults
 })
 
 export default allReducers

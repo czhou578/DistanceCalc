@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import styles from './satisForm.module.css'
 import { Formik } from 'formik';
@@ -6,13 +6,8 @@ import * as yup from 'yup';
 import IncrementBtn from './IncrementBtn';
 import { useDispatch } from 'react-redux';
 
-
 export default function SatisfactionForm(props) {
-  const [userFirstName, setUserFirstName] = useState('')
-  const [userLastName, setUserLastName] = useState('')
-  const [count, setCount] = useState(1)
   const [reset, didReset] = useState(false)
-  const ref1 = useRef();
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -35,7 +30,6 @@ export default function SatisfactionForm(props) {
     email: yup.string().required('Required').min(1, 'Must enter an email')
   })
 
-
   return (
     <div>
       <Formik
@@ -50,7 +44,6 @@ export default function SatisfactionForm(props) {
         {(formProps) => {
           const {
             handleChange,
-            isSubmitting,
             dirty,
             isValid,
             values,
