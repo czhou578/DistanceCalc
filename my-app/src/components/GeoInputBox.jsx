@@ -1,14 +1,13 @@
 import React from 'react';
 import { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import ReactDOM from 'react-dom';
 import './geobox.css'
 import ReplayRoundedIcon from '@material-ui/icons/ReplayRounded';
 import { StylesProvider } from "@material-ui/core/styles";
 import LatLongDisplay from './LatlongDisplay';
+import { connect } from 'react-redux';
 
-
-export default class GeoInputBox extends Component {
+export class GeoInputBox extends Component {
   constructor(props) {
     super(props)
     this.props = props
@@ -37,6 +36,12 @@ export default class GeoInputBox extends Component {
   returnGeoData = () => {
     const enteredFirstCity = document.getElementById('first-city')
     const enteredSecondCity = document.getElementById('second-city')
+
+    if (enteredFirstCity.value == '' || enteredSecondCity.value == '') {
+      return
+    }
+
+    this.props.enteredGeoCities(enteredFirstCity.value, enteredSecondCity.value)
     
     this.setState({firstCity: enteredFirstCity.value, secondCity: enteredSecondCity.value}, 
       function() {
@@ -119,4 +124,10 @@ export default class GeoInputBox extends Component {
   }
 }
 
-//
+const mapDispatchToProps = (dispatch) => {
+  return {
+    enteredGeoCities: (cityOne, cityTwo) => { dispatch({type: 'saveGeoCities', cityOne: cityOne, cityTwo: cityTwo})}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(GeoInputBox)

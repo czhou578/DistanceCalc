@@ -9,8 +9,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import ReplayRoundedIcon from '@material-ui/icons/ReplayRounded';
 import Log from './Log'
-import { useDispatch } from 'react-redux';
-import * as actionTypes from '../actions/index'
 import { connect } from 'react-redux';
 
 export class InitialCityBox extends Component {
@@ -76,7 +74,11 @@ export class InitialCityBox extends Component {
     const inputFinalCity = ReactDOM.findDOMNode(this.thirdRef.current)
     const inputFinalAbbrev = ReactDOM.findDOMNode(this.fourthRef.current)
 
-    // useDispatch(actionTypes.saveFirstCity)
+    if (startingCity.value == '' || inputFinalCity.value == '') {
+      this.setState({showLoading: false})
+      return
+    }
+
     this.props.enteredCities(startingCity.value, inputFinalCity.value);
 
     this.setState({cityName: startingCity.value, stateAbbrev: selectAbbrev.value, finalCity: inputFinalCity.value, finalStateAbbrev: inputFinalAbbrev.value

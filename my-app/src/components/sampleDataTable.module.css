@@ -2,6 +2,10 @@
   margin-right: 200px;
 }
 
+.table {
+  width: 80%;
+}
+
 .thStyle {
   color: white;
   border: 1px solid slateblue;
@@ -14,13 +18,14 @@
 }
 
 .tr:nth-child(even) {
-  background-color: darkgoldenrod;
+  background-color: rgb(58, 5, 102);
 }
 
 .tdStyle {
   color: white;
   font-size: 14px;
   border: 1px solid yellow;
+  text-align: center;
 }
 
 .sortDir {

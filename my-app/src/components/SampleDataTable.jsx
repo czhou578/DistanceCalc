@@ -100,11 +100,11 @@ export default function SampleDataTable(props) {
       {/* {Object.values(sortingDirection)[0] === 'DEFAULT' ? <h5>Sorting Direction: DEFAULT</h5> : <h5>Sorting Direction: {[].concat(...Object.values(sortingDirection))}</h5>} */}
       <h5 className={styles.sortDir}>Click Headers to Sort Ascend/Descend</h5>
       </div>
-      <table>
+      <table className={styles.table}>
         <thead>
           <tr>
             {locationHeaders.length > 0 ? locationHeaders.map((header, idx) => {
-              return <th key={idx} className={styles.thStyle} tabindex={idx} onClick={() => sortColumn(header)}>{header}</th>
+              return <th key={idx} className={styles.thStyle} tabIndex={idx} onClick={() => sortColumn(header)}>{header}</th>
             }) : null}
           </tr>
         </thead>
