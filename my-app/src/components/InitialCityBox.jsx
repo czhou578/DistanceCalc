@@ -113,15 +113,35 @@ export class InitialCityBox extends Component {
     this.componentDidMount()
   }
 
+  // userEnteredStartCity: state.cityReducer.userEnteredFromCity,
+  // userEnteredDestCity: state.cityReducer.userEnteredToCity,
+  // enteredStartCityAbrev: state.cityReducer.startCityAbrev,
+  // enteredEndCityAbrev: state.cityReducer.endCityAbrev,
+  // resultDistance: state.retrievedInitCityResults.distance,
+  // resultTime: state.retrievedInitCityResults.time
+
   shouldComponentUpdate = (nextProps, nextState) => {
+    // if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.userEnteredStartCity != '' && nextProps.userEnteredDestCity != '') {
+    //   return false
+    // }
 
-    if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.props.resultDistance != null ) {
-      return true;
+    if (nextProps.userEnteredStartCity == '' || nextProps.userEnteredDestCity == '') {
+      return false
     }
 
-    if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.props.resultDistance != null ) {
-      return false;
+    if (nextProps.userEnteredStartCity !== '' && nextProps.userEnteredDestCity !== '' && nextProps.resultDistance === '' && nextProps.resultTime === '' ) {
+      return false
     }
+
+    // if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.resultDistance != '' && nextProps.resultTime != '' 
+    //     && nextProps.userEnteredStartCity != '' && nextProps.userEnteredDestCity != '') {
+    //   return true;
+    // }
+
+
+    // if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.resultDistance != null ) {
+    //   return false;
+    // }
 
     return true;
   }
