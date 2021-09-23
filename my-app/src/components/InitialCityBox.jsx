@@ -35,7 +35,6 @@ export class InitialCityBox extends Component {
           finalTime: null
         }
       ],
-      showLoading: false,
       deleteResultData: false
     }
 
@@ -63,12 +62,7 @@ export class InitialCityBox extends Component {
     this.returnData()
   }
 
-  showLoad = () => {
-    this.setState({showLoading: true}, () => this.componentDidUpdate())
-  }
-
   componentDidUpdate = async (previousProps, previousState) => {
-    console.log('isloading: ' + previousState.showLoading)
     const data = {"locations": [this.props.userEnteredStartCity, this.props.userEnteredDestCity], "options": {"allToAll": false}}
     
     fetch('http://www.mapquestapi.com/directions/v2/routematrix?key=HACo4SAj1MJfWSocfZTAEkOOlHd0xrIB', {
@@ -79,15 +73,11 @@ export class InitialCityBox extends Component {
       body: JSON.stringify(data),
     })
     .then((res) => {
-      if (previousState.showLoading === true) {
-        this.setState({showLoading: false}); 
-      } 
       
       return res.json()
     }) //returns a promise
     .then((data) => {
       this.props.retrievedInitCityResults(data.distance[1], data.time[1])
-      // this.setState({finalDistance: data.distance[1] + " miles", finalTime: data.time[1]})
     })
     .catch(error => console.log(error)) 
   }
@@ -99,19 +89,18 @@ export class InitialCityBox extends Component {
     const inputFinalAbbrev = ReactDOM.findDOMNode(this.fourthRef.current)
 
     if (startingCity.value == '' || inputFinalCity.value == '') {
-      this.setState({showLoading: false})
       return
     }
 
-    this.props.enteredCities(startingCity.value, inputFinalCity.value);
+    this.props.enteredCities(startingCity.value, inputFinalCity.value, selectAbbrev.value, inputFinalAbbrev.value);
     this.setState({newSubmission: true})
 
   }
 
   convertTimeMin = () => {
-    if (this.state.finalTime === undefined) return ''
-    let hours = Math.trunc((this.state.finalTime) / 3600)
-    let remainingSec = this.state.finalTime - (hours * 3600) 
+    if (this.props.resultTime === undefined) return ''
+    let hours = Math.trunc((this.props.resultTime) / 3600)
+    let remainingSec = this.props.resultTime - (hours * 3600) 
     let minutes = Math.trunc(remainingSec / 60)
     var finalTime = ""
     finalTime += hours + "hrs " 
@@ -121,38 +110,23 @@ export class InitialCityBox extends Component {
 
   onClick = () => {
     this.setState({deleteResultData: false})
-    this.showLoad()
     this.componentDidMount()
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
 
-    // if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === false && nextState.showLoading === false) {
-    //   return false;
-    // }
-
-    if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === false && nextState.showLoading === true) {
+    if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.props.resultDistance != null ) {
       return true;
     }
 
-    if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.state.finalDistance != null && this.state.showLoading === true && nextState.showLoading === false) {
+    if (this.state.deleteResultData === false && nextState.deleteResultData === false && this.props.resultDistance != null ) {
       return false;
     }
-
-    // if (this.state.finalDistance == null && nextState.finalDistance != null) {
-    //   return true;
-    // }
-
-    // if (this.state.showLoading === true && nextState.showLoading === false) {
-    //   return true;
-    // } 
-
 
     return true;
   }
   
   render() {
-    const show = this.state.showLoading
 
     return (
       <div>
@@ -282,22 +256,18 @@ export class InitialCityBox extends Component {
               <option value="WY">Wyoming</option>
             </select>
           </form>
-
           <StylesProvider injectFirst>
             <Button type='submit' variant="contained" color="primary" onClick={this.onClick}>Submit</Button>
           </StylesProvider>
-          <ThemeProvider theme={this.theme}>
-            {show && <CircularProgress color="secondary" />}
-          </ThemeProvider>
         </div>
         <div className="resultWrapper">
-          <ResultCard didChangeDistance={this.state.finalDistance} didChangeTime={this.convertTimeMin} deleteData={this.state.deleteResultData}/>
+          <ResultCard didChangeDistance={this.props.resultDistance} didChangeTime={this.convertTimeMin} deleteData={this.state.deleteResultData}/>
         </div>
       </div>
         <div className="log-wrapper">
         <span>Search History</span>
-          <Log logInfo={[this.state.cityName, this.state.stateAbbrev, this.state.finalCity, this.state.finalStateAbbrev, this.state.finalDistance, this.convertTimeMin, 
-          this.state.deleteResultData]} loadingShow={this.state.showLoading}/>
+          <Log logInfo={[this.props.userEnteredStartCity, this.props.enteredStartCityAbrev, this.props.userEnteredDestCity, this.props.enteredEndCityAbrev, this.props.resultDistance, this.convertTimeMin, 
+          this.state.deleteResultData]}/>
         </div>
       </div>
 
@@ -308,14 +278,20 @@ export class InitialCityBox extends Component {
 const mapStateToProps = (state) => {
   return {
     userEnteredStartCity: state.cityReducer.userEnteredFromCity,
-    userEnteredDestCity: state.cityReducer.userEnteredToCity
+    userEnteredDestCity: state.cityReducer.userEnteredToCity,
+    enteredStartCityAbrev: state.cityReducer.startCityAbrev,
+    enteredEndCityAbrev: state.cityReducer.endCityAbrev,
+    resultDistance: state.retrievedInitCityResults.distance,
+    resultTime: state.retrievedInitCityResults.time
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    enteredCities: (startCity, endCity) => { dispatch({type: 'saveUserEnteredCities', startCity: startCity, endCity: endCity}) },
-    retrievedInitCityResults: (finalDistance, finalTime) => { dispatch({type: 'saveCityResults', distance: finalDistance, time: finalTime})}
+    enteredCities: (startCity, endCity, startCityAbrev, endCityAbrev) => { dispatch({
+      type: 'saveUserEnteredCities', startCity: startCity, endCity: endCity, startCityAbrev: startCityAbrev, endCityAbrev: endCityAbrev}) },
+      retrievedInitCityResults: (finalDistance, finalTime) => { dispatch({type: 'saveCityResults', distance: finalDistance, time: finalTime
+    })}
   }
 }
 

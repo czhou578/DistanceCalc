@@ -56,8 +56,6 @@ export default function StickyHeadTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  let isLoading = props.loadingShow;
-
   let startCityString = ''
   let endCityString = ''
   let startCity = props.logInfo[0]
@@ -76,9 +74,9 @@ export default function StickyHeadTable(props) {
   endCityString += endCityAbrev
   endCityString = endCityString.charAt(0).toUpperCase() + endCityString.slice(1)
 
-  if (finalDistance === undefined || travelTime === undefined || didDataDelete || isLoading === true) {
+  if (finalDistance === undefined || travelTime === undefined || didDataDelete) {
     
-  } else if (!didDataDelete || isLoading === false) {
+  } else if (!didDataDelete) {
     // console.log('true')
     rows.push(createData(startCityString, endCityString, finalDistance, travelTime))
   }

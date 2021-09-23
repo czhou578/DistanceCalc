@@ -2,8 +2,8 @@
 const initialState = {
   userEnteredFromCity: '',
   userEnteredToCity: '',
-  cityName: '',
-  finalCity: ''
+  startCityAbrev: '',
+  endCityAbrev: ''
 }
 
 const initalStateGeoCities = {
@@ -30,7 +30,9 @@ export const cityReducer = (state = initialState, action) => {
       return {
         ...state,
         userEnteredFromCity: action.startCity,
-        userEnteredToCity: action.endCity
+        userEnteredToCity: action.endCity,
+        startCityAbrev: action.startCityAbrev,
+        endCityAbrev: action.endCityAbrev
       }
     default:
       return state;
