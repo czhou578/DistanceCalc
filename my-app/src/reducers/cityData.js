@@ -20,8 +20,8 @@ const geoCityResultsInit = {
 }
 
 const initCityResults = {
-  distance: '',
-  travelTime: ''
+  distance: null,
+  travelTime: null
 }
 
 export const cityReducer = (state = initialState, action) => {
@@ -78,7 +78,7 @@ export const retrievedInitCityResults = (state = initCityResults, actions) => {
     case 'saveCityResults':
       return {
         distance: actions.distance,
-        time: actions.time
+        travelTime: actions.time
       }
     default:
       return state

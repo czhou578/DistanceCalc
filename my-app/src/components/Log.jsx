@@ -51,10 +51,16 @@ const useStyles = makeStyles({
   }
 });
 
+const removeDuplicateRows = (rowArray) => {
+  
+}
+
 export default function StickyHeadTable(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  console.log('props: ' + JSON.stringify(props))
 
   let startCityString = ''
   let endCityString = ''
@@ -64,7 +70,7 @@ export default function StickyHeadTable(props) {
   let endCityAbrev = props.logInfo[3]
   let finalDistance = props.logInfo[4]
   let travelTime = props.logInfo[5]()
-  let didDataDelete = props.logInfo[6] //if diddelete is true, don't render, but if its false, render
+  let didDataDelete = props.logInfo[6] //if did delete is true, don't render, but if its false, render
 
   startCityString += startCity + ',' + ' '
   startCityString += startCityAbrev
@@ -75,10 +81,11 @@ export default function StickyHeadTable(props) {
   endCityString = endCityString.charAt(0).toUpperCase() + endCityString.slice(1)
 
   if (finalDistance === undefined || travelTime === undefined || didDataDelete) {
-    
-  } else if (!didDataDelete) {
+
+  } else if (!didDataDelete && finalDistance != null && travelTime != null) {
     // console.log('true')
     rows.push(createData(startCityString, endCityString, finalDistance, travelTime))
+    console.log('rows: ' + JSON.stringify(rows));
   }
 
   const handleChangePage = (event, newPage) => {

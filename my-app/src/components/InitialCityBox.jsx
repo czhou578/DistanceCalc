@@ -23,22 +23,13 @@ export class InitialCityBox extends Component {
     this.state = {
       data: [
         {
-          cityName: '',
-          stateAbbrev: '',
-          finalCity: '',
-          finalStateAbbrev: '',
           newSubmission: false
         },
 
-        {
-          finalDistance: null,
-          finalTime: null
-        }
       ],
-      deleteResultData: false
+      deleteResultData: false,
+      propsReceived: false
     }
-
-    this.counter = 0;
   }
 
   theme = createMuiTheme({
@@ -78,6 +69,11 @@ export class InitialCityBox extends Component {
     }) //returns a promise
     .then((data) => {
       this.props.retrievedInitCityResults(data.distance[1], data.time[1])
+      if (this.state.propsReceived == false) {
+        this.setState({propsReceived: true})
+      }
+      // console.log(this.props.resultDistance)
+      // console.log(this.props.resultTime)
     })
     .catch(error => console.log(error)) 
   }
@@ -113,6 +109,13 @@ export class InitialCityBox extends Component {
     this.componentDidMount()
   }
 
+  didAllPropsChange = () => {
+    if (this.props.resultDistance !== null && this.props.resultTime !== null && this.props.userEnteredStartCity !== "" && this.props.userEnteredDestCity !== "") {
+      return true
+    }
+    return false
+  }
+
   // userEnteredStartCity: state.cityReducer.userEnteredFromCity,
   // userEnteredDestCity: state.cityReducer.userEnteredToCity,
   // enteredStartCityAbrev: state.cityReducer.startCityAbrev,
@@ -121,17 +124,31 @@ export class InitialCityBox extends Component {
   // resultTime: state.retrievedInitCityResults.time
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    // if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.userEnteredStartCity != '' && nextProps.userEnteredDestCity != '') {
-    //   return false
-    // }
-
-    if (nextProps.userEnteredStartCity == '' || nextProps.userEnteredDestCity == '') {
+    if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.userEnteredStartCity == '' && nextProps.userEnteredDestCity == '') {
       return false
     }
+    console.log('props changed right: ' + this.didAllPropsChange());
+    // console.log('startcity: ' + nextProps.userEnteredStartCity)
+    // console.log('finalcity: ' + nextProps.userEnteredDestCity)
+    console.log('distance: ' + nextProps.resultDistance)
+    console.log('time: ' + nextProps.resultTime)
 
     if (nextProps.userEnteredStartCity !== '' && nextProps.userEnteredDestCity !== '' && nextProps.resultDistance === '' && nextProps.resultTime === '' ) {
+      console.log('test 2')
       return false
     }
+
+    // if (nextProps.resultDistance != '' && nextProps.resultTime != undefined) {
+    //   console.log('test 3');
+    //   return true
+    // }
+
+    // if (nextProps.resultDistance == '' && nextProps.resultTime == undefined) {
+    //   console.log('test 1');
+    //   this.forceUpdate()
+    //   // return false
+    // }
+
 
     // if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.resultDistance != '' && nextProps.resultTime != '' 
     //     && nextProps.userEnteredStartCity != '' && nextProps.userEnteredDestCity != '') {
@@ -302,7 +319,7 @@ const mapStateToProps = (state) => {
     enteredStartCityAbrev: state.cityReducer.startCityAbrev,
     enteredEndCityAbrev: state.cityReducer.endCityAbrev,
     resultDistance: state.retrievedInitCityResults.distance,
-    resultTime: state.retrievedInitCityResults.time
+    resultTime: state.retrievedInitCityResults.travelTime
   }
 }
 
