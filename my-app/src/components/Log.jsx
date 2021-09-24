@@ -52,7 +52,7 @@ const useStyles = makeStyles({
 });
 
 const removeDuplicateRows = (rowArray) => {
-  
+
 }
 
 export default function StickyHeadTable(props) {
@@ -60,7 +60,7 @@ export default function StickyHeadTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  console.log('props: ' + JSON.stringify(props))
+  // console.log('props: ' + JSON.stringify(props))
 
   let startCityString = ''
   let endCityString = ''

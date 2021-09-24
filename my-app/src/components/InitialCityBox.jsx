@@ -5,8 +5,7 @@ import ReactDOM from 'react-dom';
 import './citybox.css'
 import Button from '@material-ui/core/Button';
 import { StylesProvider } from "@material-ui/core/styles";
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import ReplayRoundedIcon from '@material-ui/icons/ReplayRounded';
 import Log from './Log'
 import { connect } from 'react-redux';
@@ -69,11 +68,9 @@ export class InitialCityBox extends Component {
     }) //returns a promise
     .then((data) => {
       this.props.retrievedInitCityResults(data.distance[1], data.time[1])
-      if (this.state.propsReceived == false) {
+      if (this.state.propsReceived === false) {
         this.setState({propsReceived: true})
       }
-      // console.log(this.props.resultDistance)
-      // console.log(this.props.resultTime)
     })
     .catch(error => console.log(error)) 
   }
@@ -84,13 +81,12 @@ export class InitialCityBox extends Component {
     const inputFinalCity = ReactDOM.findDOMNode(this.thirdRef.current)
     const inputFinalAbbrev = ReactDOM.findDOMNode(this.fourthRef.current)
 
-    if (startingCity.value == '' || inputFinalCity.value == '') {
+    if (startingCity.value === '' || inputFinalCity.value === '') {
       return
     }
 
     this.props.enteredCities(startingCity.value, inputFinalCity.value, selectAbbrev.value, inputFinalAbbrev.value);
     this.setState({newSubmission: true})
-
   }
 
   convertTimeMin = () => {
@@ -116,27 +112,31 @@ export class InitialCityBox extends Component {
     return false
   }
 
-  // userEnteredStartCity: state.cityReducer.userEnteredFromCity,
-  // userEnteredDestCity: state.cityReducer.userEnteredToCity,
-  // enteredStartCityAbrev: state.cityReducer.startCityAbrev,
-  // enteredEndCityAbrev: state.cityReducer.endCityAbrev,
-  // resultDistance: state.retrievedInitCityResults.distance,
-  // resultTime: state.retrievedInitCityResults.time
-
   shouldComponentUpdate = (nextProps, nextState) => {
-    if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.userEnteredStartCity == '' && nextProps.userEnteredDestCity == '') {
+    
+    if (this.didAllPropsChange() === false && nextProps.resultDistance !== null && nextProps.resultTime !== null) {
+      return false
+    }
+    
+    if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.userEnteredStartCity === '' && nextProps.userEnteredDestCity === '') {
+      console.log('joma tech')
       return false
     }
     console.log('props changed right: ' + this.didAllPropsChange());
-    // console.log('startcity: ' + nextProps.userEnteredStartCity)
-    // console.log('finalcity: ' + nextProps.userEnteredDestCity)
+    console.log('startcity: ' + nextProps.userEnteredStartCity)
+    console.log('finalcity: ' + nextProps.userEnteredDestCity)
     console.log('distance: ' + nextProps.resultDistance)
     console.log('time: ' + nextProps.resultTime)
+    
+    // if (this.didAllPropsChange() === true && nextProps.resultDistance !== null && nextProps.resultTime !== null) {
+    //   return 
+    // }
 
-    if (nextProps.userEnteredStartCity !== '' && nextProps.userEnteredDestCity !== '' && nextProps.resultDistance === '' && nextProps.resultTime === '' ) {
-      console.log('test 2')
-      return false
-    }
+
+    // if (nextProps.userEnteredStartCity !== '' && nextProps.userEnteredDestCity !== '' && nextProps.resultDistance === '' && nextProps.resultTime === '' ) {
+    //   console.log('test 2')
+    //   return false
+    // }
 
     // if (nextProps.resultDistance != '' && nextProps.resultTime != undefined) {
     //   console.log('test 3');
@@ -307,7 +307,6 @@ export class InitialCityBox extends Component {
           this.state.deleteResultData]}/>
         </div>
       </div>
-
     )
   }
 }

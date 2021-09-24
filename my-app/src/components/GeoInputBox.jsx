@@ -70,7 +70,7 @@ export class GeoInputBox extends Component {
     const enteredFirstCity = document.getElementById('first-city')
     const enteredSecondCity = document.getElementById('second-city')
 
-    if (enteredFirstCity.value == '' || enteredSecondCity.value == '') {
+    if (enteredFirstCity.value === '' || enteredSecondCity.value === '') {
       return
     }
 

@@ -7,9 +7,6 @@ import './components/home.css'
 import SampleDataTable from './components/SampleDataTable';
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
     const script = document.createElement("script");

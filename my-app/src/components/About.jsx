@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ColinPic from './colin.jpg'
 
-export default function About(props) {
+export default function About() {
 
-  const {...rest} = props
   const styles = {
     color: 'white',
     fontSize: '15px'
