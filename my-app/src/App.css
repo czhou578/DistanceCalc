@@ -2,16 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 body {
-  background-color: #142253;
+  background-color: #142253 !important;
 }
 
 ul {
-  display: flex;
-  list-style-type: none;
+  display: flex !important;
+  list-style-type: none !important;
 }
 
 li {
-  color: white;
-  margin-left: 30px;
-  cursor: pointer;
+  color: white !important;
+  margin-left: 30px !important;
+  cursor: pointer !important;
 }

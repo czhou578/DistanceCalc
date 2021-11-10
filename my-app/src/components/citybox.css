@@ -7,6 +7,7 @@ body {
 }
 
 div > h1 {
+  font-size: 35px;
   color: rgb(28, 241, 82);
 }
 
@@ -16,6 +17,7 @@ form + h1 {
 
 label {
   margin-left: 20px;
+  margin-right: 15px;
   color: white;
 }
 
@@ -61,12 +63,14 @@ select {
 
 .resultWrapper {
   position: relative;
-  top: 60px;
-  left: 85%;
+  top: 55px;
+  left: 95%;
 }
 
 .result {
   padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   position: absolute;
   right: 132px;
   bottom: 120px;

@@ -1,3 +1,4 @@
+import Login from './components/Login';
 import './App.css';
 import'./components/ResultCard'
 import React, { Component } from 'react';
@@ -35,12 +36,16 @@ export default class App extends Component {
                 <Link to='/About'>
                   <li>About</li>
                 </Link>
+                <Link to='/Login'>
+                  <li>Login</li>
+                </Link>
               </ul>
             </nav>
           </div>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/About" component={About} />
+            <Route path="/Login" component={Login} /> 
           </Switch>  
         </div>
       </Router>
