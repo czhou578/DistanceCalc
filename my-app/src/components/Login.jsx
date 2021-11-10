@@ -10,16 +10,16 @@ export default function Login(props) {
  
   return (
     <div>
-      <Card>
+      <Card style={{backgroundColor: 'darkgreen'}}>
         <Card.Body>
-          <h2 className="text-center mb-4">
+          <h2 className="text-center mb-4" style={{color: 'white'}}>Sign Up</h2>
             <Form>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" ref={emailRef} required/>
               </Form.Group>
               <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
+                <Form.Label color="green">Password</Form.Label>
                 <Form.Control type="password" ref={passwordRef} required/>
               </Form.Group>
               <Form.Group id="password-confirm">
@@ -28,10 +28,9 @@ export default function Login(props) {
               </Form.Group>
               <Button type="submit" className="w-100">Sign Up</Button>
             </Form>
-          </h2>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
+      <div className="w-100 text-center mt-2" style={{color: 'white'}}>
         Already have an account? Log In
       </div>
     </div>
