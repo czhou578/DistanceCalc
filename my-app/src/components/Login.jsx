@@ -1,44 +1,49 @@
 import React, {useRef} from "react";
 import {Form, Button, Card, Container } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
-
+import { AuthProvider, useAuth } from "../contexts/AuthContext";
 
 export default function Login(props) {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
- 
-  return (
-    <div>
-      <Container className="d-flex align-items-center justify-content-center"
-        style={{minHeight: "100vh"}}>
-        <div className="w-100" style={{maxWidth: "400px"}}>
-          <Card style={{backgroundColor: 'darkgreen'}}>
-            <Card.Body>
-              <h2 className="text-center mb-4" style={{color: 'white'}}>Sign Up</h2>
-                <Form>
-                  <Form.Group id="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" ref={emailRef} required/>
-                  </Form.Group>
-                  <Form.Group id="password">
-                    <Form.Label color="green">Password</Form.Label>
-                    <Form.Control type="password" ref={passwordRef} required/>
-                  </Form.Group>
-                  <Form.Group id="password-confirm">
-                    <Form.Label>Password Confirmation</Form.Label>
-                    <Form.Control type="password" ref={passwordConfirmRef} required/>
-                  </Form.Group>
-                  <Button type="submit" className="w-100">Sign Up</Button>
-                </Form>
-            </Card.Body>
-          </Card>
-          <div className="w-100 text-center mt-2" style={{color: 'white'}}>
-            Already have an account? Log In
-          </div>
+  const { signup } = useAuth();
 
-        </div>
-      </Container>
-    </div>
+  function handleSubmit(e) {
+    e.preventDefault();
+    signup(emailRef.current.value, passwordRef.current.value)
+  }
+
+  return (
+    <AuthProvider> 
+        <Container className="d-flex align-items-center justify-content-center"
+          style={{minHeight: "100vh"}}>
+          <div className="w-100" style={{maxWidth: "400px"}}>
+            <Card style={{backgroundColor: 'darkgreen'}}>
+              <Card.Body>
+                <h2 className="text-center mb-4" style={{color: 'white'}}>Sign Up</h2>
+                  <Form>
+                    <Form.Group id="email">
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control type="email" ref={emailRef} required/>
+                    </Form.Group>
+                    <Form.Group id="password">
+                      <Form.Label color="green">Password</Form.Label>
+                      <Form.Control type="password" ref={passwordRef} required/>
+                    </Form.Group>
+                    <Form.Group id="password-confirm">
+                      <Form.Label>Password Confirmation</Form.Label>
+                      <Form.Control type="password" ref={passwordConfirmRef} required/>
+                    </Form.Group>
+                    <Button type="submit" className="w-100">Sign Up</Button>
+                  </Form>
+              </Card.Body>
+            </Card>
+            <div className="w-100 text-center mt-2" style={{color: 'white'}}>
+              Already have an account? Log In
+            </div>
+          </div>
+        </Container>
+     </AuthProvider>
   )
 }
