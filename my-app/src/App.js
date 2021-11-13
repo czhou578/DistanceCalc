@@ -43,7 +43,7 @@ export default class App extends Component {
             </nav>
           </div>
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />
             <Route path="/SignUp" component={SignUp} /> 
           </Switch>  

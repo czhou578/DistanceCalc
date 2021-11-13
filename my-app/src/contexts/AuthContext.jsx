@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 import {auth} from "../firebase"
 
 const AuthContext = React.createContext()
@@ -16,6 +15,10 @@ export function AuthProvider({children}) {
     return auth.createUserWithEmailAndPassword(email, password)
   } 
 
+  function login(email, password) {
+    return auth.signInWithEmailAndPassword(email, password)
+  }
+
   //after runs useeffect, then the authentication of existing user is done
   useEffect(() => { //firebase sets tokens automatically (deal with initial loading state)
     const unsubscriber = auth.onAuthStateChanged(user => {
@@ -28,7 +31,8 @@ export function AuthProvider({children}) {
 
   const value = {
     currentUser,
-    signup
+    signup,
+    login
   }
 
   //don't render anything in application until the user is set!!
