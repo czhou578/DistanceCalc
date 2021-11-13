@@ -3,7 +3,6 @@ import {Form, Button, Card, Container, Alert} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
 import { AuthProvider, useAuth } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Link, Route, useHistory } from "react-router-dom";
-import SignUp from "./SignUp";
 
 export default function Login(props) {
   const emailRef = useRef()
@@ -51,7 +50,7 @@ export default function Login(props) {
               </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2" style={{color: 'white'}}>
-              Need an account? <Link to="/Sign-Up">Sign Up</Link>
+              Need an account? <Link to="/SignUp">Sign Up</Link>
             </div>
           </div>
       </Container>

@@ -36,10 +36,6 @@ export default function SignUp(props) {
 
   return (
     <AuthProvider> 
-      <Router> 
-      <Switch>
-        <Route exact path="/LogIn" component={Login} />
-      </Switch>
       <Container className="d-flex align-items-center justify-content-center"
         style={{minHeight: "100vh"}}>
           <div className="w-100" style={{maxWidth: "400px"}}>
@@ -69,7 +65,6 @@ export default function SignUp(props) {
             </div>
           </div>
       </Container>
-      </Router>
     </AuthProvider>
   )
 }

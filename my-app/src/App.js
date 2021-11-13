@@ -6,6 +6,7 @@ import About from './components/About';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import Home from './Home';
+import Login from './components/Login';
 
 
 export default class App extends Component {
@@ -45,7 +46,8 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />
-            <Route path="/SignUp" component={SignUp} /> 
+            <Route path="/SignUp" component={SignUp} />
+            <Route path="/LogIn" component={Login} />
           </Switch>  
         </div>
       </Router>
