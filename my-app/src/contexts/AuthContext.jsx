@@ -10,14 +10,17 @@ export function useAuth() { //returns the current context
 
 export function AuthProvider({children}) {
   const [currentUser, setCurrentUser] = useState()
+  const [loading, setLoading] = useState(true) //by default is loading
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
   } 
 
-  useEffect(() => {
+  //after runs useeffect, then the authentication of existing user is done
+  useEffect(() => { //firebase sets tokens automatically (deal with initial loading state)
     const unsubscriber = auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
+      setCurrentUser(user) //set user before set loading 
+      setLoading(false)
     })
 
     return unsubscriber
@@ -28,9 +31,10 @@ export function AuthProvider({children}) {
     signup
   }
 
+  //don't render anything in application until the user is set!!
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   )
 }
