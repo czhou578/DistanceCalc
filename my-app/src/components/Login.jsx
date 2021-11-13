@@ -19,7 +19,7 @@ export default function Login(props) {
       setError('')
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
+      history.push("/Profile")
     } catch (error) {
       setError('Failed to log in.')
     }

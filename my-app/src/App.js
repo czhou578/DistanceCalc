@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import Home from './Home';
 import Login from './components/Login';
+import Profile from './components/Profile';
 
 
 export default class App extends Component {
@@ -48,6 +49,7 @@ export default class App extends Component {
             <Route path="/About" component={About} />
             <Route path="/SignUp" component={SignUp} />
             <Route path="/LogIn" component={Login} />
+            <Route path="/Profile" component={Profile} />
           </Switch>  
         </div>
       </Router>

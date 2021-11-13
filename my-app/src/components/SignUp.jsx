@@ -25,7 +25,7 @@ export default function SignUp(props) {
       setError('')
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
+      history.push("/Profile")
 
     } catch (error) {
       setError('Failed to create an account')

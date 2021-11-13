@@ -19,6 +19,10 @@ export function AuthProvider({children}) {
     return auth.signInWithEmailAndPassword(email, password)
   }
 
+  function logout() {
+    auth.signOut()
+  }
+
   //after runs useeffect, then the authentication of existing user is done
   useEffect(() => { //firebase sets tokens automatically (deal with initial loading state)
     const unsubscriber = auth.onAuthStateChanged(user => {
@@ -32,7 +36,8 @@ export function AuthProvider({children}) {
   const value = {
     currentUser,
     signup,
-    login
+    login,
+    logout
   }
 
   //don't render anything in application until the user is set!!
