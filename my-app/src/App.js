@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 import Home from './Home';
 import Login from './components/Login';
 import Profile from './components/Profile';
-
+import PrivateRoute from './components/PrivateRoute';
+import ForgotPassword from './components/ForgotPassword';
+import UpdateProfile from './components/UpdateProfile';
 
 export default class App extends Component {
   constructor(props) {
@@ -45,16 +47,17 @@ export default class App extends Component {
             </nav>
           </div>
           <Switch>
+            <PrivateRoute path="/Profile" component={Profile} />
+            <PrivateRoute path="/update-profile" component={UpdateProfile} />
             <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />
             <Route path="/SignUp" component={SignUp} />
             <Route path="/LogIn" component={Login} />
-            <Route path="/Profile" component={Profile} />
+            <Route path="/forgot-password" component={ForgotPassword}/>
           </Switch>  
         </div>
       </Router>
-    ); 
-      
+    );      
   }
 }
 
