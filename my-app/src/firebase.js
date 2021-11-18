@@ -1,5 +1,4 @@
 import firebase from 'firebase/compat/app'
-import { getAuth } from '@firebase/auth'
 import 'firebase/compat/auth'
 import { firebaseConfig } from './firebase.config'
 

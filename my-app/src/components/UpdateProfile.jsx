@@ -33,13 +33,11 @@ export default function UpdateProfile(props) {
     }
 
     Promise.all(promises).then(() => {
+      console.log('object');
       history.push('/Profile')
     }).catch(() => {
       setError('Failed to update account')
-    }).finally(() => {
-      setLoading(false)
     })
-
   }
 
   return (

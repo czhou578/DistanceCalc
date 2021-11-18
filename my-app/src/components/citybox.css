@@ -64,7 +64,7 @@ select {
 .resultWrapper {
   position: relative;
   top: 58px;
-  left: 95%;
+  left: 100%;
 }
 
 .result {
