@@ -78,6 +78,9 @@
   flex-direction: column;
   align-items: center;
   margin-left: 30px;
+  background-color: darkgreen;
+  padding: 25px;
+  border-radius: 6px;
 }
 
 .longitude-explain > p, .latitude-explain > p {
@@ -92,6 +95,11 @@
 }
 
 .sampleBoxHeader {
-  margin-left: 200px;
+  margin-left: 120px;
+  margin-bottom: 30px;
   color: brown;
+}
+
+.satisf-container {
+  margin-top: 30px;
 }

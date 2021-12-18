@@ -21,7 +21,8 @@ export default class Home extends Component {
     const style = {
       position: 'relative',
       right: '300px',
-      top: '50px'
+      top: '50px',
+      paddingBottom: '50px'
     }
 
     return (
@@ -46,7 +47,7 @@ export default class Home extends Component {
             usually expressed in degrees and by the Greek symbol lambda. </p>
           </div>
           <div className="latitude-explain">
-            <h2>How Latitude Works</h2>
+            <h2>How Latitude Works:</h2>
             <p>Latitude is the geographic coordinate that specifies <br></br>
             the north-south position of a point on Earth's surface. It is <br></br>
             an angle that ranges from 0 to 90, where 0 starts at the Equator<br></br>
@@ -57,7 +58,7 @@ export default class Home extends Component {
           <h1>Use this calculator to find the latitude and longitude of two cities</h1>
           <GeoInputBox />
         </div>
-        <div>
+        <div className='satisf-container'>
           <SatisfactionForm />
         </div>
         <div style={style}>

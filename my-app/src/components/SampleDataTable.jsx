@@ -97,7 +97,6 @@ export default function SampleDataTable(props) {
   return (
     <div className={styles.container} id="container">
       <div>
-      {/* {Object.values(sortingDirection)[0] === 'DEFAULT' ? <h5>Sorting Direction: DEFAULT</h5> : <h5>Sorting Direction: {[].concat(...Object.values(sortingDirection))}</h5>} */}
       <h5 className={styles.sortDir}>Click Headers to Sort Ascend/Descend</h5>
       </div>
       <table className={styles.table}>

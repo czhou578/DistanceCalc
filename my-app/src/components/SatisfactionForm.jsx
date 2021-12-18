@@ -97,7 +97,7 @@ export default function SatisfactionForm(props) {
                       />
                     </div>
                     <div>
-                      <h4>Give Rating (0-10)</h4>
+                      <h4 className={styles.ratingHeader}>Give Rating (0-10)</h4>
                       <div className={styles.increDiv}>
                         <IncrementBtn state={reset} handler={didReset}/>
                       </div>
