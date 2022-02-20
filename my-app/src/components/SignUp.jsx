@@ -5,7 +5,6 @@ import { AuthProvider, useAuth } from "../contexts/AuthContext";
 import {
   BrowserRouter as Router,
   Link,
-  Route,
   Switch,
   useHistory,
 } from "react-router-dom";
