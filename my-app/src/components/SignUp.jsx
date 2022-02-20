@@ -9,9 +9,8 @@ import {
   Switch,
   useHistory,
 } from "react-router-dom";
-import Login from "./Login";
 
-export default function SignUp(props) {
+export default function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
