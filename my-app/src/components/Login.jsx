@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider, useAuth } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 
-export default function Login(props) {
+export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
