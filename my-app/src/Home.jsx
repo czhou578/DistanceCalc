@@ -1,17 +1,16 @@
-import InitialCityBox from './components/InitialCityBox';
-import'./components/ResultCard'
-import React, { Component } from 'react';
-import GeoInputBox from './components/GeoInputBox';
-import SatisfactionForm from './components/SatisfactionForm';
-import './components/home.css'
-import SampleDataTable from './components/SampleDataTable';
+import InitialCityBox from "./components/InitialCityBox";
+import "./components/ResultCard";
+import React, { Component } from "react";
+import GeoInputBox from "./components/GeoInputBox";
+import SatisfactionForm from "./components/SatisfactionForm";
+import "./components/home.css";
+import SampleDataTable from "./components/SampleDataTable";
 
 export default class Home extends Component {
-
   componentDidMount() {
     const script = document.createElement("script");
     script.src = "test2.js";
-    script.type = "text/babel"
+    script.type = "text/babel";
     script.async = true;
 
     document.body.appendChild(script);
@@ -19,55 +18,70 @@ export default class Home extends Component {
 
   render() {
     const style = {
-      position: 'relative',
-      right: '300px',
-      top: '50px',
-      paddingBottom: '50px'
-    }
+      position: "relative",
+      right: "300px",
+      top: "50px",
+      paddingBottom: "50px",
+    };
 
     return (
       <div>
         <div className="header">
-        <h2>Route Time Calculator</h2>
-        <div>
-          <p className="descrip">Enter one city in the US and choose where you want to go. The resulting distance will be calculated.
-          <br></br>If the city you are looking for is not correct, an error will be thrown! Distance will be given in miles and <br></br> time
-          will be given in hours and minutes. Any feedback is appreciated! This application uses the MapQuest API. </p>
-        </div>
-        <div className="box-container">
-          <div className="from-box">
-            <InitialCityBox />
+          <h2>Route Time Calculator</h2>
+          <div>
+            <p className="descrip">
+              Enter one city in the US and choose where you want to go. The
+              resulting distance will be calculated.
+              <br></br>If the city you are looking for is not correct, an error
+              will be thrown! Distance will be given in miles and <br></br> time
+              will be given in hours and minutes. Any feedback is appreciated!
+              This application uses the MapQuest API.{" "}
+            </p>
           </div>
-        </div>
-        <div className="longlat-explain">
-          <div className="longitude-explain">
-            <h2>How Longitude Works:</h2>
-            <p>Longitude is a geographic coordinate that specifies
-            the east-west position of a point on Earth's surface. It is
-            usually expressed in degrees and by the Greek symbol lambda. </p>
+          <div className="box-container">
+            <div className="from-box">
+              <InitialCityBox />
+            </div>
           </div>
-          <div className="latitude-explain">
-            <h2>How Latitude Works:</h2>
-            <p>Latitude is the geographic coordinate that specifies <br></br>
-            the north-south position of a point on Earth's surface. It is <br></br>
-            an angle that ranges from 0 to 90, where 0 starts at the Equator<br></br>
-            and 90 is at both the North and South Poles.</p>
+          <div className="longlat-explain">
+            <div className="longitude-explain">
+              <h2>How Longitude Works:</h2>
+              <p>
+                Longitude is a geographic coordinate that specifies the
+                east-west position of a point on Earth's surface. It is usually
+                expressed in degrees and by the Greek symbol lambda.{" "}
+              </p>
+            </div>
+            <div className="latitude-explain">
+              <h2>How Latitude Works:</h2>
+              <p>
+                Latitude is the geographic coordinate that specifies <br></br>
+                the north-south position of a point on Earth's surface. It is{" "}
+                <br></br>
+                an angle that ranges from 0 to 90, where 0 starts at the Equator
+                <br></br>
+                and 90 is at both the North and South Poles.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="geobox-container">
-          <h1>Use this calculator to find the latitude and longitude of two cities</h1>
-          <GeoInputBox />
-        </div>
-        <div className='satisf-container'>
-          <SatisfactionForm />
-        </div>
-        <div style={style}>
-          <h2 className="sampleBoxHeader">Enjoy Some Sample Data (refresh for updates!) </h2>
-          <SampleDataTable />
+          <div className="geobox-container">
+            <h1>
+              Use this calculator to find the latitude and longitude of two
+              cities
+            </h1>
+            <GeoInputBox />
+          </div>
+          <div className="satisf-container">
+            <SatisfactionForm />
+          </div>
+          <div style={style}>
+            <h2 className="sampleBoxHeader">
+              Enjoy Some Sample Data (refresh for updates!){" "}
+            </h2>
+            <SampleDataTable />
+          </div>
         </div>
       </div>
-    </div>
-
-    )
+    );
   }
 }

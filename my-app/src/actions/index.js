@@ -1,33 +1,31 @@
- export const incrementType = () => {
+export const incrementType = () => {
   return {
-    type: 'increment'
-  }
-}
+    type: "increment",
+  };
+};
 
 export const decrementType = () => {
   return {
-    type: 'decrement'
-  }
-}
+    type: "decrement",
+  };
+};
 
 export const resetStore = () => {
   return {
-    type: 'reset'
-  }
-}
+    type: "reset",
+  };
+};
 
 export const saveFirstCity = (error) => {
   return {
-    type: 'enteredFirstCity',
-    error: error
-  }
-}
+    type: "enteredFirstCity",
+    error: error,
+  };
+};
 
 export const saveDestinationCity = (error) => {
   return {
-    type: 'enteredDestinationCity',
-    error: error
-  }
-}
-
-
+    type: "enteredDestinationCity",
+    error: error,
+  };
+};

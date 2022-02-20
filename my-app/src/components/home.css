@@ -1,9 +1,10 @@
 .header {
   margin-left: 40%;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-.header > h2, .descrip {
+.header > h2,
+.descrip {
   color: white;
 }
 
@@ -54,7 +55,6 @@
   margin-left: 40%;
   margin-bottom: 30px;
   font-size: 20px;
-
 }
 
 /**
@@ -68,11 +68,15 @@
   margin-left: -300px;
 }
 
-.longitude-explain > h2, .longitude-explain > p, .latitude-explain > h2, .latitude-explain > p{
+.longitude-explain > h2,
+.longitude-explain > p,
+.latitude-explain > h2,
+.latitude-explain > p {
   color: antiquewhite;
 }
 
-.longitude-explain, .latitude-explain {
+.longitude-explain,
+.latitude-explain {
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -83,7 +87,8 @@
   border-radius: 6px;
 }
 
-.longitude-explain > p, .latitude-explain > p {
+.longitude-explain > p,
+.latitude-explain > p {
   font-size: 12px;
 }
 

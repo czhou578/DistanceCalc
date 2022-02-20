@@ -12,7 +12,7 @@ const allReducers = combineReducers({
   counter: counterReducer,
   isSubmittedReducer: isSubmittedReducer,
   firstGeoCityReducerResults: firstGeoCityReducerResults,
-  retrievedInitCityResults: retrievedInitCityResults
-})
+  retrievedInitCityResults: retrievedInitCityResults,
+});
 
-export default allReducers
+export default allReducers;

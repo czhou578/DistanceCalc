@@ -1,24 +1,27 @@
-import React, { Component } from 'react';
-import './InitialCityBox'
-import './citybox.css'
+import React, { Component } from "react";
+import "./InitialCityBox";
+import "./citybox.css";
 
 export default class ResultCard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
-    let distanceDisplay
-    let timeDisplay
-    let deleted = this.props.deleteData
+    let distanceDisplay;
+    let timeDisplay;
+    let deleted = this.props.deleteData;
 
     if (deleted == false && this.props.didChangeDistance != null) {
-      distanceDisplay = <h2 id="distance">Distance: {this.props.didChangeDistance} miles</h2>
-      timeDisplay = <h2 id="travelTime">Travel time: {this.props.didChangeTime()} </h2>
-
+      distanceDisplay = (
+        <h2 id="distance">Distance: {this.props.didChangeDistance} miles</h2>
+      );
+      timeDisplay = (
+        <h2 id="travelTime">Travel time: {this.props.didChangeTime()} </h2>
+      );
     } else {
-      distanceDisplay = <h2 id="distance">Distance: </h2>
-      timeDisplay = <h2 id="travelTime">Travel time: </h2>
+      distanceDisplay = <h2 id="distance">Distance: </h2>;
+      timeDisplay = <h2 id="travelTime">Travel time: </h2>;
     }
 
     return (
@@ -26,7 +29,6 @@ export default class ResultCard extends Component {
         {distanceDisplay}
         {timeDisplay}
       </div>
-    )
+    );
   }
 }
-

@@ -1,59 +1,55 @@
-import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import './Log.css'
-import './InitialCityBox'
+import React, { Component } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import "./Log.css";
+import "./InitialCityBox";
 
 const columns = [
-  { id: 'currentCity', label: 'Current City', minWidth: 150 },
-  { id: 'destinationCity', label: 'Destination City', minWidth: 140 },
+  { id: "currentCity", label: "Current City", minWidth: 150 },
+  { id: "destinationCity", label: "Destination City", minWidth: 140 },
   {
-    id: 'distance',
-    label: 'Distance(mi)',
+    id: "distance",
+    label: "Distance(mi)",
     minWidth: 140,
-    align: 'right',
+    align: "right",
   },
   {
-    id: 'travelTime',
-    label: 'Travel Time(min)',
+    id: "travelTime",
+    label: "Travel Time(min)",
     minWidth: 140,
-    align: 'right',
-  }
+    align: "right",
+  },
 ];
 
 function createData(currentCity, destinationCity, distance, travelTime) {
   return { currentCity, destinationCity, distance, travelTime };
 }
 
-const rows = [
-
-];
+const rows = [];
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
+    width: "100%",
   },
   container: {
     maxHeight: 340,
   },
 
   cell: {
-    fontSize: '10px',
-    padding: '12px',
-    textAlign: 'center'
-  }
+    fontSize: "10px",
+    padding: "12px",
+    textAlign: "center",
+  },
 });
 
-const removeDuplicateRows = (rowArray) => {
-
-}
+const removeDuplicateRows = (rowArray) => {};
 
 export default function StickyHeadTable(props) {
   const classes = useStyles();
@@ -62,30 +58,37 @@ export default function StickyHeadTable(props) {
 
   // console.log('props: ' + JSON.stringify(props))
 
-  let startCityString = ''
-  let endCityString = ''
-  let startCity = props.logInfo[0]
-  let startCityAbrev = props.logInfo[1]
-  let endCity = props.logInfo[2]
-  let endCityAbrev = props.logInfo[3]
-  let finalDistance = props.logInfo[4]
-  let travelTime = props.logInfo[5]()
-  let didDataDelete = props.logInfo[6] //if did delete is true, don't render, but if its false, render
+  let startCityString = "";
+  let endCityString = "";
+  let startCity = props.logInfo[0];
+  let startCityAbrev = props.logInfo[1];
+  let endCity = props.logInfo[2];
+  let endCityAbrev = props.logInfo[3];
+  let finalDistance = props.logInfo[4];
+  let travelTime = props.logInfo[5]();
+  let didDataDelete = props.logInfo[6]; //if did delete is true, don't render, but if its false, render
 
-  startCityString += startCity + ',' + ' '
-  startCityString += startCityAbrev
-  startCityString = startCityString.charAt(0).toUpperCase() + startCityString.slice(1)
+  startCityString += startCity + "," + " ";
+  startCityString += startCityAbrev;
+  startCityString =
+    startCityString.charAt(0).toUpperCase() + startCityString.slice(1);
 
-  endCityString += endCity + ',' + ' '
-  endCityString += endCityAbrev
-  endCityString = endCityString.charAt(0).toUpperCase() + endCityString.slice(1)
+  endCityString += endCity + "," + " ";
+  endCityString += endCityAbrev;
+  endCityString =
+    endCityString.charAt(0).toUpperCase() + endCityString.slice(1);
 
-  if (finalDistance === undefined || travelTime === undefined || didDataDelete) {
-
+  if (
+    finalDistance === undefined ||
+    travelTime === undefined ||
+    didDataDelete
+  ) {
   } else if (!didDataDelete && finalDistance != null && travelTime != null) {
     // console.log('true')
-    rows.push(createData(startCityString, endCityString, finalDistance, travelTime))
-    console.log('rows: ' + JSON.stringify(rows));
+    rows.push(
+      createData(startCityString, endCityString, finalDistance, travelTime)
+    );
+    console.log("rows: " + JSON.stringify(rows));
   }
 
   const handleChangePage = (event, newPage) => {
@@ -105,7 +108,7 @@ export default function StickyHeadTable(props) {
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  key={column.id} 
+                  key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                   className={classes.cell}
@@ -116,20 +119,28 @@ export default function StickyHeadTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align} className={classes.cell}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          className={classes.cell}
+                        >
+                          {column.format && typeof value === "number"
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -145,4 +156,3 @@ export default function StickyHeadTable(props) {
     </Paper>
   );
 }
-

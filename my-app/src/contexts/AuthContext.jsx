@@ -1,49 +1,51 @@
 import React, { useContext, useEffect, useState } from "react";
-import {auth} from "../firebase"
+import { auth } from "../firebase";
 
-const AuthContext = React.createContext()
+const AuthContext = React.createContext();
 
-export function useAuth() { //returns the current context
-  return useContext(AuthContext)
+export function useAuth() {
+  //returns the current context
+  return useContext(AuthContext);
 }
 
-export function AuthProvider({children}) {
-  const [currentUser, setCurrentUser] = useState()
-  const [loading, setLoading] = useState(true) //by default is loading
+export function AuthProvider({ children }) {
+  const [currentUser, setCurrentUser] = useState();
+  const [loading, setLoading] = useState(true); //by default is loading
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password)
-  } 
+    return auth.createUserWithEmailAndPassword(email, password);
+  }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
+    return auth.signInWithEmailAndPassword(email, password);
   }
 
   function logout() {
-    auth.signOut()
+    auth.signOut();
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email)
+    return auth.sendPasswordResetEmail(email);
   }
 
   function updateEmail(email) {
-    currentUser.updateEmail(email) 
+    currentUser.updateEmail(email);
   }
 
   function updatePassword(password) {
-    return currentUser.updatePassword(password)
+    return currentUser.updatePassword(password);
   }
 
   //after runs useeffect, then the authentication of existing user is done
-  useEffect(() => { //firebase sets tokens automatically (deal with initial loading state)
-    const unsubscriber = auth.onAuthStateChanged(user => {
-      setCurrentUser(user) //set user before set loading 
-      setLoading(false)
-    })
+  useEffect(() => {
+    //firebase sets tokens automatically (deal with initial loading state)
+    const unsubscriber = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user); //set user before set loading
+      setLoading(false);
+    });
 
-    return unsubscriber
-  }, [])
+    return unsubscriber;
+  }, []);
 
   const value = {
     currentUser,
@@ -52,13 +54,13 @@ export function AuthProvider({children}) {
     logout,
     resetPassword,
     updateEmail,
-    updatePassword
-  }
+    updatePassword,
+  };
 
   //don't render anything in application until the user is set!!
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
     </AuthContext.Provider>
-  )
+  );
 }

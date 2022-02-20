@@ -50,7 +50,7 @@ select {
   margin-top: 20px;
 }
 
-.MuiCircularProgress-root	{
+.MuiCircularProgress-root {
   position: relative;
   top: 22px;
   left: 20px;
@@ -90,4 +90,3 @@ select {
   color: white;
   padding-bottom: 10px;
 }
-
