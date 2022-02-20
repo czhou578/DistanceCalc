@@ -41,7 +41,7 @@ jobs:
       - name: Tests
         run: |
           npm ci
-          npm run test
+          npm run test --passWithNoTests
         working-directory: my-app
     
   prettier:
