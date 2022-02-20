@@ -30,7 +30,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-    - working-directory: my-app
+      working-directory: my-app
     
   prettier:
     runs-on: ubuntu-latest
