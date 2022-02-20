@@ -1,6 +1,24 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
+  #   name: Frontend tests
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '17.1'
+  #         cache: 'npm'
+  #         cache-dependency-path: app/package-lock.json
+  #     - name: Tests
+  #       run: |
+  #         npm ci
+  #         npm run test
+  #       working-directory: app
+  # prettier:
+
 name: Node.js CI
 
 on:
@@ -10,15 +28,9 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  front-end test:
+    name: front-end tests
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -28,7 +40,6 @@ jobs:
         cache: 'npm'
         cache-dependency-path: my-app/package-lock.json
     - run: npm ci
-    - run: npm run build --if-present
     - run: npm test
       working-directory: my-app
     

@@ -7,7 +7,7 @@ const getData = () => {
     .then((data) => {
       return data.results;
     });
-};
+}; //
 
 const flattenObject = (obj) => {
   let flattenedObject = [];
