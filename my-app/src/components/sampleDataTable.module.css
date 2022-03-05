@@ -2,8 +2,21 @@
   margin-right: 200px;
 }
 
+.sampleBoxHeader {
+  margin-top: 50px;
+  margin-left: 32%;
+  margin-bottom: 30px;
+  color: rgb(189, 130, 130);
+}
+
 .table {
   width: 80%;
+  margin-left: 250px;
+}
+
+h5 {
+  margin-left: 43%;
+  margin-bottom: 40px;
 }
 
 .thStyle {

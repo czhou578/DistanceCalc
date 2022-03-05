@@ -103,7 +103,7 @@ export default function SampleDataTable(props) {
 
   return (
     <div className={styles.container} id="container">
-      <h2 className="sampleBoxHeader">
+      <h2 className={styles.sampleBoxHeader}>
         Enjoy Some Sample Data (refresh for updates!){" "}
       </h2>
       <div>
