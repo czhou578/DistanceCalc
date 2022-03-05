@@ -59,7 +59,7 @@ export default function SatisfactionForm() {
           } = formProps;
           return (
             <div>
-              <h1>Want to Subscribe?</h1>
+              <h1 className={styles.header}>Want to Subscribe?</h1>
               <div className={styles["text-wrapper"]}>
                 <form
                   action="submit"

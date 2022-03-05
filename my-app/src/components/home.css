@@ -3,9 +3,13 @@
   font-family: "Poppins", sans-serif;
 }
 
+.home {
+  margin-left: -40px;
+}
+
 .paragraph-wrapper {
   margin-top: 30px;
-  margin-left: -130px;
+  margin-left: -160px;
 }
 
 .header > h2,
@@ -21,8 +25,9 @@
 
 .box-container {
   margin-top: 25px;
+  /* margin-right: 70%; */
   position: relative;
-  right: 280px;
+  right: 340px;
   display: flex;
   justify-content: space-between;
   border: 2px solid green;
@@ -113,5 +118,6 @@
 }
 
 .satisf-container {
-  margin-top: 30px;
+  margin-top: 250px;
+  margin-left: 50px;
 }

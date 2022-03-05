@@ -25,7 +25,7 @@ export default class Home extends Component {
     };
 
     return (
-      <div>
+      <div className="home">
         <div className="header">
           <h2>Route Time Calculator</h2>
           <div className="paragraph-wrapper">
@@ -47,6 +47,7 @@ export default class Home extends Component {
             <SatisfactionForm />
           </div>
         </div>
+        <footer>Copyright Colin Zhou 2020, 2022</footer>
       </div>
     );
   }
