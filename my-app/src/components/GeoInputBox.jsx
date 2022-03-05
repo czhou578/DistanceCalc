@@ -105,7 +105,8 @@ export class GeoInputBox extends Component {
       this.props.secondCityLongitude,
     ];
     return (
-      <div>
+      <div className="geobox-container">
+        <h1>Latitude / Longitude Calculator</h1>
         <div className="longlat-explain">
           <div className="longitude-explain">
             <h2>How Longitude Works:</h2>
@@ -127,16 +128,13 @@ export class GeoInputBox extends Component {
             </p>
           </div>
         </div>
-        <h1>
-          Use this calculator to find the latitude and longitude of two cities
-        </h1>
-        <div className="logo-descrip">
-          <span>Reset</span>
-          <StylesProvider injectFirst>
-            <ReplayRoundedIcon onClick={this.reset}></ReplayRoundedIcon>
-          </StylesProvider>
-        </div>
-        <div>
+        <div className="forms">
+          <div className="logo-descrip">
+            <span>Reset</span>
+            <StylesProvider injectFirst>
+              <ReplayRoundedIcon onClick={this.reset}></ReplayRoundedIcon>
+            </StylesProvider>
+          </div>
           <h1>First City </h1>
           <form action="submit" id="form-1">
             <input
@@ -146,7 +144,7 @@ export class GeoInputBox extends Component {
               id="first-city"
             />
           </form>
-          <h1>Second City </h1>
+          <h1 className="secondcityheader">Second City </h1>
           <form action="submit" id="form-2">
             <input
               type="text"
@@ -155,7 +153,7 @@ export class GeoInputBox extends Component {
               id="second-city"
             />
           </form>
-          <div>
+          <div className="button">
             <Button
               type="submit"
               variant="contained"
@@ -165,9 +163,9 @@ export class GeoInputBox extends Component {
               Calculate
             </Button>
           </div>
-        </div>
-        <div id="display-container">
-          <LatLongDisplay citiesInfo={states} />
+          <div id="display-container">
+            <LatLongDisplay citiesInfo={states} />
+          </div>
         </div>
       </div>
     );
