@@ -11,6 +11,8 @@ import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
 import UpdateProfile from "./components/UpdateProfile";
+import GeoInputBox from "./components/GeoInputBox";
+import SampleDataTable from "./components/SampleDataTable";
 
 export default class App extends Component {
   constructor(props) {
@@ -40,8 +42,11 @@ export default class App extends Component {
                 <Link to="/About">
                   <li>About</li>
                 </Link>
-                <Link to="/SignUp">
-                  <li>Sign Up</li>
+                <Link to="/geobox">
+                  <li>Lat/Long Calculator</li>
+                </Link>
+                <Link to="/sampleData">
+                  <li>Sample Data</li>
                 </Link>
               </ul>
             </nav>
@@ -53,7 +58,9 @@ export default class App extends Component {
             <Route path="/About" component={About} />
             <Route path="/SignUp" component={SignUp} />
             <Route path="/LogIn" component={Login} />
+            <Route path="/geobox" component={GeoInputBox} />
             <Route path="/forgot-password" component={ForgotPassword} />
+            <Route path="/sampleData" component={SampleDataTable} />
           </Switch>
         </div>
       </Router>

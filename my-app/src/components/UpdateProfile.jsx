@@ -2,11 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Container, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider, useAuth } from "../contexts/AuthContext";
-import {
-  BrowserRouter as Router,
-  Link,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 
 export default function UpdateProfile(props) {
   const emailRef = useRef();

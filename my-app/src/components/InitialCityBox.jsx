@@ -187,7 +187,7 @@ export class InitialCityBox extends Component {
 
   render() {
     return (
-      <div>
+      <div className="citybox-wrapper">
         <div className="top-header">
           <h1>Current City</h1>
           <div className="logo-descrip">

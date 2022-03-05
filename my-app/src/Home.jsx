@@ -28,7 +28,7 @@ export default class Home extends Component {
       <div>
         <div className="header">
           <h2>Route Time Calculator</h2>
-          <div>
+          <div className="paragraph-wrapper">
             <p className="descrip">
               Enter one city in the US and choose where you want to go. The
               resulting distance will be calculated.
@@ -43,42 +43,8 @@ export default class Home extends Component {
               <InitialCityBox />
             </div>
           </div>
-          <div className="longlat-explain">
-            <div className="longitude-explain">
-              <h2>How Longitude Works:</h2>
-              <p>
-                Longitude is a geographic coordinate that specifies the
-                east-west position of a point on Earth's surface. It is usually
-                expressed in degrees and by the Greek symbol lambda.{" "}
-              </p>
-            </div>
-            <div className="latitude-explain">
-              <h2>How Latitude Works:</h2>
-              <p>
-                Latitude is the geographic coordinate that specifies <br></br>
-                the north-south position of a point on Earth's surface. It is{" "}
-                <br></br>
-                an angle that ranges from 0 to 90, where 0 starts at the Equator
-                <br></br>
-                and 90 is at both the North and South Poles.
-              </p>
-            </div>
-          </div>
-          <div className="geobox-container">
-            <h1>
-              Use this calculator to find the latitude and longitude of two
-              cities
-            </h1>
-            <GeoInputBox />
-          </div>
           <div className="satisf-container">
             <SatisfactionForm />
-          </div>
-          <div style={style}>
-            <h2 className="sampleBoxHeader">
-              Enjoy Some Sample Data (refresh for updates!){" "}
-            </h2>
-            <SampleDataTable />
           </div>
         </div>
       </div>

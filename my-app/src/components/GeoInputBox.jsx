@@ -106,6 +106,30 @@ export class GeoInputBox extends Component {
     ];
     return (
       <div>
+        <div className="longlat-explain">
+          <div className="longitude-explain">
+            <h2>How Longitude Works:</h2>
+            <p>
+              Longitude is a geographic coordinate that specifies the east-west
+              position of a point on Earth's surface. It is usually expressed in
+              degrees and by the Greek symbol lambda.{" "}
+            </p>
+          </div>
+          <div className="latitude-explain">
+            <h2>How Latitude Works:</h2>
+            <p>
+              Latitude is the geographic coordinate that specifies <br></br>
+              the north-south position of a point on Earth's surface. It is{" "}
+              <br></br>
+              an angle that ranges from 0 to 90, where 0 starts at the Equator
+              <br></br>
+              and 90 is at both the North and South Poles.
+            </p>
+          </div>
+        </div>
+        <h1>
+          Use this calculator to find the latitude and longitude of two cities
+        </h1>
         <div className="logo-descrip">
           <span>Reset</span>
           <StylesProvider injectFirst>
