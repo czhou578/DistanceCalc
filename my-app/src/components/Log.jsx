@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     width: "100%",
   },
   container: {
-    maxHeight: 340,
+    minHeight: 340,
   },
 
   cell: {
@@ -48,8 +48,6 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
 });
-
-const removeDuplicateRows = (rowArray) => {};
 
 export default function StickyHeadTable(props) {
   const classes = useStyles();
