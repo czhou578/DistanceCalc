@@ -48,6 +48,9 @@ export default class App extends Component {
                 <Link to="/sampleData">
                   <li>Sample Data</li>
                 </Link>
+                {/* <Link to="/map">
+                  <li>Map</li>
+                </Link> */}
               </ul>
             </nav>
           </div>
@@ -61,6 +64,7 @@ export default class App extends Component {
             <Route path="/geobox" component={GeoInputBox} />
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/sampleData" component={SampleDataTable} />
+            {/* <Route path="/map" component={Map} /> */}
           </Switch>
         </div>
       </Router>
