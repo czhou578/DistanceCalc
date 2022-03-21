@@ -13,6 +13,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import UpdateProfile from "./components/UpdateProfile";
 import GeoInputBox from "./components/GeoInputBox";
 import SampleDataTable from "./components/SampleDataTable";
+import Map from "./components/Map";
 
 export default class App extends Component {
   constructor(props) {
@@ -48,9 +49,9 @@ export default class App extends Component {
                 <Link to="/sampleData">
                   <li>Sample Data</li>
                 </Link>
-                {/* <Link to="/map">
+                <Link to="/map">
                   <li>Map</li>
-                </Link> */}
+                </Link>
               </ul>
             </nav>
           </div>
@@ -64,6 +65,7 @@ export default class App extends Component {
             <Route path="/geobox" component={GeoInputBox} />
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/sampleData" component={SampleDataTable} />
+            <Route path="/map" component={Map} />
             {/* <Route path="/map" component={Map} /> */}
           </Switch>
         </div>
