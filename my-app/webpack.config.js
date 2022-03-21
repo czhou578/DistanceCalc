@@ -1,37 +1,37 @@
 module.exports = {
-  mode: 'development',
+  mode: "development",
   devServer: {
     compress: true,
     port: 3000,
-    historyApiFallback: true
+    historyApiFallback: true,
   },
-  entry: __dirname + '/src/index.js',
+  entry: __dirname + "/src/index.js",
   module: {
     rykes: [
       {
         test: /\.tsx?$/,
-        use: ['ts-loader']
+        use: ["ts-loader"],
       },
       {
         test: /\.css?$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
-              module: true
-            }
-          }
-        ]
-      }
-    ]
+              module: true,
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.tsx', '.css'],
+    extensions: [".js", ".jsx", ".tsx", ".css"],
   },
-  target: 'web',
+  target: "web",
   output: {
     filename: "[name].[contenthash].js",
     publicPath: "/",
   },
-}
+};

@@ -21,21 +21,21 @@ export default function Map(): React.ReactElement {
 function MapContent(): React.ReactElement {
   return (
     <TileLayer
-    attribution="© OpenStreetMap contributors"
-    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    detectRetina
+      attribution="© OpenStreetMap contributors"
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      detectRetina
     />
-  )
+  );
 }
 
 function MyComponent() {
   const map = useMapEvents({
     click: () => {
-      map.locate()
+      map.locate();
     },
     locationfound: (location) => {
-      console.log('location found:', location)
+      console.log("location found:", location);
     },
-  })
-  return null
+  });
+  return null;
 }
