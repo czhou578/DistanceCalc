@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 
 export default function Map(): React.ReactElement {
   return (
@@ -13,6 +13,7 @@ export default function Map(): React.ReactElement {
       }}
     >
       <MapContent />
+      <MyComponent />
     </MapContainer>
   );
 }
@@ -25,4 +26,16 @@ function MapContent(): React.ReactElement {
     detectRetina
     />
   )
+}
+
+function MyComponent() {
+  const map = useMapEvents({
+    click: () => {
+      map.locate()
+    },
+    locationfound: (location) => {
+      console.log('location found:', location)
+    },
+  })
+  return null
 }

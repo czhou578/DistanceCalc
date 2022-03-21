@@ -66,7 +66,6 @@ export default class App extends Component {
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/sampleData" component={SampleDataTable} />
             <Route path="/map" component={Map} />
-            {/* <Route path="/map" component={Map} /> */}
           </Switch>
         </div>
       </Router>
