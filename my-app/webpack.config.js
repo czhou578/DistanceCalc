@@ -1,5 +1,6 @@
 module.exports = {
   mode: "development",
+  devtool: "inline-source-map",
   devServer: {
     compress: true,
     port: 3000,
@@ -7,10 +8,28 @@ module.exports = {
   },
   entry: __dirname + "/src/index.js",
   module: {
-    rykes: [
+    rules: [
       {
-        test: /\.tsx?$/,
-        use: ["ts-loader"],
+        test: /.tsx?$/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              ["@babel/react", { runtime: "automatic" }],
+              "@babel/preset-typescript",
+              ["@babel/preset-env", { targets: "last 2 years" }],
+            ],
+          },
+        },
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-react']
+        }
+        },
       },
       {
         test: /\.css?$/,
@@ -19,7 +38,7 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              module: true,
+              modules: true,
             },
           },
         ],
@@ -32,6 +51,6 @@ module.exports = {
   target: "web",
   output: {
     filename: "[name].[contenthash].js",
-    publicPath: "/",
+    publicPath: "index_build.js",
   },
 };
