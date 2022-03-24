@@ -101,11 +101,16 @@ export default function SampleDataTable(props) {
     setLocationData(newFlattenedColumn.data);
   };
 
+  const testing = () => {
+    console.log('hi');
+  }
+
   return (
     <div className={styles.container} id="container">
       <h2 className={styles.sampleBoxHeader}>
         Enjoy Some Sample Data (refresh for updates!){" "}
       </h2>
+      <button onClick={this.testing()}></button>
       <div>
         <h5 className={styles.sortDir}>Click Headers to Sort Ascend/Descend</h5>
       </div>

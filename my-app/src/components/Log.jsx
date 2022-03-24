@@ -54,8 +54,6 @@ export default function StickyHeadTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  // console.log('props: ' + JSON.stringify(props))
-
   let startCityString = "";
   let endCityString = "";
   let startCity = props.logInfo[0];
