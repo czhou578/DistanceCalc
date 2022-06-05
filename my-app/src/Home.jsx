@@ -1,10 +1,8 @@
 import InitialCityBox from "./components/InitialCityBox";
 import "./components/ResultCard";
-import React, { Component } from "react";
-import GeoInputBox from "./components/GeoInputBox";
+import { Component } from "react";
 import SatisfactionForm from "./components/SatisfactionForm";
 import "./components/home.css";
-import SampleDataTable from "./components/SampleDataTable";
 
 export default class Home extends Component {
   componentDidMount() {

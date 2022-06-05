@@ -5,5 +5,5 @@ import Home from "../Home";
 // const tree = create(<Home />);
 
 test("snapshot", () => {
-  renderer.create(<Home />)
+  renderer.create(<Home />);
 });

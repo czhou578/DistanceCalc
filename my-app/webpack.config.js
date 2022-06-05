@@ -27,8 +27,8 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-react']
-        }
+            presets: ["@babel/preset-react"],
+          },
         },
       },
       {
@@ -45,12 +45,13 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [{
-            loader: 'file-loader',
-            options: {}
-        }]
-      }
-
+        use: [
+          {
+            loader: "file-loader",
+            options: {},
+          },
+        ],
+      },
     ],
   },
   resolve: {

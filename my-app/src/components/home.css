@@ -47,13 +47,6 @@
   font-size: 50px;
 }
 
-.results {
-  border: 2px solid lightgoldenrodyellow;
-  position: relative;
-  top: 200px;
-  right: 450px;
-}
-
 .log-container {
   margin-top: 60px;
   margin-left: 16%;

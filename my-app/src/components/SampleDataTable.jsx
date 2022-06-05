@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./sampleDataTable.module.css";
 
 const getData = () => {
@@ -7,7 +7,7 @@ const getData = () => {
     .then((data) => {
       return data.results;
     });
-}; //
+};
 
 const flattenObject = (obj) => {
   let flattenedObject = [];
@@ -100,10 +100,6 @@ export default function SampleDataTable(props) {
     setSortingDirection(newSortDirection);
     setLocationData(newFlattenedColumn.data);
   };
-
-  const testing = () => {
-    console.log('hi');
-  }
 
   return (
     <div className={styles.container} id="container">
