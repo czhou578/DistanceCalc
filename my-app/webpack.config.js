@@ -1,12 +1,16 @@
+const path = require("path");
+const HtmlWebpackPlugin = require ('html-webpack-plugin')
+
 module.exports = {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
     compress: true,
     port: 3000,
+    open: true,
     historyApiFallback: true,
   },
-  entry: __dirname + "/src/index.js",
+  entry: ["regenerator-runtime/runtime.js", __dirname + "/src/index.js", __dirname + "/src/App.css"],
   module: {
     rules: [
       {
@@ -32,7 +36,7 @@ module.exports = {
         },
       },
       {
-        test: /\.css?$/,
+        test: /\.(css)$/,
         use: [
           "style-loader",
           {
@@ -42,6 +46,7 @@ module.exports = {
             },
           },
         ],
+        sideEffects: true
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -59,7 +64,19 @@ module.exports = {
   },
   target: "web",
   output: {
-    filename: "[name].[contenthash].js",
-    publicPath: "index_build.js",
+    path: path.resolve(__dirname, "/dist"),
+    filename: "bundle.js",
+    clean: true
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'App',
+      filename: 'index.html',
+      template: 'public/index.html'
+    })
+  ],
+
+  // externals: {
+  //   react: 'React'
+  // },
 };
