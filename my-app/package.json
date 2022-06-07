@@ -60,6 +60,7 @@
   ],
   "devDependencies": {
     "@types/react-leaflet": "^2.8.2",
+    "@types/react-router-dom": "^5.3.3",
     "babel-preset-react-app": "*",
     "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",

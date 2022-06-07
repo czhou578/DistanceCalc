@@ -1,5 +1,5 @@
 const path = require("path");
-const HtmlWebpackPlugin = require ('html-webpack-plugin')
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -10,7 +10,11 @@ module.exports = {
     open: true,
     historyApiFallback: true,
   },
-  entry: ["regenerator-runtime/runtime.js", __dirname + "/src/index.js", __dirname + "/src/App.css"],
+  entry: [
+    "regenerator-runtime/runtime.js",
+    __dirname + "/src/index.js",
+    __dirname + "/src/App.css",
+  ],
   module: {
     rules: [
       {
@@ -46,7 +50,7 @@ module.exports = {
             },
           },
         ],
-        sideEffects: true
+        sideEffects: true,
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -66,14 +70,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "/dist"),
     filename: "bundle.js",
-    clean: true
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'App',
-      filename: 'index.html',
-      template: 'public/index.html'
-    })
+      title: "App",
+      filename: "index.html",
+      template: "public/index.html",
+    }),
   ],
 
   // externals: {
