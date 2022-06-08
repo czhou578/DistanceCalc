@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { TextField, Button } from "@material-ui/core";
-import styles from "./satisForm.module.css";
+import { Button, TextField } from "@material-ui/core";
 import { Formik } from "formik";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import * as yup from "yup";
 import IncrementBtn from "./IncrementBtn";
-import { useDispatch } from "react-redux";
+import styles from "./satisForm.module.css";
 
 export default function SatisfactionForm() {
   const [reset, didReset] = useState(false);

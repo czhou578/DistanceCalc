@@ -1,9 +1,9 @@
-import * as renderer from "react-test-renderer";
-import Home from "../Home";
-import Map from "../components/Map";
-import About from "../components/About";
 import { MemoryRouter } from "react-router-dom";
+import * as renderer from "react-test-renderer";
+import About from "../components/About";
 import GeoInputBox from "../components/GeoInputBox";
+import Map from "../components/Map";
+import Home from "../Home";
 
 const MockEnvironment: React.FC = ({
   children,

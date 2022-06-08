@@ -1,14 +1,12 @@
-import React from "react";
-import { Component } from "react";
-import ResultCard from "./ResultCard";
-import ReactDOM from "react-dom";
-import "./citybox.css";
 import Button from "@material-ui/core/Button";
 import { StylesProvider } from "@material-ui/core/styles";
-import { createMuiTheme } from "@material-ui/core/styles";
 import ReplayRoundedIcon from "@material-ui/icons/ReplayRounded";
-import Log from "./Log";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
+import "./citybox.css";
+import Log from "./Log";
+import ResultCard from "./ResultCard";
 
 export class InitialCityBox extends Component {
   constructor(props) {

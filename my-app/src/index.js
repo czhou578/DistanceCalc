@@ -1,10 +1,9 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import App from "./App";
 import { createStore } from "redux";
-import allReducers from "./reducers/index";
+import App from "./App";
 import { AuthProvider } from "./contexts/AuthContext";
+import allReducers from "./reducers/index";
 
 const store = createStore(
   allReducers,

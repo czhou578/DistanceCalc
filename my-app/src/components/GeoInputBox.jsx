@@ -1,11 +1,10 @@
-import React from "react";
-import { Component } from "react";
 import Button from "@material-ui/core/Button";
-import "./geobox.css";
-import ReplayRoundedIcon from "@material-ui/icons/ReplayRounded";
 import { StylesProvider } from "@material-ui/core/styles";
-import LatLongDisplay from "./LatlongDisplay";
+import ReplayRoundedIcon from "@material-ui/icons/ReplayRounded";
+import { Component } from "react";
 import { connect } from "react-redux";
+import "./geobox.css";
+import LatLongDisplay from "./LatlongDisplay";
 
 export class GeoInputBox extends Component {
   constructor(props) {

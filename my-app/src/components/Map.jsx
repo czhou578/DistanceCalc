@@ -1,9 +1,7 @@
-import React from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
-import { OpenStreetMapProvider } from "react-leaflet-geosearch";
-import { useEffect } from "react";
-import { useMap } from "react-leaflet";
 import { GeoSearchControl } from "leaflet-geosearch";
+import React, { useEffect } from "react";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { OpenStreetMapProvider } from "react-leaflet-geosearch";
 
 export default class MapComponent extends React.Component {
   render() {

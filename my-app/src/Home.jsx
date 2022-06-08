@@ -1,8 +1,8 @@
+import { Component } from "react";
+import "./components/home.css";
 import InitialCityBox from "./components/InitialCityBox";
 import "./components/ResultCard";
-import { Component } from "react";
 import SatisfactionForm from "./components/SatisfactionForm";
-import "./components/home.css";
 
 export default class Home extends Component {
   componentDidMount() {
@@ -15,12 +15,6 @@ export default class Home extends Component {
   }
 
   render() {
-    const style = {
-      position: "relative",
-      right: "300px",
-      top: "50px",
-      paddingBottom: "50px",
-    };
 
     return (
       <div className="home">

@@ -1,4 +1,3 @@
-import React from "react";
 import ColinPic from "./colin.png";
 
 export default function About() {

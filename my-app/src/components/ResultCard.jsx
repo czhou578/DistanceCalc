@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import "./InitialCityBox";
+import { Component } from "react";
 import "./citybox.css";
+import "./InitialCityBox";
 
 export default class ResultCard extends Component {
   constructor(props) {
