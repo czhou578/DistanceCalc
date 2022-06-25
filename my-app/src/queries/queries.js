@@ -29,6 +29,14 @@ const getCountryInfoQuery = gql`
   }
 `;
 
+const getCurrencyInfoQuery = gql`
+  query getCurrencies {
+    countries {
+      currency
+    }
+  }
+`;
+
 const getCountriesByContinentQuery = gql`
   query getCountriesByContinent($code: String!) {
     countries(filter: { continent: { eq: $code } }) {
@@ -45,8 +53,30 @@ const getCountriesByContinentQuery = gql`
   }
 `;
 
+const getCountriesByCurrencyQuery = gql`
+  query Query($continent: String!, $currency: String!) {
+    countries(
+      filter: { continent: { eq: $continent }, currency: { eq: $currency } }
+    ) {
+      name
+      native
+      capital
+      emoji
+      currency
+      languages {
+        code
+        name
+      }
+    }
+  }
+`;
+
+//get countries that speak a certain language
+
 export {
   listInitialInfoQuery,
   getCountryInfoQuery,
   getCountriesByContinentQuery,
+  getCountriesByCurrencyQuery,
+  getCurrencyInfoQuery,
 };
