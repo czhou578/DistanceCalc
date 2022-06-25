@@ -1,19 +1,19 @@
-import SignUp from "./components/SignUp";
-import "./App.css";
-import "./components/ResultCard";
 import React, { Component } from "react";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import "./App.css";
 import About from "./components/About";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Home from "./Home";
-import Login from "./components/Login";
-import Profile from "./components/Profile";
-import PrivateRoute from "./components/PrivateRoute";
+import Countries from "./components/Countries";
 import ForgotPassword from "./components/ForgotPassword";
-import UpdateProfile from "./components/UpdateProfile";
 import GeoInputBox from "./components/GeoInputBox";
-import SampleDataTable from "./components/SampleDataTable";
+import Login from "./components/Login";
 import MapComponent from "./components/Map";
+import PrivateRoute from "./components/PrivateRoute";
+import Profile from "./components/Profile";
+import "./components/ResultCard";
+import SampleDataTable from "./components/SampleDataTable";
+import SignUp from "./components/SignUp";
+import UpdateProfile from "./components/UpdateProfile";
+import Home from "./Home";
 
 export default class App extends Component {
   constructor(props) {
@@ -49,6 +49,9 @@ export default class App extends Component {
                 <Link to="/sampleData">
                   <li>Sample Data</li>
                 </Link>
+                <Link to="/countries">
+                  <li>Countries</li>
+                </Link>
                 <Link to="/map">
                   <li>Map</li>
                 </Link>
@@ -66,6 +69,7 @@ export default class App extends Component {
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/sampleData" component={SampleDataTable} />
             <Route path="/map" component={MapComponent} />
+            <Route path={"/countries"} component={Countries} />
           </Switch>
         </div>
       </Router>

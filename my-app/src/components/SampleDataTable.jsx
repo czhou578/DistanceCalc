@@ -106,7 +106,6 @@ export default function SampleDataTable(props) {
       <h2 className={styles.sampleBoxHeader}>
         Enjoy Some Sample Data (refresh for updates!){" "}
       </h2>
-      <button onClick={this.testing()}></button>
       <div>
         <h5 className={styles.sortDir}>Click Headers to Sort Ascend/Descend</h5>
       </div>

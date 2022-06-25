@@ -1,3 +1,4 @@
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
@@ -10,11 +11,19 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+export const client = new ApolloClient({
+  uri: "https://countries.trevorblades.com/graphql",
+  cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
-  <Provider store={store}>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </Provider>,
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </Provider>
+    ,
+  </ApolloProvider>,
   document.getElementById("root")
 );

@@ -1,5 +1,5 @@
 import Button from "@material-ui/core/Button";
-import { StylesProvider } from "@material-ui/core/styles";
+import { createTheme, StylesProvider } from "@material-ui/core/styles";
 import ReplayRoundedIcon from "@material-ui/icons/ReplayRounded";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
@@ -28,7 +28,7 @@ export class InitialCityBox extends Component {
     };
   }
 
-  theme = createMuiTheme({
+  theme = createTheme({
     props: {
       MuiCircularProgress: {
         size: 20,
