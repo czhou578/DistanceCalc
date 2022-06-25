@@ -44,7 +44,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "webpack",
+    "build": "react-scripts build",
     "test": "jest",
     "prettier": "prettier -w .",
     "eject": "react-scripts eject"
