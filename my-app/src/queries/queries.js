@@ -71,6 +71,26 @@ const getCountriesByCurrencyQuery = gql`
   }
 `;
 
+const getCapitalsAndPhoneByContinentQuery = gql`
+  query getCapitalsContinent($continent: String!) {
+    countries(filter: { continent: { eq: $continent } }) {
+      capital
+      phone
+    }
+  }
+`;
+
+const getStatesInCountryByContinentQuery = gql`
+  query Query($continent: String!) {
+    countries(filter: { continent: { eq: $continent } }) {
+      name
+      states {
+        name
+      }
+    }
+  }
+`;
+
 //get countries that speak a certain language
 
 export {
@@ -79,4 +99,6 @@ export {
   getCountriesByContinentQuery,
   getCountriesByCurrencyQuery,
   getCurrencyInfoQuery,
+  getCapitalsAndPhoneByContinentQuery,
+  getStatesInCountryByContinentQuery,
 };
