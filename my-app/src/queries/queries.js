@@ -81,11 +81,16 @@ const getCapitalsAndPhoneByContinentQuery = gql`
 `;
 
 const getStatesInCountryByContinentQuery = gql`
-  query Query($continent: String!) {
+  query Query(
+    $continent: String!
+    $showStateCode: String!
+    $showStateName: String!
+  ) {
     countries(filter: { continent: { eq: $continent } }) {
       name
       states {
-        name
+        code @include(if: $showStateCode)
+        name @skip(if: $showStateName)
       }
     }
   }

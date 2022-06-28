@@ -2,16 +2,18 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { client } from "..";
 import {
+  getCapitalsAndPhoneByContinentQuery,
   getCountriesByContinentQuery,
   getCountriesByCurrencyQuery,
   getCountryInfoQuery,
   getCurrencyInfoQuery,
-  listInitialInfoQuery,
+  listInitialInfoQuery
 } from "../queries/queries";
 import styles from "./sampleDataTable.module.css";
 
 const Countries = () => {
   const [country, setCountry] = useState("");
+  const [capitalPhoneContinent, setCapitalPhoneContinent] = useState("");
   const [continent, setContinent] = useState("");
   const [currencyContinent, setCurrencyContinent] = useState("");
   const [currency, setCurrency] = useState("");
@@ -45,12 +47,22 @@ const Countries = () => {
     variables: { continent: currencyContinent, currency: currency },
   });
 
+  const [
+    getCapitalsAndPhoneByContinents,
+    {
+      called: capitalPhoneCalled,
+      loading: capitalPhoneLoading,
+      data: capitalPhones,
+    },
+  ] = useLazyQuery(getCapitalsAndPhoneByContinentQuery, {
+    variables: { continent: capitalPhoneContinent },
+  });
+
   useEffect(() => {
     console.log(initialCurrency);
     if (initialCurrency && initialCurrency.countries) {
       let removeCurrencyDuplicates = new Set();
       initialCurrency.countries.forEach((element) => {
-        // console.log(element)
         if (element.currency !== null) {
           if (element.currency.split(",").length < 2) {
             removeCurrencyDuplicates.add(element.currency);
@@ -140,6 +152,24 @@ const Countries = () => {
           style={{ marginLeft: "10px" }}
         >
           Get Country By Currency
+        </button>
+      </div>
+      <div style={{ marginLeft: "500px", marginTop: "30px" }}>
+        <select
+          value={capitalPhoneContinent}
+          onChange={(event) => setCapitalPhoneContinent(event.target.value)}
+        >
+          {data.continents.map((continent) => (
+            <option key={continent.code} value={continent.code}>
+              {continent.name}
+            </option>
+          ))}
+        </select>
+        <button
+          onClick={() => getCapitalsAndPhoneByContinents()}
+          style={{ marginLeft: "10px" }}
+        >
+          Get Capitals And Phone #s
         </button>
       </div>
       <div>
@@ -238,6 +268,27 @@ const Countries = () => {
               })}
             </table>
           </div>
+        ) : null}
+        {capitalPhoneCalled && capitalPhoneLoading ? (
+          <p>Loading...</p>
+        ) : capitalPhones ? (
+          <div style={{ marginLeft: "350px", marginTop: "30px" }}>
+            <h2 style={{ color: "white" }}>
+              Capitals and Phone Numbers of Countries in {capitalPhoneContinent}
+            </h2>
+              <table>
+                <th style={{ color: "white" }}>Capital</th>
+                <th style={{ color: "white" }}>Phone Number</th>
+              {capitalPhones.countries.map((element, key) => {
+                return (
+                  <tr style={{ color: "white" }}>
+                    <td style={{ color: "white" }}>{element.capital}</td>
+                    <td style={{ color: "white", paddingLeft: "40px" }}>{element.phone}</td>
+                  </tr>
+                );
+              })}
+            </table>
+          </div>            
         ) : null}
       </div>
     </div>
