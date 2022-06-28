@@ -6,8 +6,7 @@ import {
   getCountriesByContinentQuery,
   getCountriesByCurrencyQuery,
   getCountryInfoQuery,
-  getCurrencyInfoQuery,
-  listInitialInfoQuery
+  getCurrencyInfoQuery, getStatesInCountryByContinentQuery, listInitialInfoQuery
 } from "../queries/queries";
 import styles from "./sampleDataTable.module.css";
 
@@ -18,6 +17,9 @@ const Countries = () => {
   const [currencyContinent, setCurrencyContinent] = useState("");
   const [currency, setCurrency] = useState("");
   const [noDuplicateCurrencies, setNoDuplicateCurrencies] = useState([]);
+  const [statesContinent, setStatesContinent] = useState("")
+  const [showStateCode, setShowStateCode] = useState(false)
+  const [showName, setShowName] = useState(false)
   const { data, loading, error } = useQuery(listInitialInfoQuery, { client });
   const [
     getCountryInfo,
@@ -57,6 +59,17 @@ const Countries = () => {
   ] = useLazyQuery(getCapitalsAndPhoneByContinentQuery, {
     variables: { continent: capitalPhoneContinent },
   });
+
+  const [
+    getStatesInCountryByContinent,
+    {
+      called: statesCountryCalled,
+      loading: statesCountryLoading,
+      data: statesInCountry
+    },
+  ] = useLazyQuery(getStatesInCountryByContinentQuery, {
+    variables: { continent: statesContinent, showStateCode: showStateCode, showStateName: showName}
+  })
 
   useEffect(() => {
     console.log(initialCurrency);
@@ -172,6 +185,38 @@ const Countries = () => {
           Get Capitals And Phone #s
         </button>
       </div>
+      <div style={{ marginLeft: "500px", marginTop: "30px" }}>
+        <select
+            value={statesContinent}
+            onChange={(event) => setStatesContinent(event.target.value)}
+          >
+            {data.continents.map((continent) => (
+              <option key={continent.code} value={continent.code}>
+                {continent.name}
+              </option>
+            ))}
+        </select>
+        <fieldset>
+          <legend>Choose Filter Options</legend>
+          <div>
+            <input type="checkbox" id="scales" name="State Code"
+             checked />
+            <label for="scales">Show State Code</label>
+          </div>
+          <div>
+            <input type="checkbox" id="horns" name="State Name" />
+            <label for="horns">Skip State Name</label>
+          </div>
+        </fieldset>
+          <button
+            onClick={() => getStatesInCountryByContinent()}
+            style={{ marginLeft: "10px" }}
+          >
+            Get Capitals And Phone #s
+          </button>            
+      </div>
+
+
       <div>
         {countryCalled && countryInfoLoading ? (
           <p>Loading...</p>
