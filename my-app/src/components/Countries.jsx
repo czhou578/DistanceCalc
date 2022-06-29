@@ -2,8 +2,7 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { client } from "..";
 import {
-  getCapitalsAndPhoneByContinentQuery,
-  getCountriesByContinentQuery,
+  getCapitalsAndPhoneByContinentQuery, getCountriesByContinentQuery,
   getCountriesByCurrencyQuery,
   getCountryInfoQuery,
   getCurrencyInfoQuery, getStatesInCountryByContinentQuery, listInitialInfoQuery
@@ -200,11 +199,11 @@ const Countries = () => {
           <legend>Choose Filter Options</legend>
           <div>
             <input type="checkbox" id="scales" name="State Code"
-             checked />
+             onChange={() => setShowStateCode(!showStateCode)} />
             <label for="scales">Show State Code</label>
           </div>
           <div>
-            <input type="checkbox" id="horns" name="State Name" />
+            <input type="checkbox" id="horns" name="State Name" onChange={() => setShowName(!showName)}/>
             <label for="horns">Skip State Name</label>
           </div>
         </fieldset>
@@ -215,8 +214,6 @@ const Countries = () => {
             Get Capitals And Phone #s
           </button>            
       </div>
-
-
       <div>
         {countryCalled && countryInfoLoading ? (
           <p>Loading...</p>
@@ -335,6 +332,16 @@ const Countries = () => {
             </table>
           </div>            
         ) : null}
+        {/* {statesCountryCalled && statesCountryLoading ? (
+          <p>Loading...</p>
+        ) : statesInCountry ? (
+            <div style={{ marginLeft: "350px", marginTop: "30px" }}>
+            <h2 style={{ color: "white" }}>
+              Different States in Countries in {statesContinent}
+            </h2>
+
+            </div>
+        ) : null} */}
       </div>
     </div>
   );

@@ -83,8 +83,8 @@ const getCapitalsAndPhoneByContinentQuery = gql`
 const getStatesInCountryByContinentQuery = gql`
   query Query(
     $continent: String!
-    $showStateCode: String!
-    $showStateName: String!
+    $showStateCode: Boolean!
+    $showStateName: Boolean!
   ) {
     countries(filter: { continent: { eq: $continent } }) {
       name
