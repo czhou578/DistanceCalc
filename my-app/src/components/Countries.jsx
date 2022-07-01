@@ -70,8 +70,11 @@ const Countries = () => {
     variables: { continent: statesContinent, showStateCode: showStateCode, showStateName: showName}
   })
 
+  // useEffect(() => {
+  //   console.log('states in country: ' + JSON.stringify(statesInCountry), null, 2)
+  // }, [statesInCountry])
+
   useEffect(() => {
-    console.log(initialCurrency);
     if (initialCurrency && initialCurrency.countries) {
       let removeCurrencyDuplicates = new Set();
       initialCurrency.countries.forEach((element) => {
@@ -86,10 +89,6 @@ const Countries = () => {
       setNoDuplicateCurrencies(array);
     }
   }, [initialCurrency]);
-
-  useEffect(() => {
-    console.log(currencyCountry);
-  }, [currencyCountry]);
 
   if (loading || error) {
     return <p>{error ? error.message : "Loading..."}</p>;
@@ -211,7 +210,7 @@ const Countries = () => {
             onClick={() => getStatesInCountryByContinent()}
             style={{ marginLeft: "10px" }}
           >
-            Get Capitals And Phone #s
+            Get States in a Country
           </button>            
       </div>
       <div>
@@ -332,16 +331,51 @@ const Countries = () => {
             </table>
           </div>            
         ) : null}
-        {/* {statesCountryCalled && statesCountryLoading ? (
+        {statesCountryCalled && statesCountryLoading ? (
           <p>Loading...</p>
         ) : statesInCountry ? (
             <div style={{ marginLeft: "350px", marginTop: "30px" }}>
-            <h2 style={{ color: "white" }}>
-              Different States in Countries in {statesContinent}
-            </h2>
+              <h2 style={{ color: "white" }}>
+                Different States in Countries in {statesContinent}
+              </h2>
+              {Object.keys(statesInCountry.countries[0]).map((element, key) => {
+                return (
+                  <th key={key} style={{ color: "white", paddingRight: "40px" }}>
+                    {element}
+                  </th>
+                )
+              })}
+              {statesInCountry.countries.map((element, key) => {
 
+                if (element.states.length === 0) return null
+
+                const {}
+
+                // for (const iterator of element.states) {
+                //   return (
+                //         <tr style={{ color: "white" }}>
+                //           <td style={{ color: "white" }}>{iterator.code}</td>
+                //           <td style={{ color: "white" }}>{iterator.name}</td>
+                //         </tr>
+
+                //   )
+                // }
+
+                // return (
+                //   <div>
+                //     {element.states.map((state, key) => {
+                //       return (
+                //         <tr style={{ color: "white" }}>
+                //           <td style={{ color: "white" }}>{state?.code}</td>
+                //           <td style={{ color: "white" }}>{state.name}</td>
+                //         </tr>
+                //       )
+                //     })}
+                //   </div>
+                // )
+              })}
             </div>
-        ) : null} */}
+        ) : null}
       </div>
     </div>
   );
