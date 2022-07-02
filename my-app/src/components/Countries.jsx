@@ -77,10 +77,6 @@ const Countries = () => {
     },
   });
 
-  // useEffect(() => {
-  //   console.log('states in country: ' + JSON.stringify(statesInCountry), null, 2)
-  // }, [statesInCountry])
-
   useEffect(() => {
     if (initialCurrency && initialCurrency.countries) {
       let removeCurrencyDuplicates = new Set();

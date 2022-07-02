@@ -151,35 +151,6 @@ export class InitialCityBox extends Component {
     console.log("distance: " + nextProps.resultDistance);
     console.log("time: " + nextProps.resultTime);
 
-    // if (this.didAllPropsChange() === true && nextProps.resultDistance !== null && nextProps.resultTime !== null) {
-    //   return
-    // }
-
-    // if (nextProps.userEnteredStartCity !== '' && nextProps.userEnteredDestCity !== '' && nextProps.resultDistance === '' && nextProps.resultTime === '' ) {
-    //   console.log('test 2')
-    //   return false
-    // }
-
-    // if (nextProps.resultDistance != '' && nextProps.resultTime != undefined) {
-    //   console.log('test 3');
-    //   return true
-    // }
-
-    // if (nextProps.resultDistance == '' && nextProps.resultTime == undefined) {
-    //   console.log('test 1');
-    //   this.forceUpdate()
-    //   // return false
-    // }
-
-    // if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.resultDistance != '' && nextProps.resultTime != ''
-    //     && nextProps.userEnteredStartCity != '' && nextProps.userEnteredDestCity != '') {
-    //   return true;
-    // }
-
-    // if (this.state.deleteResultData === false && nextState.deleteResultData === false && nextProps.resultDistance != null ) {
-    //   return false;
-    // }
-
     return true;
   };
 
