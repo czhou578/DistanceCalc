@@ -2,10 +2,13 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { client } from "..";
 import {
-  getCapitalsAndPhoneByContinentQuery, getCountriesByContinentQuery,
+  getCapitalsAndPhoneByContinentQuery,
+  getCountriesByContinentQuery,
   getCountriesByCurrencyQuery,
   getCountryInfoQuery,
-  getCurrencyInfoQuery, getStatesInCountryByContinentQuery, listInitialInfoQuery
+  getCurrencyInfoQuery,
+  getStatesInCountryByContinentQuery,
+  listInitialInfoQuery
 } from "../queries/queries";
 import styles from "./sampleDataTable.module.css";
 
@@ -16,9 +19,9 @@ const Countries = () => {
   const [currencyContinent, setCurrencyContinent] = useState("");
   const [currency, setCurrency] = useState("");
   const [noDuplicateCurrencies, setNoDuplicateCurrencies] = useState([]);
-  const [statesContinent, setStatesContinent] = useState("")
-  const [showStateCode, setShowStateCode] = useState(false)
-  const [showName, setShowName] = useState(false)
+  const [statesContinent, setStatesContinent] = useState("");
+  const [showStateCode, setShowStateCode] = useState(false);
+  const [showName, setShowName] = useState(false);
   const { data, loading, error } = useQuery(listInitialInfoQuery, { client });
   const [
     getCountryInfo,
@@ -64,11 +67,15 @@ const Countries = () => {
     {
       called: statesCountryCalled,
       loading: statesCountryLoading,
-      data: statesInCountry
+      data: statesInCountry,
     },
   ] = useLazyQuery(getStatesInCountryByContinentQuery, {
-    variables: { continent: statesContinent, showStateCode: showStateCode, showStateName: showName}
-  })
+    variables: {
+      continent: statesContinent,
+      showStateCode: showStateCode,
+      showStateName: showName,
+    },
+  });
 
   // useEffect(() => {
   //   console.log('states in country: ' + JSON.stringify(statesInCountry), null, 2)
@@ -97,7 +104,7 @@ const Countries = () => {
   return (
     <div>
       <h2 className={styles.sampleBoxHeader} style={{ marginLeft: "700px" }}>
-        Countries of the World
+        Countries of the World (GraphQL)
       </h2>
       <div>
         <select
@@ -185,33 +192,42 @@ const Countries = () => {
       </div>
       <div style={{ marginLeft: "500px", marginTop: "30px" }}>
         <select
-            value={statesContinent}
-            onChange={(event) => setStatesContinent(event.target.value)}
-          >
-            {data.continents.map((continent) => (
-              <option key={continent.code} value={continent.code}>
-                {continent.name}
-              </option>
-            ))}
+          value={statesContinent}
+          onChange={(event) => setStatesContinent(event.target.value)}
+        >
+          {data.continents.map((continent) => (
+            <option key={continent.code} value={continent.code}>
+              {continent.name}
+            </option>
+          ))}
         </select>
         <fieldset>
           <legend>Choose Filter Options</legend>
           <div>
-            <input type="checkbox" id="scales" name="State Code"
-             onChange={() => setShowStateCode(!showStateCode)} />
+            <input
+              type="checkbox"
+              id="scales"
+              name="State Code"
+              onChange={() => setShowStateCode(!showStateCode)}
+            />
             <label for="scales">Show State Code</label>
           </div>
           <div>
-            <input type="checkbox" id="horns" name="State Name" onChange={() => setShowName(!showName)}/>
+            <input
+              type="checkbox"
+              id="horns"
+              name="State Name"
+              onChange={() => setShowName(!showName)}
+            />
             <label for="horns">Skip State Name</label>
           </div>
         </fieldset>
-          <button
-            onClick={() => getStatesInCountryByContinent()}
-            style={{ marginLeft: "10px" }}
-          >
-            Get States in a Country
-          </button>            
+        <button
+          onClick={() => getStatesInCountryByContinent()}
+          style={{ marginLeft: "10px" }}
+        >
+          Get States in a Country
+        </button>
       </div>
       <div>
         {countryCalled && countryInfoLoading ? (
@@ -317,64 +333,43 @@ const Countries = () => {
             <h2 style={{ color: "white" }}>
               Capitals and Phone Numbers of Countries in {capitalPhoneContinent}
             </h2>
-              <table>
-                <th style={{ color: "white" }}>Capital</th>
-                <th style={{ color: "white" }}>Phone Number</th>
+            <table>
+              <th style={{ color: "white" }}>Capital</th>
+              <th style={{ color: "white" }}>Phone Number</th>
               {capitalPhones.countries.map((element, key) => {
                 return (
                   <tr style={{ color: "white" }}>
                     <td style={{ color: "white" }}>{element.capital}</td>
-                    <td style={{ color: "white", paddingLeft: "40px" }}>{element.phone}</td>
+                    <td style={{ color: "white", paddingLeft: "40px" }}>
+                      {element.phone}
+                    </td>
                   </tr>
                 );
               })}
             </table>
-          </div>            
+          </div>
         ) : null}
         {statesCountryCalled && statesCountryLoading ? (
           <p>Loading...</p>
         ) : statesInCountry ? (
-            <div style={{ marginLeft: "350px", marginTop: "30px" }}>
-              <h2 style={{ color: "white" }}>
-                Different States in Countries in {statesContinent}
-              </h2>
-              {Object.keys(statesInCountry.countries[0]).map((element, key) => {
-                return (
-                  <th key={key} style={{ color: "white", paddingRight: "40px" }}>
-                    {element}
-                  </th>
-                )
-              })}
-              {statesInCountry.countries.map((element, key) => {
+          <div style={{ marginLeft: "550px", marginTop: "30px" }}>
+            <h2 style={{ color: "white" }}>
+              Different States in Countries in {statesContinent}
+            </h2>
+            {Object.keys(statesInCountry.countries[0]).map((element, key) => {
+              return (
+                <th key={key} style={{ color: "white", paddingRight: "40px" }}>
+                  {element}
+                </th>
+              );
+            })}
+            {statesInCountry.countries.map((element, key) => {
+              if (element.states.length === 0) return null;
+              let string = JSON.stringify(element, null, 2);
 
-                if (element.states.length === 0) return null
-
-                const {}
-
-                // for (const iterator of element.states) {
-                //   return (
-                //         <tr style={{ color: "white" }}>
-                //           <td style={{ color: "white" }}>{iterator.code}</td>
-                //           <td style={{ color: "white" }}>{iterator.name}</td>
-                //         </tr>
-
-                //   )
-                // }
-
-                // return (
-                //   <div>
-                //     {element.states.map((state, key) => {
-                //       return (
-                //         <tr style={{ color: "white" }}>
-                //           <td style={{ color: "white" }}>{state?.code}</td>
-                //           <td style={{ color: "white" }}>{state.name}</td>
-                //         </tr>
-                //       )
-                //     })}
-                //   </div>
-                // )
-              })}
-            </div>
+              return <pre style={{ color: "white" }}>{string}</pre>;
+            })}
+          </div>
         ) : null}
       </div>
     </div>
