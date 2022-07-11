@@ -7,12 +7,9 @@ import ForgotPassword from "./components/ForgotPassword";
 import GeoInputBox from "./components/GeoInputBox";
 import Login from "./components/Login";
 import MapComponent from "./components/Map";
-import PrivateRoute from "./components/PrivateRoute";
-import Profile from "./components/Profile";
 import "./components/ResultCard";
 import SampleDataTable from "./components/SampleDataTable";
 import SignUp from "./components/SignUp";
-import UpdateProfile from "./components/UpdateProfile";
 import Home from "./Home";
 
 export default class App extends Component {
@@ -59,8 +56,6 @@ export default class App extends Component {
             </nav>
           </div>
           <Switch>
-            <PrivateRoute path="/Profile" component={Profile} />
-            <PrivateRoute path="/update-profile" component={UpdateProfile} />
             <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />
             <Route path="/SignUp" component={SignUp} />

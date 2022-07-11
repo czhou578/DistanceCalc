@@ -8,7 +8,7 @@ import {
   getCountryInfoQuery,
   getCurrencyInfoQuery,
   getStatesInCountryByContinentQuery,
-  listInitialInfoQuery
+  listInitialInfoQuery,
 } from "../queries/queries";
 import styles from "./sampleDataTable.module.css";
 

@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import App from "./App";
-import { AuthProvider } from "./contexts/AuthContext";
 import allReducers from "./reducers/index";
 
 const store = createStore(
@@ -19,9 +18,7 @@ export const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Provider store={store}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <App />
     </Provider>
     ,
   </ApolloProvider>,
