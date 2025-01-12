@@ -21,7 +21,7 @@
     "firebase": "^10.9.0",
     "firebase-admin": "^13.0.2",
     "formik": "^2.2.9",
-    "graphql": "^16.5.0",
+    "graphql": "^16.10.0",
     "leaflet": "^1.7.1",
     "leaflet-geosearch": "^3.6.0",
     "prettier": "^2.6.0",
